@@ -4,10 +4,16 @@ import AddAddress from "../Common/AddAddress";
 import ContactForm from "../Common/ContactForm";
 
 const SetUpStoreAndRelated = () => {
-  const [view, setView] = useState("store");
+  const [view, setView] = useState("");
   useEffect(() => {
     sessionStorage.removeItem("currentView");
   });
+
+  useEffect(() => {
+    const currentView = sessionStorage.getItem("esView");
+    if(currentView) setView(currentView)
+    else setView("Store")
+  }, []);
 
   return (
     <div className="w-screen min-h-screen h-max flex flex-col items-center justify-start">
@@ -19,7 +25,7 @@ const SetUpStoreAndRelated = () => {
             activeTabName={view}
             onClick={() => {
               setView("Store");
-              sessionStorage.setItem("editStoreView", true);
+              sessionStorage.setItem("esView", "Store");
             }}
           />
           <Tab
@@ -27,7 +33,7 @@ const SetUpStoreAndRelated = () => {
             activeTabName={view}
             onClick={() => {
               setView("Address");
-              sessionStorage.setItem("editStoreView", false);
+              sessionStorage.setItem("esView", "Address");
             }}
           />
           <Tab
@@ -35,7 +41,7 @@ const SetUpStoreAndRelated = () => {
             activeTabName={view}
             onClick={() => {
               setView("Contacts");
-              sessionStorage.setItem("editStoreView", false);
+              sessionStorage.setItem("esView", "Contacts");
             }}
           />
         </div>
@@ -57,18 +63,13 @@ const SetUpStoreAndRelated = () => {
 export default SetUpStoreAndRelated;
 
 export const Tab = ({ tabName, onClick, activeTabName }) => {
-  const [selected, setSelected] = useState(false);
-
   return (
     <button
       className={`w-max py-1 my-2 flex justify-center items-center border-b-2 ${
         tabName === activeTabName ? "border-blue-400 " : "border-transparent"
       }`}
       type="button"
-      onClick={() => {
-        setSelected(true);
-        onClick();
-      }}
+      onClick={onClick}
     >
       {tabName}
     </button>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 export function DropDown({
@@ -24,7 +24,9 @@ export function DropDown({
       <button
         type="button"
         className=" w-max py-1 px-2 font-semibold text-slate-700"
-        onMouseEnter={() => setDropdownOpen(true)}
+        onClick={() => {
+          isDropdownOpen? setDropdownOpen(false) : setDropdownOpen(true)
+        }}
       >
         <div className="flex flex-col justify-start items-start w-fit">
           <div className="flex justify-start items-start w-max"> 
@@ -45,7 +47,7 @@ export function DropDown({
         <div
           className="dropdown absolute w-3/12 font-semibold max-h-60 overflow-y-auto scroll-smooth flex flex-col shadow-lg shadow-slate-300 bg-slate-50 rounded-sm"
           ref={dropDownRef}
-          onMouseLeave={() => setDropdownOpen(false)}
+          onClick={() => setDropdownOpen(false)}
         >
           {options.map((option, i) => {
             return (
