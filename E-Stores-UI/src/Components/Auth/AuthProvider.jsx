@@ -1,18 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import useLoginRefresh from "../Auth/useLoginRefersher";
+import useLoginRefresher from "./useLoginRefersher";
 
 // context
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const { user } = useLoginRefresh();
+  const { user } = useLoginRefresher();
+
   const [auth, setAuth] = useState({
     userId: "",
     username: "",
-    role: "CUSTOMER",
-    isAuthenticated: false,
-    fromLocation: "",
-    accessExpiry: "",
+    roles: ["CUSTOMER"],
+    accessExpiration: null,
+    refreshExpiration: null,
+    authenticated: false,
   });
 
   useEffect(() => {

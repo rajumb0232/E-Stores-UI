@@ -13,7 +13,8 @@ export default {
       colors:{
         my_yellow: '#FFCE32',
         prussian_blue: '#1D63FF',
-        standard_black: 'rgb(51, 65, 85)'
+        standard_black: 'rgb(51, 65, 85)',
+        danger: '#FB4A40'
       },
       spacing: {
         '88per': '90%',
