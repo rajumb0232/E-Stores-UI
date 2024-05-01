@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Context/AuthProvider";
+import { useAuth } from "../Auth/AuthProvider";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import SubmitBtn from "../Util/SubmitBtn";
 import { LuShoppingCart } from "react-icons/lu";

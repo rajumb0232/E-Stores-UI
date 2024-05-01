@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useEffect, useState } from "react";
 
-const useLoginRefresh = () => {
+const useLoginRefresher = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const axiosInstance = AxiosPrivateInstance();
@@ -15,10 +15,10 @@ const useLoginRefresh = () => {
     setUser({
       userId: "",
       username: "",
-      role: "CUSTOMER",
-      isAuthenticated: false,
-      fromLocation: "",
-      accessExpiry: "",
+      roles: ["CUSTOMER"],
+      accessExpiration: null,
+      refreshExpiration: null,
+      authenticated: false,
     })
   };
 
@@ -30,7 +30,7 @@ const useLoginRefresh = () => {
   const refresh = async () => {
     try {
       console.log("refreshing request sent to server");
-      const response = await axiosInstance.post("/login/refresh");
+      const response = await axiosInstance.post("/refresh");
       if (response.status === 200) {
         const accessExpiration = response.data.data.accessExpiration;
         const refreshExpiration = response.data.data.refreshExpiration;
@@ -93,4 +93,4 @@ const useLoginRefresh = () => {
   return { user };
 };
 
-export default useLoginRefresh;
+export default useLoginRefresher;
