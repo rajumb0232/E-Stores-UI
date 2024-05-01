@@ -22,44 +22,31 @@ export const navs = [
     element: <Register role={"SELLER"} isLogin={false} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
-    authorizedTo: ["ALL"],
   },
   {
     path: "/customer/register",
     element: <Register role={"CUSTOMER"} isLogin={false} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
-    authorizedTo: ["ALL"],
   },
   {
     path: "/login",
-    element: <Register role={"ALL"} isLogin={true} />,
+    element: <Register role={""} isLogin={true} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
-    authorizedTo: ["ALL"],
   },
   {
     path: "/verify-email",
     element: <VerifyOTP />,
     isPrivate: false,
     isVisibleAfterLogin: false,
-    authorizedTo: ["ALL"],
   },
   {
     path: "/logout",
     element: <Logout />,
     isPrivate: true,
     isVisibleAfterLogin: true,
-    authorizedTo: ["ALL"],
-  },
-
-  /** ---------------------------------ADMIN--------------------------------- */
-  {
-    path: "/",
-    element: <AdminDashboard />,
-    isPrivate: true,
-    isVisibleAfterLogin: true,
-    authorizedTo: ["ADMIN"],
+    authorizedTo: ["SELLER", "CUSTOMER"],
   },
 
   /** ---------------------------------COMMON--------------------------------- */
@@ -68,21 +55,21 @@ export const navs = [
     element: <Account />,
     isPrivate: true,
     isVisibleAfterLogin: true,
-    authorizedTo: ["ALL"],
+    authorizedTo: ["SELLER", "CUSTOMER"],
   },
   {
     path: "/reset-credentials",
     element: <ResetCredentials />,
     isPrivate: true,
     isVisibleAfterLogin: true,
-    authorizedTo: ["ALL"],
+    authorizedTo: ["SELLER", "CUSTOMER"],
   },
   {
     path: "/update-profile",
     element: <UpdateProfile />,
     isPrivate: true,
     isVisibleAfterLogin: true,
-    authorizedTo: ["ALL"],
+    authorizedTo: ["SELLER", "CUSTOMER"],
   },
 
   /** ---------------------------------CUSTOMER--------------------------------- */
@@ -110,7 +97,7 @@ export const navs = [
 
   /** ---------------------------------SELLER--------------------------------- */
   {
-    path: "/",
+    path: "/dashboard",
     element: <SellerDashboard />,
     isPrivate: true,
     isVisibleAfterLogin: true,
@@ -142,15 +129,6 @@ export const navs = [
     element: <SetUpStoreAndRelated />,
     isPrivate: true,
     isVisibleAfterLogin: true,
-    authorizedTo: ["ALL"],
-  },
-
-  /** ---------------------------------SUPER ADMIN--------------------------------- */
-  {
-    path: "/",
-    element: <SuperAdminDashboard />,
-    isPrivate: true,
-    isVisibleAfterLogin: true,
-    authorizedTo: ["SUPER_ADMIN"],
+    authorizedTo: ["SELLER"],
   },
 ];

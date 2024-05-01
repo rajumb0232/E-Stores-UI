@@ -32,7 +32,11 @@ const Register = ({ role, isLogin }) => {
   }, [isSubmitFailed]);
 
   // basic request config
-  const endPoint = isLogin ? "/login" : "/users/register";
+  const endPoint = isLogin
+    ? "/login"
+    : role === "SELLER"
+    ? "/sellers/register"
+    : "customers/register";
 
   // method to handle login reguest
   const handleLogin = async () => {
@@ -43,22 +47,28 @@ const Register = ({ role, isLogin }) => {
         const refreshExpiration = response.data.data.refreshExpiration;
         const user = {
           ...response.data.data,
-          accessExpiration:new Date(new Date().getTime() + accessExpiration * 1000),
-          refreshExpiration: new Date(new Date().getTime() + refreshExpiration * 1000)
-        }
+          accessExpiration: new Date(
+            new Date().getTime() + accessExpiration * 1000
+          ),
+          refreshExpiration: new Date(
+            new Date().getTime() + refreshExpiration * 1000
+          ),
+        };
 
         setAuth(user);
         localStorage.setItem("user", JSON.stringify(user));
-        navigate("/")
+        navigate("/");
       } else {
         setIsSubmited(false);
         setSubmitFailed(true);
-        alert(error.response.data.message + ": " + error.response.data.rootCause)
+        alert(
+          error.response.data.message + ": " + error.response.data.rootCause
+        );
       }
     } catch (error) {
       setIsSubmited(false);
       setSubmitFailed(true);
-      alert(error.response.data.message + ": " + error.response.data.rootCause)
+      alert(error.response.data.message + ": " + error.response.data.rootCause);
     }
   };
 
@@ -68,25 +78,26 @@ const Register = ({ role, isLogin }) => {
       const response = await axiosInstance.post(endPoint, {
         email,
         password,
-        userRole: role,
       });
       if (response.status === 202) {
         setAuth({
           ...auth,
           userId: response.data.data.userId,
-          username: email
+          username: email,
         });
         sessionStorage.setItem("email", response.data.data.email);
         navigate("/verify-email");
       } else {
         setIsSubmited(false);
         setSubmitFailed(true);
-        alert(error.response.data.message + ": " + error.response.data.rootCause)
+        alert(
+          error.response.data.message + ": " + error.response.data.rootCause
+        );
       }
     } catch (error) {
       setIsSubmited(false);
       setSubmitFailed(true);
-      alert(error.response.data.message + ": " + error.response.data.rootCause)
+      alert(error.response.data.message + ": " + error.response.data.rootCause);
     }
   };
 
@@ -110,19 +121,23 @@ const Register = ({ role, isLogin }) => {
           {isLogin ? (
             <div className="p-2 text-white">
               <p className="text-4xl font-thin">
-                Looks like you are not logged in!
+                Looks like you are not logged in! 🧐
               </p>
               <p className="text-lg my-6 font-extralight text-white">
-                Login to continue using our services...
+                Login to continue using our services... 😃
               </p>
             </div>
           ) : (
             <div className="p-2 text-white">
-              <p className="text-4xl font-thin">Looks like Your new!</p>
+              <p className="text-4xl font-thin">{
+                role === "SELLER"
+                ? "You're few step way 😃"
+                : "Looks like Your new 😇"
+              }</p>
               <p className="text-lg my-6 font-extralight text-white">
                 {role === "SELLER"
-                  ? "Register to access dashboard, list products and manage orders."
-                  : "Register to shop, order and access cart."}
+                  ? "1 2 and done! start selling immediately"
+                  : "start shopping from top Brands, Categories, etc.,"}
               </p>
             </div>
           )}
