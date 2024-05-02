@@ -134,7 +134,7 @@ const Headers = () => {
             }
             className="mx-2 px-4 py-2 hover:bg-prussian_blue hover:text-white rounded-md flex justify-center items-center "
           >
-            <div className="mt-0.5 mr-1 hover:text-white text-2xl">
+            <div className="mt-0.5 mr-1 text-2xl">
               {!authenticated ? (
                 <PiStorefront />
               ) : roles.includes("SELLER") ? (
@@ -156,7 +156,7 @@ const Headers = () => {
           <div
             className="mx-2 px-4 py-2 hover:bg-prussian_blue hover:text-white rounded-md flex justify-center items-center "
           >
-            <div className="text-xl mt-1 hover:text-white">
+            <div className="text-xl mt-1">
               <VscListSelection />
             </div>
           </div>
