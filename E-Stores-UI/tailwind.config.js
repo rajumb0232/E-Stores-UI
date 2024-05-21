@@ -18,8 +18,12 @@ export default {
       },
       spacing: {
         '88per': '90%',
+        'mid_screen': '1320px',
         '18': '4.4rem',
         '19':"4.5rem"
+      },
+      screens: {
+        '1.2xl': '1350px'
       },
       animation: {
         wiggle: 'wiggle .5s ease-in-out',
