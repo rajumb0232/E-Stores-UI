@@ -1,49 +1,70 @@
 import React from "react";
-import AdminDashboard from "../Private/Admin/AdminDashboard";
-import Account from "../private/Common/Account";
-import ResetCredentials from "../Private/Common/ResetCredentials";
-import UpdateProfile from "../Private/Common/UpdateProfile";
-import Cart from "../Private/Customer/Cart";
-import Wishlist from "../Private/Customer/Wishlist";
-import AddUpdateProduct from "../Private/Seller/AddUpdateProduct";
-import Orders from "../Private/Seller/Orders";
-import SellerDashboard from "../Private/Seller/SellerDashboard";
-import SuperAdminDashboard from "../Private/SuperAdmin/SuperAdminDashboard";
-import Register from "../Public/LoginAndRegister";
-import VerifyOTP from "../Public/VerifyOTP";
-import SetUpStoreAndRelated from "../Private/Seller/SetUpStoreAndRelated";
-import Logout from "../Private/Common/Logout";
-import Explore from "../Public/Explore";
+
+const LazyAccount = React.lazy(() => import("../Private/Common/Account"));
+
+const LazyResetCredentials = React.lazy(() =>
+  import("../Private/Common/ResetCredentials")
+);
+
+const LazyUpdateProfile = React.lazy(() =>
+  import("../Private/Common/UpdateProfile")
+);
+
+const LazyCart = React.lazy(() => import("../Private/Customer/Cart"));
+
+const LazyWishlist = React.lazy(() => import("../Private/Customer/Wishlist"));
+
+const LazyAddUpdateProduct = React.lazy(() =>
+  import("../Private/Seller/AddUpdateProduct")
+);
+
+const LazyOrders = React.lazy(() => import("../Private/Seller/Orders"));
+
+const LazySellerDashboard = React.lazy(() =>
+  import("../Private/Seller/SellerDashboard")
+);
+
+const LazyRegister = React.lazy(() => import("../Public/LoginAndRegister"));
+
+const LazyVerifyOTP = React.lazy(() => import("../Public/VerifyOTP"));
+
+const LazySetUpStoreAndRelated = React.lazy(() =>
+  import("../Private/Seller/SetUpStoreAndRelated")
+);
+
+const LazyLogout = React.lazy(() => import("../Private/Common/Logout"));
+
+const LazyExplore = React.lazy(() => import("../Public/Explore"));
 
 export const navs = [
   /** ---------------------------------AUTH--------------------------------- */
   {
     path: "/seller/register",
-    element: <Register role={"SELLER"} isLogin={false} />,
+    element: <LazyRegister role={"SELLER"} isLogin={false} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
   },
   {
     path: "/customer/register",
-    element: <Register role={"CUSTOMER"} isLogin={false} />,
+    element: <LazyRegister role={"CUSTOMER"} isLogin={false} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
   },
   {
     path: "/login",
-    element: <Register role={""} isLogin={true} />,
+    element: <LazyRegister role={""} isLogin={true} />,
     isPrivate: false,
     isVisibleAfterLogin: false,
   },
   {
     path: "/verify-email",
-    element: <VerifyOTP />,
+    element: <LazyVerifyOTP />,
     isPrivate: false,
     isVisibleAfterLogin: false,
   },
   {
     path: "/logout",
-    element: <Logout />,
+    element: <LazyLogout />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER", "CUSTOMER"],
@@ -52,21 +73,21 @@ export const navs = [
   /** ---------------------------------COMMON--------------------------------- */
   {
     path: "/account",
-    element: <Account />,
+    element: <LazyAccount />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER", "CUSTOMER"],
   },
   {
     path: "/reset-credentials",
-    element: <ResetCredentials />,
+    element: <LazyResetCredentials />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER", "CUSTOMER"],
   },
   {
     path: "/update-profile",
-    element: <UpdateProfile />,
+    element: <LazyUpdateProfile />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER", "CUSTOMER"],
@@ -75,21 +96,21 @@ export const navs = [
   /** ---------------------------------CUSTOMER--------------------------------- */
   {
     path: "/",
-    element: <Explore />,
+    element: <LazyExplore />,
     isPrivate: false,
     isVisibleAfterLogin: true,
     authorizedTo: ["CUSTOMER"],
   },
   {
     path: "/cart",
-    element: <Cart />,
+    element: <LazyCart />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["CUSTOMER"],
   },
   {
     path: "/wishlist",
-    element: <Wishlist />,
+    element: <LazyWishlist />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["CUSTOMER"],
@@ -98,35 +119,35 @@ export const navs = [
   /** ---------------------------------SELLER--------------------------------- */
   {
     path: "/dashboard",
-    element: <SellerDashboard />,
+    element: <LazySellerDashboard />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],
   },
   {
     path: "/add-product",
-    element: <AddUpdateProduct />,
+    element: <LazyAddUpdateProduct />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],
   },
   {
     path: "/update-product",
-    element: <AddUpdateProduct />,
+    element: <LazyAddUpdateProduct />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],
   },
   {
     path: "/orders",
-    element: <Orders />,
+    element: <LazyOrders />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER", "CUSTOMER"],
   },
   {
     path: "/setup-store",
-    element: <SetUpStoreAndRelated />,
+    element: <LazySetUpStoreAndRelated />,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],
