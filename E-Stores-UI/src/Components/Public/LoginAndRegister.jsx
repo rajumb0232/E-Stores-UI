@@ -158,6 +158,7 @@ const Register = ({ role, isLogin }) => {
               onChangePerform={setEmail}
               placeholderText={"Enter Email:"}
               isRequired={isSubmited}
+              type={"email"}
             />
             <p className="text-xs text-red-400  font-mono font-semibold h-4 mb-4 px-4">
               {email !== "" && !isEmailValid(email) ? "Invalid Email Id" : ""}
@@ -170,6 +171,7 @@ const Register = ({ role, isLogin }) => {
               onChangePerform={setPassword}
               placeholderText={"Enter Password:"}
               isRequired={isSubmited}
+              type={"password"}
             />
             <p className="text-xs text-red-400  font-mono font-semibold h-4 mb-4 px-4">
               {password !== "" && !isPwdValid(password)
