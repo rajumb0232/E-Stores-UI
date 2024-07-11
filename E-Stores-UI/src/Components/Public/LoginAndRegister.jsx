@@ -124,7 +124,7 @@ const Register = ({ role, isLogin }) => {
                 Looks like you are not logged in! 🧐
               </p>
               <p className="text-lg my-6">
-                Login to continue using our services... 😃
+                Login to sell/shop and get exclusive offers only for you 😃
               </p>
             </div>
           ) : (
@@ -137,7 +137,7 @@ const Register = ({ role, isLogin }) => {
               <p className="text-lg my-6">
                 {role === "SELLER"
                   ? "1 2 and done! start selling immediately"
-                  : "start shopping from top Brands, Categories, etc.,"}
+                  : "start shopping from top Brands and Categories."}
               </p>
             </div>
           )}
