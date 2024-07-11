@@ -35,6 +35,7 @@ const Input = ({
       />
       {isSecure && (
         <div
+          className="border-l border-l-slate-300 pl-1"
           onClick={() =>
             showSensitive ? setShowSensitive(false) : setShowSensitive(true)
           }
