@@ -31,7 +31,7 @@ const Input = ({
         required={isRequired}
         placeholder={placeholderText}
         value={value ? value : ""}
-        className="rounded-md bg-gray-100 w-full py-3 px-2 placeholder:text-slate-500"
+        className="rounded-md bg-gray-100 w-full py-3 px-2 font-medium placeholder:font-normal text-slate-700 placeholder:text-slate-500"
       />
       {isSecure && (
         <div
