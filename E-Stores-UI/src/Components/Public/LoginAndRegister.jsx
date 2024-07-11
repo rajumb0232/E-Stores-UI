@@ -116,32 +116,32 @@ const Register = ({ role, isLogin }) => {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-start bg-gray-100">
-      <form className="flex flex-row justify-center items-center w-4/6 h-4/6 mt-24 rounded-md bg-white shadow-md">
-        <div className="w-4/12 bg-slate-600 h-full rounded-l-md flex flex-col justify-center items-center p-5">
+      <form className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white  overflow-hidden">
+        <div className="w-4/12 bg-my_yellow text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
           {isLogin ? (
-            <div className="p-2 text-white">
-              <p className="text-4xl font-thin">
+            <div className="p-2">
+              <p className="text-4xl">
                 Looks like you are not logged in! 🧐
               </p>
-              <p className="text-lg my-6 font-extralight text-white">
+              <p className="text-lg my-6">
                 Login to continue using our services... 😃
               </p>
             </div>
           ) : (
-            <div className="p-2 text-white">
-              <p className="text-4xl font-thin">{
+            <div className="p-2">
+              <p className="text-4xl">{
                 role === "SELLER"
                 ? "You're few step way 😃"
                 : "Looks like Your new 😇"
               }</p>
-              <p className="text-lg my-6 font-extralight text-white">
+              <p className="text-lg my-6">
                 {role === "SELLER"
                   ? "1 2 and done! start selling immediately"
                   : "start shopping from top Brands, Categories, etc.,"}
               </p>
             </div>
           )}
-          <div className="mt-auto mb-5 flex justify-around text-white p-2 w-3/5 text-2xl">
+          <div className="mt-auto mb-5 flex justify-around text-slate-700 p-2 w-3/5 text-2xl">
             <LuShoppingCart /> <RiShoppingBag2Line /> <HiOutlineTag />
           </div>
         </div>
