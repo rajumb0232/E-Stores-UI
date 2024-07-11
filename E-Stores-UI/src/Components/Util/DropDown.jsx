@@ -57,7 +57,7 @@ export function DropDown({
                   setter(option);
                   setDropdownOpen(false);
                 }}
-                className="prime-category hover:bg-prussian_blue hover:shadow-md shadow-slate-700 px-4 py-2 w-full text-start font-light hover:text-slate-100"
+                className="prime-category hover:bg-prussian_blue hover:shadow-lg shadow-slate-700 px-4 py-2 w-full text-start font-normal hover:text-slate-100 text-slate-600"
               >
                 {option}
               </button>
