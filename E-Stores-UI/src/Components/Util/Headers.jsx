@@ -19,7 +19,7 @@ const Headers = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="shadow-sm fixed z-50 top-0 font-sans w-screen flex justify-center bg-white">
+    <header className="border border-gray-200 fixed z-50 top-0 font-sans w-screen flex justify-center bg-white">
       <nav className="px-2 flex flex-row items-center justify-center w-11/12 max-w-7xl">
         {/* LOGO */}
         <div className="mr-auto flex items-center justify-center">

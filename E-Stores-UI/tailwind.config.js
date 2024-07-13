@@ -10,9 +10,17 @@ export default {
         '1':'1px',
         '1.5':'1.5px'
       },
+      fontFamily:{
+        "one": '"Cardo", serif',
+        "two": "Open Sans, sans-serif"
+      },
       colors:{
         my_yellow: '#FFCE32',
-        prussian_blue: '#1D63FF',
+        // my_yellow: '#efce69',
+        text_b: '#7B590B',
+        prussian_blue: '#000',
+        // input_blue: "#E8F0FE",
+        input_blue: "#F3F4F6",
         standard_black: 'rgb(51, 65, 85)',
         danger: '#FB4A40'
       },

@@ -115,15 +115,15 @@ const Register = ({ role, isLogin }) => {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-start bg-gray-100">
-      <form className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white  overflow-hidden">
-        <div className="w-4/12 bg-my_yellow text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
+    <div className="w-screen h-screen font-two flex flex-col items-center justify-start">
+      <form className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden">
+        <div className="w-full bg-gray-100 text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
           {isLogin ? (
             <div className="p-2">
-              <p className="text-4xl">
+              <p className="text-3xl">
                 Looks like you are not logged in! 🧐
               </p>
-              <p className="text-lg my-6">
+              <p className="text-base my-6">
                 Login to sell/shop and get exclusive offers only for you 😃
               </p>
             </div>
@@ -147,7 +147,7 @@ const Register = ({ role, isLogin }) => {
         </div>
 
         {/* FORM */}
-        <div className="flex flex-col justify-center w-8/12 h-full px-8">
+        <div className="flex flex-col justify-center w-full h-full px-8">
           <h1 className="text-slate-700 font-semibold text-4xl my-8 ml-2">
             {isLogin ? "Login" : "Register"}
           </h1>
@@ -156,11 +156,12 @@ const Register = ({ role, isLogin }) => {
             <Input
               value={email}
               onChangePerform={setEmail}
-              placeholderText={"Enter Email:"}
+              placeholderText={"Enter your email: "}
               isRequired={isSubmited}
               type={"email"}
+              name={"Email"}
             />
-            <p className="text-xs text-red-400  font-mono font-semibold h-4 mb-4 px-4">
+            <p className="text-xs text-red-400  font-mono font-normal h-4 px-2 mb-2">
               {email !== "" && !isEmailValid(email) ? "Invalid Email Id" : ""}
             </p>
           </div>
@@ -169,11 +170,12 @@ const Register = ({ role, isLogin }) => {
             <Input
               value={password}
               onChangePerform={setPassword}
-              placeholderText={"Enter Password:"}
+              placeholderText={"Enter your password: "}
               isRequired={isSubmited}
               type={"password"}
+              name={"Password"}
             />
-            <p className="text-xs text-red-400  font-mono font-semibold h-4 mb-4 px-4">
+            <p className="text-xs text-red-400  font-mono font-normal h-4 px-2">
               {password !== "" && !isPwdValid(password)
                 ? "Password must contain at least 1 letter, 1 number, 1 special character"
                 : ""}
@@ -181,14 +183,14 @@ const Register = ({ role, isLogin }) => {
           </div>
 
           {/* SUBMIT BUTTON */}
-          <div className="w-full flex justify-end">
-            <div className="w-max">
+          <div className="w-full flex justify-end mt-4">
+            {/* <div className="w-max"> */}
               <SubmitBtn
                 submit={submit}
                 isSubmited={isSubmited}
                 name={"Submit"}
               />
-            </div>
+            {/* </div> */}
           </div>
 
           {/* TOGGLE REDIRECTS TO LOGIN AND REGISTER */}

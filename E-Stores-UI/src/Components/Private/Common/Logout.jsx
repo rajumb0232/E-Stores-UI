@@ -6,7 +6,7 @@ import { IoWarningOutline } from "react-icons/io5";
 const Logout = ({ doAppear }) => {
   const [isSubmited, setIsSubmited] = useState(false);
   const axiosInstance = AxiosPrivateInstance();
-  const [loginRequested, setLoginRequested] = useState(false)
+  const [loginRequested, setLoginRequested] = useState(false);
 
   const handleLogout = async () => {
     const response = await axiosInstance.post("/logout");
@@ -36,7 +36,9 @@ const Logout = ({ doAppear }) => {
     <div
       className={`absolute w-max h-max top-18 right-20 px-6 hover:px-7 py-4 bg-white shadow-even20 shadow-gray-300 rounded-md flex flex-col justify-start items-center z-50 transition-all duration-300 animate-pop`}
     >
-      <div className="text-5xl bg-transparent w-full flex justify-center items-center text-danger mb-3"><IoWarningOutline /></div>
+      <div className="text-5xl bg-transparent w-full flex justify-center items-center text-danger mb-3">
+        <IoWarningOutline />
+      </div>
       <p className="text-lg text-slate-500 px-5">
         Are you sure you want to logout?
       </p>
@@ -47,11 +49,11 @@ const Logout = ({ doAppear }) => {
           danger={true}
           submit={() => {
             console.log("submitted...");
-            setIsSubmited(true)
+            setIsSubmited(true);
           }}
         />
         <button
-          className=" font-bold rounded-lg w-full min-w-32 px-4 py-2 text-white bg-slate-600 hover:bg-prussian_blue my-2"
+          className=" font-bold rounded-lg w-full min-w-32 px-4 py-2 border-2 bg-prussian_blue text-slate-100 hover:text-prussian_blue border-prussian_blue hover:bg-white focus:bg-prussian_blue my-2"
           onClick={() => doAppear(false)}
         >
           Cancel

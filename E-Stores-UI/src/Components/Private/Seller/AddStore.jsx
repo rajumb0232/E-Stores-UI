@@ -250,7 +250,7 @@ const AddStore = () => {
               </div>
             )}
             <div
-              className={`w-40 ${displayLogoURL || store.logoLink ? "h-max rounded-sm bg-transparent bg-opacity-0" : "h-40 rounded-full bg-cyan-950 bg-opacity-5"} overflow-hidden mb-4 flex justify-center items-center text-slate-400 font-semibold`}
+              className={`w-40 ${displayLogoURL || store.logoLink ? "h-max rounded-full border hover:border-slate-300 bg-transparent bg-opacity-0" : "h-40 rounded-full bg-cyan-950 bg-opacity-5"} overflow-hidden mb-4 flex justify-center items-center text-slate-400 font-semibold`}
             >
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
@@ -287,15 +287,18 @@ const AddStore = () => {
                 placeholderText={"Your store name here:"}
                 onChangePerform={setStoreName}
                 value={storeName}
+                type={"text"}
+                name={"Store name"}
               />
             </div>
 
+            <label htmlFor="about" className="w-full px-2 py-0.5 text-base font-medium text-slate-600">About:</label>
             <textarea
               type="text"
               id="about"
               onChange={(event) => setAbout(event.target.value)}
               placeholder="About (optional):"
-              className="h-56 w-full overflow-x-clip text-start text-slate-700 bg-gray-100 hover:border-gray-300 focus:border-gray-300 border-2 border-transparent rounded-md p-2 text-base"
+              className="h-56 w-full overflow-x-clip text-start text-slate-700 bg-input_blue hover:border-gray-300 focus:border-gray-300 border border-transparent rounded-md p-2 text-base"
               value={about}
             />
           </div>
