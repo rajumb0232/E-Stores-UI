@@ -4,11 +4,11 @@ import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import PerformanceRecord from "./PerformanceRecord";
-import AddUpdateProduct from "./AddUpdateProduct";
 import Orders from "./Orders";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
+import Products from "./Products";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
@@ -182,7 +182,7 @@ const SellerDashboard = () => {
             {currentView === "dashboard" ? (
               <PerformanceRecord />
             ) : currentView === "products" ? (
-              <AddUpdateProduct />
+              <Products />
             ) : currentView === "orders" ? (
               <Orders />
             ) : currentView === "manage_store" && (

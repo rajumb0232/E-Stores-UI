@@ -51,7 +51,7 @@ const Headers = () => {
           >
             <Link
               to={!authenticated && "/login"}
-              className={`mx-2 px-4 py-2 rounded-md flex justify-start items-center ${
+              className={`mx-2 px-4 py-2 rounded-full flex justify-start items-center ${
                 loginHovered
                   ? "bg-pallete_zero text-white"
                   : "bg-transparent text-slate-700"
@@ -132,7 +132,7 @@ const Headers = () => {
                 ? "/dashboard"
                 : roles.includes("CUSTOMER") && "/cart"
             }
-            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-md flex justify-center items-center "
+            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-full flex justify-center items-center "
           >
             <div className="mt-0.5 mr-1 text-2xl">
               {!authenticated ? (
@@ -154,7 +154,7 @@ const Headers = () => {
 
           {/* OPTIONS */}
           <div
-            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-md flex justify-center items-center "
+            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-full flex justify-center items-center "
           >
             <div className="text-xl mt-1">
               <VscListSelection />

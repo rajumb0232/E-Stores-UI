@@ -7,6 +7,7 @@ import { MdOutlineEditLocationAlt } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
 import { IoMdArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import NavigateBtn from "../../Util/NavigateBtn";
 
 const SetUpStoreAndRelated = () => {
   const [view, setView] = useState("Store");
@@ -40,15 +41,7 @@ const SetUpStoreAndRelated = () => {
       <form className="flex justify-start items-center w-11/12 h-max px-10 pb-6 mt-20 rounded-lg">
         {/* SELECTOR */}
         <div className="w-max h-4/6 p-2 top-24 border-r-1 fixed flex flex-col justify-start items-start font-semibold text-slate-700 text-md">
-          <button className="w-full p-1 my-2 rounded-full flex justify-center items-center border-pallete_zero border-2 text-pallete_zero bg-white hover:bg-pallete_zero hover:text-white"
-          type="button"
-          onClick={() => navigate("/dashboard")}
-          >
-            <span>
-              <IoMdArrowBack />
-            </span>
-            <span className="px-1 text-base">Back</span>
-          </button>
+          <NavigateBtn name={"Back"} icon={<IoMdArrowBack />} to={"/dashboard"}/>
           {tabs.map((option, i) => {
             return (
               <Tab
