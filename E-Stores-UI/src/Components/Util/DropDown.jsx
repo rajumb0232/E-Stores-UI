@@ -23,13 +23,13 @@ export function DropDown({
     <div>
       <button
         type="button"
-        className=" w-max py-1 px-2 font-semibold text-slate-700"
+        className=" w-max py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
         onClick={() => {
           isDropdownOpen? setDropdownOpen(false) : setDropdownOpen(true)
         }}
       >
         <div className="flex flex-col justify-start items-start w-fit">
-          <div className="flex justify-start items-start w-max"> 
+          <div className="flex justify-center items-center w-max"> 
             <p>
               {value !== "" && value ? valueType + ": " + value : DefaultText}
             </p>
@@ -45,7 +45,7 @@ export function DropDown({
 
       {isDropdownOpen && (
         <div
-          className="dropdown absolute w-3/12 font-semibold max-h-60 overflow-y-auto scroll-smooth flex flex-col shadow-lg shadow-slate-300 bg-slate-50 rounded-sm"
+          className="dropdown absolute w-3/12 font-semibold max-h-60 overflow-y-auto scroll-smooth flex flex-col shadow-lg shadow-slate-300 bg-white rounded-sm"
           ref={dropDownRef}
           onClick={() => setDropdownOpen(false)}
         >
@@ -57,7 +57,7 @@ export function DropDown({
                   setter(option);
                   setDropdownOpen(false);
                 }}
-                className="prime-category hover:bg-prussian_blue hover:shadow-md shadow-slate-700 px-4 py-2 w-full text-start font-light hover:text-slate-100"
+                className="prime-category hover:bg-input px-4 py-2 w-full text-start font-normal hover:text-pallete_zero text-slate-600"
               >
                 {option}
               </button>

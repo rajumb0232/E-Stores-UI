@@ -19,7 +19,7 @@ const Headers = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="shadow-sm fixed z-50 top-0 font-sans w-screen flex justify-center bg-white">
+    <header className="border border-gray-200 fixed z-50 top-0 font-sans w-screen flex justify-center bg-white">
       <nav className="px-2 flex flex-row items-center justify-center w-11/12 max-w-7xl">
         {/* LOGO */}
         <div className="mr-auto flex items-center justify-center">
@@ -51,9 +51,9 @@ const Headers = () => {
           >
             <Link
               to={!authenticated && "/login"}
-              className={`mx-2 px-4 py-2 rounded-md flex justify-start items-center ${
+              className={`mx-2 px-4 py-2 rounded-full flex justify-start items-center ${
                 loginHovered
-                  ? "bg-prussian_blue text-white"
+                  ? "bg-pallete_zero text-white"
                   : "bg-transparent text-slate-700"
               }`}
             >
@@ -80,7 +80,7 @@ const Headers = () => {
                       {authenticated ? "Need break?" : "New customer?"}
                     </p>
                     <button
-                      className="text-prussian_blue font-semibold rounded-sm px-2"
+                      className="text-pallete_zero text-base border-2 border-transparent bg-transparent rounded-full font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
                       onClick={() => {
                         authenticated 
                         ? setDoLogout(true)
@@ -132,7 +132,7 @@ const Headers = () => {
                 ? "/dashboard"
                 : roles.includes("CUSTOMER") && "/cart"
             }
-            className="mx-2 px-4 py-2 hover:bg-prussian_blue hover:text-white rounded-md flex justify-center items-center "
+            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-full flex justify-center items-center "
           >
             <div className="mt-0.5 mr-1 text-2xl">
               {!authenticated ? (
@@ -154,7 +154,7 @@ const Headers = () => {
 
           {/* OPTIONS */}
           <div
-            className="mx-2 px-4 py-2 hover:bg-prussian_blue hover:text-white rounded-md flex justify-center items-center "
+            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-full flex justify-center items-center "
           >
             <div className="text-xl mt-1">
               <VscListSelection />

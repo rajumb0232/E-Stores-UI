@@ -264,7 +264,7 @@ const ContactForm = () => {
   }, [doDelete]);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full">
+    <div className="flex flex-col justify-start items-center w-full h-screen">
       <div
         className={`w-full h-max flex flex-col justify-start items-center text-slate`}
       >

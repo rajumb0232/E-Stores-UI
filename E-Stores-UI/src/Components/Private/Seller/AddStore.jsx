@@ -42,7 +42,11 @@ const AddStore = () => {
   // update isModified state if data modified
   useEffect(() => {
     if (isPrevPresent) {
-      if (storeName !== store.storeName || about !== store.about || category !== store.category) {
+      if (
+        storeName !== store.storeName ||
+        about !== store.about ||
+        category !== store.category
+      ) {
         setAnyModified(true);
       }
     }
@@ -99,7 +103,7 @@ const AddStore = () => {
       if (response.status === 200) {
         updateLogoLinkToStoreInCache(response.data.data);
         setIsSubmited(false);
-        setAnyModified(false)
+        setAnyModified(false);
         alert("Upload successful");
       } else {
         setIsSubmited(false);
@@ -115,10 +119,10 @@ const AddStore = () => {
 
   // works as a triggger point to Upload Image when ever the POST operation of store is done
   useEffect(() => {
-    if(storeId && storeId !== "" && selectedLogo){
+    if (storeId && storeId !== "" && selectedLogo) {
       uploadImage();
-    } 
-  }, [storeId])
+    }
+  }, [storeId]);
 
   // handling axios request to post the store data
   const updateStore = async (isNew) => {
@@ -144,7 +148,7 @@ const AddStore = () => {
           updateCache(response?.data?.data);
           localStorage.setItem("store", "true");
           setStoreId(response?.data?.data?.storeId);
-          setPrevPresent(true)
+          setPrevPresent(true);
           if (!selectedLogo) {
             setIsSubmited(false);
             setAnyModified(true);
@@ -172,7 +176,7 @@ const AddStore = () => {
           localStorage.setItem("store", "true");
           setStoreId(response?.data?.data?.storeId);
           setIsSubmited(false);
-          setAnyModified(false)
+          setAnyModified(false);
         } else {
           setIsSubmited(false);
           alert(response?.data.message || response?.message);
@@ -206,7 +210,7 @@ const AddStore = () => {
   }, [isSubmited]);
 
   return (
-    <div className="flex flex-col justify-center items-start w-full h-full">
+    <div className="flex flex-col justify-start items-center w-full h-screen">
       <FormHeading icon={<PiStorefrontDuotone />} text={"Store Details"} />
 
       <div className="w-full flex justify-center items-start">
@@ -218,7 +222,7 @@ const AddStore = () => {
           >
             {imageHovered && (
               <div
-                className="absolute right-4 bg-slate-100 p-1 border-1 border-slate-200 text-slate-400 hover:border-transparent hover:text-xl hover:text-white hover:p-1.5 hover:bg-my_yellow rounded-full flex justify-center items-center transition-all duration-150 cursor-pointer"
+                className="absolute right-4 bg-slate-100 p-1 border-1 border-slate-200 text-slate-400 hover:border-transparent hover:text-xl hover:text-white hover:p-1.5 hover:bg-pallete_one rounded-full flex justify-center items-center transition-all duration-150 cursor-pointer"
                 title={store?.logoLink ? "Upload New Logo" : "Upload Logo"}
               >
                 <input
@@ -250,7 +254,11 @@ const AddStore = () => {
               </div>
             )}
             <div
-              className={`w-40 ${displayLogoURL || store.logoLink ? "h-max rounded-sm bg-transparent bg-opacity-0" : "h-40 rounded-full bg-cyan-950 bg-opacity-5"} overflow-hidden mb-4 flex justify-center items-center text-slate-400 font-semibold`}
+              className={`w-40 ${
+                displayLogoURL || store.logoLink
+                  ? "h-max rounded-full border hover:border-slate-300 bg-transparent bg-opacity-0"
+                  : "h-40 rounded-full bg-cyan-950 bg-opacity-5"
+              } overflow-hidden mb-4 flex justify-center items-center text-slate-400 font-semibold`}
             >
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
@@ -287,6 +295,8 @@ const AddStore = () => {
                 placeholderText={"Your store name here:"}
                 onChangePerform={setStoreName}
                 value={storeName}
+                type={"text"}
+                name={"Store name"}
               />
             </div>
 
@@ -295,7 +305,7 @@ const AddStore = () => {
               id="about"
               onChange={(event) => setAbout(event.target.value)}
               placeholder="About (optional):"
-              className="h-56 w-full overflow-x-clip text-start text-slate-700 bg-gray-100 hover:border-gray-300 focus:border-gray-300 border-2 border-transparent rounded-md p-2 text-base"
+              className="h-56 w-full overflow-x-clip text-start text-slate-700 bg-input hover:border-gray-300 focus:border-gray-300 border border-transparent rounded-md p-2 text-base"
               value={about}
             />
           </div>

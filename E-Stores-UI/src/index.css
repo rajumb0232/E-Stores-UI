@@ -19,7 +19,7 @@
 }
 
 .dropdown::-webkit-scrollbar-thumb{
-    background-color: rgb(37 99 235 );
+    background-color: #000;
     border-radius: 2px;
     border: .5px solid #d5d5d5;
 }
