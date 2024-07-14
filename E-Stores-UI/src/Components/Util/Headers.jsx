@@ -80,7 +80,7 @@ const Headers = () => {
                       {authenticated ? "Need break?" : "New customer?"}
                     </p>
                     <button
-                      className="text-pallete_zero text-base border-2 border-pallete_zero bg-pallete_one rounded-xl font-semibold px-3 py-0.5 hover:bg-transparent hover:border-pallete_zero"
+                      className="text-pallete_zero text-base border-2 border-transparent bg-transparent rounded-full font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
                       onClick={() => {
                         authenticated 
                         ? setDoLogout(true)

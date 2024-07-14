@@ -1,39 +1,16 @@
 import React from "react";
-
 const LazyAccount = React.lazy(() => import("../Private/Common/Account"));
-
-const LazyResetCredentials = React.lazy(() =>
-  import("../Private/Common/ResetCredentials")
-);
-
-const LazyUpdateProfile = React.lazy(() =>
-  import("../Private/Common/UpdateProfile")
-);
-
+const LazyResetCredentials = React.lazy(() => import("../Private/Common/ResetCredentials"));
+const LazyUpdateProfile = React.lazy(() => import("../Private/Common/UpdateProfile"));
 const LazyCart = React.lazy(() => import("../Private/Customer/Cart"));
-
 const LazyWishlist = React.lazy(() => import("../Private/Customer/Wishlist"));
-
-const LazyAddUpdateProduct = React.lazy(() =>
-  import("../Private/Seller/AddUpdateProduct")
-);
-
+const LazyAddUpdateProduct = React.lazy(() => import("../Private/Seller/AddUpdateProduct"));
 const LazyOrders = React.lazy(() => import("../Private/Seller/Orders"));
-
-const LazySellerDashboard = React.lazy(() =>
-  import("../Private/Seller/SellerDashboard")
-);
-
+const LazySellerDashboard = React.lazy(() => import("../Private/Seller/SellerDashboard"));
 const LazyRegister = React.lazy(() => import("../Public/LoginAndRegister"));
-
 const LazyVerifyOTP = React.lazy(() => import("../Public/VerifyOTP"));
-
-const LazySetUpStoreAndRelated = React.lazy(() =>
-  import("../Private/Seller/SetUpStoreAndRelated")
-);
-
+const LazySetUpStoreAndRelated = React.lazy(() => import("../Private/Seller/SetUpStoreAndRelated"));
 const LazyLogout = React.lazy(() => import("../Private/Common/Logout"));
-
 const LazyExplore = React.lazy(() => import("../Public/Explore"));
 
 export const navs = [

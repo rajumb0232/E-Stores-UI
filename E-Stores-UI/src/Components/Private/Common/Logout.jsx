@@ -42,7 +42,7 @@ const Logout = ({ doAppear }) => {
       <p className="text-lg text-slate-500 px-5">
         Are you sure you want to logout?
       </p>
-      <div className="mt-4 w-full">
+      <div className="mt-4 w-full flex justify-center items-center">
         <SubmitBtn
           isSubmited={isSubmited}
           name={"Logout"}
@@ -53,7 +53,7 @@ const Logout = ({ doAppear }) => {
           }}
         />
         <button
-          className=" font-bold rounded-lg w-full min-w-32 px-4 py-2 border-2 bg-prussian_blue text-slate-100 hover:text-prussian_blue border-prussian_blue hover:bg-white focus:bg-prussian_blue my-2"
+          className=" font-bold rounded-full w-full min-w-32 px-4 py-2 border-2 bg-pallete_zero text-white hover:text-pallete_zero border-pallete_zero hover:bg-white focus:bg-pallete_zero focus:text-white my-2 ml-1 transition-colors duration-75 ease-in-out "
           onClick={() => doAppear(false)}
         >
           Cancel

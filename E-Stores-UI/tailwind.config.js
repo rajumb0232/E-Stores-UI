@@ -17,7 +17,7 @@ export default {
         pallete_two: "#30E6F7",
         text_b: "#7B590B",
         pallete_zero: "#141411",
-        danger: "#FB4A40",
+        danger: "#DD2627",
         input: "#F3F4F6"
       },
       spacing: {

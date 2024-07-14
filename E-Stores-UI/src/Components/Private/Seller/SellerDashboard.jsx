@@ -9,11 +9,6 @@ import Orders from "./Orders";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
-import AddStore from "../Seller/AddStore";
-import AddAddress from "../Common/AddAddress";
-import ContactForm from "../Common/ContactForm";
-import { MdOutlineEditLocationAlt } from "react-icons/md";
-import { RiContactsLine } from "react-icons/ri";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");

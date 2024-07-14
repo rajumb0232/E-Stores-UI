@@ -6,14 +6,16 @@ const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
     <button
       onClick={submit}
       disabled={isSubmited}
-      className={` font-bold rounded-lg w-full min-w-32 px-4 py-2 border-2 border-transparent transition-colors duration-75 ease-in-out ${
+      className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border-2 border-transparent transition-colors duration-75 ease-in-out ${
+        // applies for danger buttons
         danger &&
-        "hover:border-danger hover:bg-opacity-95 border-slate-400 bg-slate-100 hover:bg-danger hover:text-white text-slate-700 focus-within:border-transparent"
+        "hover:border-danger hover:bg-opacity-95 border-danger hover:bg-danger hover:text-white bg-transparent text-danger focus-within:border-transparent"
       }  ${
+        // appies when submitted
         isSubmited
-          ? "bg-transparent hover:bg-transparent bg-pallete_two border-slate-400"
+          ? "bg-transparent hover:bg-transparent bg-pallete_two border-transparent"
           : !danger &&
-            "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:border-pallete_zero hover:bg-white focus:border-pallete_zero focus:bg-pallete_zero"
+            "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:border-pallete_zero hover:bg-white focus:border-pallete_zero focus:bg-pallete_zero focus:text-white"
       }`}
       type="button"
     >
