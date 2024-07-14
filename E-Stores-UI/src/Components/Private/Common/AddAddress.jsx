@@ -152,7 +152,7 @@ const AddAddress = () => {
   }, [isSubmited]);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-max">
+    <div className="flex flex-col justify-start items-center w-full h-screen">
       <div
         className={`w-full h-max flex flex-col justify-end items-center text-slate `}
       >

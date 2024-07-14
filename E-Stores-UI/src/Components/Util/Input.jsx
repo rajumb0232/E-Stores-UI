@@ -15,7 +15,6 @@ const Input = ({
   const [inputType, setInputType] = useState(type);
 
   useEffect(() => {
-    console.log(type);
     if (type === "password") setSecure(true);
   }, []);
 
@@ -25,9 +24,7 @@ const Input = ({
   }, [showSensitive]);
 
   return (
-    // <div className="w-full flex flex-col justify-center items-start">
-    //   <label htmlFor={name} className="px-2 py-0.5 text-base font-medium text-slate-600">{name + ": "}</label>
-      <div className="border border-transparent rounded-md bg-input_blue w-full text-sm px-2 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
+      <div className="border border-transparent rounded-md bg-input w-full text-sm px-2 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
         <input
           id={name}
           type={inputType}
@@ -52,7 +49,6 @@ const Input = ({
           </div>
         )}
       </div>
-    // </div>
   );
 };
 
