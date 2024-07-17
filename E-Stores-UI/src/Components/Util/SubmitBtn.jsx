@@ -15,7 +15,7 @@ const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
         isSubmited
           ? "bg-transparent hover:bg-transparent bg-pallete_two border-transparent"
           : !danger &&
-            "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:border-pallete_zero hover:bg-white focus:border-pallete_zero focus:bg-pallete_zero focus:text-white"
+            "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:bg-white border-pallete_zero focus:bg-pallete_zero focus:text-white"
       }`}
       type="button"
     >

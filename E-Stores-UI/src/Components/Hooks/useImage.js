@@ -1,8 +1,6 @@
-import { useState } from "react";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 
 const useImage = () => {
-  const [imageURL, setImageURL] = useState("");
   const axiosInstance = AxiosPrivateInstance();
 
   const getImageURL = async (url) => {
@@ -10,7 +8,7 @@ const useImage = () => {
     try {
       if (response.status === 200) {
         const url = URL.createObjectURL(response.data);
-        setImageURL(url);
+        return url;
       } else {
         console.log(response?.data?.message);
       }
@@ -19,7 +17,7 @@ const useImage = () => {
     }
   };
 
-  return { imageURL, getImageURL };
+  return { getImageURL };
 };
 
 export default useImage;

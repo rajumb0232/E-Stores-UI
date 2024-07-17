@@ -21,12 +21,20 @@ const AddStore = () => {
   const { topCategories } = useTopCategories();
 
   const { store } = useStore();
-  const { imageURL, getImageURL } = useImage();
+  const [prevStoreImage, setPrevStoreImage] = useState("");
+  const { getImageURL } = useImage();
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
 
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
+
+  const updateStoreImage = async (link) => {
+    if (store?.logoLink) {
+      const url = await getImageURL(link);
+      setPrevStoreImage(url);
+    }
+  }
 
   useEffect(() => {
     if (store?.storeId) {
@@ -35,7 +43,7 @@ const AddStore = () => {
       setAbout(store.about);
       setCategory(store.category);
       setPrevPresent(true);
-      if (store?.logoLink) getImageURL(store.logoLink);
+      if (store?.logoLink) updateStoreImage(store.logoLink);
     }
   }, [store]);
 
@@ -263,7 +271,7 @@ const AddStore = () => {
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
               ) : store?.logoLink ? (
-                <img src={imageURL} className="w-full" />
+                <img src={prevStoreImage} className="w-full" />
               ) : (
                 "Upload Logo"
               )}
