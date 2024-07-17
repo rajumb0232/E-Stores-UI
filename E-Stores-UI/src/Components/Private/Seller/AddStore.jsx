@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SubmitBtn from "../../Util/SubmitBtn";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import { DropDown } from "../../Util/DropDown";
-import Input from "../../Util/Input";
-import FormHeading from "../../Util/FormHeading";
 import { useTopCategories } from "../../Hooks/useOptions";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
 import { MdAdd, MdEdit } from "react-icons/md";
+import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");
@@ -21,12 +18,20 @@ const AddStore = () => {
   const { topCategories } = useTopCategories();
 
   const { store } = useStore();
-  const { imageURL, getImageURL } = useImage();
+  const [prevStoreImage, setPrevStoreImage] = useState("");
+  const { getImageURL } = useImage();
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
 
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
+
+  const updateStoreImage = async (link) => {
+    if (store?.logoLink) {
+      const url = await getImageURL(link);
+      setPrevStoreImage(url);
+    }
+  };
 
   useEffect(() => {
     if (store?.storeId) {
@@ -35,7 +40,7 @@ const AddStore = () => {
       setAbout(store.about);
       setCategory(store.category);
       setPrevPresent(true);
-      if (store?.logoLink) getImageURL(store.logoLink);
+      if (store?.logoLink) updateStoreImage(store.logoLink);
     }
   }, [store]);
 
@@ -211,7 +216,7 @@ const AddStore = () => {
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen">
-      <FormHeading icon={<PiStorefrontDuotone />} text={"Store Details"} />
+      <FormHeader icon={<PiStorefrontDuotone />} text={"Store Details"} />
 
       <div className="w-full flex justify-center items-start">
         <div className="w-max mx-4 flex flex-col items-center">
@@ -263,7 +268,7 @@ const AddStore = () => {
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
               ) : store?.logoLink ? (
-                <img src={imageURL} className="w-full" />
+                <img src={prevStoreImage} className="w-full" />
               ) : (
                 "Upload Logo"
               )}

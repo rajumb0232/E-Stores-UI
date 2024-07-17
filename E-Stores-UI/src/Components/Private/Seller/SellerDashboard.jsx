@@ -9,6 +9,7 @@ import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
 import Products from "./Products";
+import Store from "./Store";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
@@ -17,7 +18,8 @@ const SellerDashboard = () => {
   const navigate = useNavigate();
   const axiosInstance = AxiosPrivateInstance();
   const { store, prevAddress } = useStore();
-  const { imageURL, getImageURL } = useImage();
+  const [storeImage, setStoreImage] = useState("");
+  const { getImageURL } = useImage();
 
   let isChecked = false;
   const checkForStore = async () => {
@@ -52,8 +54,8 @@ const SellerDashboard = () => {
 
   useEffect(() => {
     if (store?.logoLink) {
-      const get = () => {
-        getImageURL(store.logoLink);
+      const get = async () => {
+        setStoreImage(await getImageURL(store.logoLink));
       };
       get();
     }
@@ -76,7 +78,7 @@ const SellerDashboard = () => {
       icon: <BsBoxes />,
     },
     {
-      name: "manage_store",
+      name: "store",
       display_name: "Store",
       icon: <PiStorefrontDuotone />,
     },
@@ -141,7 +143,7 @@ const SellerDashboard = () => {
           {currentView === "dashboard" && (
             <div
               className={`w-10/12 px-2 py-0.5 flex items-center justify-center border-b-2 cursor-pointer hover:bg-gradient-to-r from-transparent from-0% via-stone-100 via-50% to-transparent to-100% `}
-              onClick={() => navigate("/setup-store")}
+              onClick={() => setCurrentView("store")}
               onMouseEnter={() => setStoreHovered(true)}
               onMouseLeave={() => setStoreHovered(false)}
             >
@@ -151,7 +153,7 @@ const SellerDashboard = () => {
                 }`}
               >
                 <div className="rounded-full overflow-hidden border border-slate-400 flex justify-center items-center">
-                  <img src={imageURL} alt="" className="w-full" />
+                  <img src={storeImage} alt="" className="w-full" />
                 </div>
               </div>
               <div className="flex flex-col justify-center items-start hover:transition-all duration-500 delay-200 ease-in-out">
@@ -185,8 +187,8 @@ const SellerDashboard = () => {
               <Products />
             ) : currentView === "orders" ? (
               <Orders />
-            ) : currentView === "manage_store" && (
-              navigate("/setup-store")
+            ) : currentView === "store" && (
+              <Store/>
             )
             //  : currentView === "manage_address" ? (
             //   <AddAddress />

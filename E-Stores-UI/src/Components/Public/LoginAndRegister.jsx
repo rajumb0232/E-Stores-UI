@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthProvider";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
-import SubmitBtn from "../Util/SubmitBtn";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
-import Input from "../Util/Input";
+import { Input, SubmitBtn } from "../Util/Forms";
 
 const Register = ({ role, isLogin }) => {
   const [email, setEmail] = useState("");
@@ -128,13 +127,13 @@ const Register = ({ role, isLogin }) => {
               </p>
             </div>
           ) : (
-            <div className="p-2">
-              <p className="text-4xl">{
+            <div className="p-2 w-full flex flex-col justify-center items-start">
+              <p className="text-3xl">{
                 role === "SELLER"
                 ? "You're few step way 😃"
                 : "Looks like Your new 😇"
               }</p>
-              <p className="text-lg my-6">
+              <p className="text-base my-6">
                 {role === "SELLER"
                   ? "1 2 and done! start selling immediately"
                   : "start shopping from top Brands and Categories."}
