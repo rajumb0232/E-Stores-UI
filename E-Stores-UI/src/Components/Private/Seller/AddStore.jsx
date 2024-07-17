@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SubmitBtn from "../../Util/SubmitBtn";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import { DropDown } from "../../Util/DropDown";
-import Input from "../../Util/Input";
-import FormHeading from "../../Util/FormHeading";
 import { useTopCategories } from "../../Hooks/useOptions";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
 import { MdAdd, MdEdit } from "react-icons/md";
+import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");
@@ -34,7 +31,7 @@ const AddStore = () => {
       const url = await getImageURL(link);
       setPrevStoreImage(url);
     }
-  }
+  };
 
   useEffect(() => {
     if (store?.storeId) {
@@ -219,7 +216,7 @@ const AddStore = () => {
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen">
-      <FormHeading icon={<PiStorefrontDuotone />} text={"Store Details"} />
+      <FormHeader icon={<PiStorefrontDuotone />} text={"Store Details"} />
 
       <div className="w-full flex justify-center items-start">
         <div className="w-max mx-4 flex flex-col items-center">

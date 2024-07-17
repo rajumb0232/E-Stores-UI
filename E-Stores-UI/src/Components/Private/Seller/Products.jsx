@@ -1,6 +1,6 @@
 import React from 'react'
-import NavigateBtn from '../../Util/NavigateBtn'
 import { LuPlus } from 'react-icons/lu'
+import { NavigateBtn } from '../../Util/Forms'
 
 const Products = () => {
   return (

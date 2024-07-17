@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
 import { LuBadgeInfo } from "react-icons/lu";
-import { IoLocationOutline } from "react-icons/io5";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
-import NavigateBtn from "../../Util/NavigateBtn";
+import { NavigateBtn } from "../../Util/Forms";
 
 const Store = () => {
   const { store, prevAddress, prevContacts } = useStore();

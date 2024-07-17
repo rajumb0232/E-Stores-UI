@@ -6,7 +6,7 @@ import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
-import SubmitBtn from "../Util/SubmitBtn";
+import { SubmitBtn } from "../Util/Forms";
 
 const VerifyOTP = () => {
   const { auth } = useAuth();

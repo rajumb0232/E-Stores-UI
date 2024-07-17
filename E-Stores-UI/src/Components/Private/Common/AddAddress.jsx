@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SubmitBtn from "../../Util/SubmitBtn";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import { DropDown } from "../../Util/DropDown";
-import Input from "../../Util/Input";
-import FormHeading from "../../Util/FormHeading";
 import { RiUserLocationLine } from "react-icons/ri";
 import { useCityDistricts, useStates } from "../../Hooks/useOptions";
 import useStore from "../../Hooks/useStore";
+import { DropDown, FormHeader, Input, SubmitBtn } from "../../Util/Forms";
 
 const AddAddress = () => {
   const [addressId, setAddressId] = useState("");
@@ -156,7 +153,7 @@ const AddAddress = () => {
       <div
         className={`w-full h-max flex flex-col justify-end items-center text-slate `}
       >
-        <FormHeading icon={<RiUserLocationLine />} text={"Address Details"} />
+        <FormHeader icon={<RiUserLocationLine />} text={"Address Details"} />
         <div className="w-full px-4 py-2 h-full">
           <div className="w-full flex justify-center items-center mb-4">
             <Input

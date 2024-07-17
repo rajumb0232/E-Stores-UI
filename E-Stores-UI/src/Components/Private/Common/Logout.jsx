@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SubmitBtn from "../../Util/SubmitBtn";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { IoWarningOutline } from "react-icons/io5";
+import { SubmitBtn } from "../../Util/Forms";
 
 const Logout = ({ doAppear }) => {
   const [isSubmited, setIsSubmited] = useState(false);

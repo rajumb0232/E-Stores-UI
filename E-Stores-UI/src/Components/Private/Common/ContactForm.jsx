@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import useStore from "../../Hooks/useStore";
-import FormHeader from "../../Util/FormHeading";
 import { PiUserCirclePlusDuotone } from "react-icons/pi";
-import Input from "../../Util/Input";
-import RadioBtn from "../../Util/RadioBtn";
-import SubmitBtn from "../../Util/SubmitBtn";
 import { AiOutlineDelete } from "react-icons/ai";
+import { FormHeader, Input, RadioBtn, SubmitBtn } from "../../Util/Forms";
 
 const ContactForm = () => {
   const [contactId1, setContactId1] = useState("");

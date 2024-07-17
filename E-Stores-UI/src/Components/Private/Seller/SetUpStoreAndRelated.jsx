@@ -7,7 +7,7 @@ import { MdOutlineEditLocationAlt } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
 import { IoMdArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import NavigateBtn from "../../Util/NavigateBtn";
+import { NavigateBtn } from "../../Util/Forms";
 
 const SetUpStoreAndRelated = () => {
   const [view, setView] = useState("Store");
