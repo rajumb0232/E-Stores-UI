@@ -16,7 +16,7 @@ const Footer = () => {
             />
             <FooterLink
               title={"Linkedin"}
-              url={"www.linkedin.com/in/raju-gowda-atwork"}
+              url={"https://www.linkedin.com/in/raju-gowda-atwork"}
             />
           </FooterBlock>
 
