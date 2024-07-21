@@ -111,7 +111,7 @@ export const useCategoryCatalogue = () => {
   const getCategories = async () => {
     const backup = localStorage.getItem("categories");
     const data = backup && JSON.parse(backup);
-    console.log("existing category list: ",backup);
+    
     if (data) {
       setCategories(data);
     } else {

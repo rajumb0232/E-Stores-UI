@@ -31,10 +31,6 @@ const Headers = () => {
   const [addOnsHovered, setAddOnsHovered] = useState(false);
   const [doLogout, setDoLogout] = useState(false);
 
-  useEffect(() => {
-    console.log(roles);
-  }, [roles]);
-
   const preAuthNavs = [
     {
       title: "Login",
