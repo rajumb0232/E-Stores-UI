@@ -103,14 +103,14 @@ export const navs = [
   },
   {
     path: "/add-product",
-    element: <LazyAddUpdateProduct />,
+    element: <LazyAddUpdateProduct update={false}/>,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],
   },
   {
     path: "/update-product",
-    element: <LazyAddUpdateProduct />,
+    element: <LazyAddUpdateProduct update={true}/>,
     isPrivate: true,
     isVisibleAfterLogin: true,
     authorizedTo: ["SELLER"],

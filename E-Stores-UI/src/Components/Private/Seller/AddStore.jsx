@@ -294,7 +294,7 @@ const AddStore = () => {
 
         <div className="w-full flex flex-col justify-center items-center">
           <div className="w-full flex flex-col items-center">
-            <div className="w-full flex justify-center items-center mb-4">
+            <div className="w-full flex justify-center items-center mb-1">
               <Input
                 isRequired={true}
                 placeholderText={"Your store name here:"}

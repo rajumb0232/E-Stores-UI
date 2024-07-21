@@ -295,23 +295,19 @@ const ContactForm = () => {
               </div>
             </div>
             <div className=" w-full">
-              <div className="w-full flex justify-center items-center mb-4">
                 <Input
                   isRequired={true}
                   onChangePerform={setContactName1}
                   value={contactName1}
                   placeholderText={"Contact name: "}
                 />
-              </div>
 
-              <div className="w-full flex justify-center items-center mb-4">
                 <Input
                   isRequired={true}
                   onChangePerform={setContactNumber1}
                   value={contactNumber1}
                   placeholderText={"Contact number: "}
                 />
-              </div>
             </div>
           </div>
           <div className="px-2 w-full">
@@ -339,22 +335,18 @@ const ContactForm = () => {
               </div>
             </div>
             <div className=" w-full">
-              <div className="w-full flex justify-center items-center mb-4">
                 <Input
                   isRequired={true}
                   onChangePerform={setContactName2}
                   value={contactName2}
                   placeholderText={"Contact name: "}
                 />
-              </div>
-              <div className="w-full flex justify-center items-center mb-4">
                 <Input
                   isRequired={true}
                   onChangePerform={setContactNumber2}
                   value={contactNumber2}
                   placeholderText={"Contact number: "}
                 />
-              </div>
             </div>
           </div>
         </div>
