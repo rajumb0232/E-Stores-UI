@@ -180,16 +180,11 @@ const Headers = () => {
                   <div className="flex flex-col justify-between items-center w-full p-2">
                     {addOns.map((item, i) => {
                       return (
-                        // <HoverOptions
-                        //   name={item.title}
-                        //   to={item.url}
-                        //   icon={item.icon}
-                        //   key={i}
-                        // />
                         <a
                           href={item.url}
                           target="_blank"
                           className="text-slate-700 w-full hover:bg-slate-100 text-base h-max"
+                          key={i}
                         >
                           <div className="px-2 flex justify-start items-center w-full py-2 hover:bg-gray-100">
                             {item.icon}
@@ -223,8 +218,8 @@ export const MyNav = ({
   return (
     <div
       className="mx-2 px-4 py-2 rounded-full flex justify-start items-center hover:bg-pallete_zero hover:text-white bg-transparent text-slate-700"
-      onMouseEnter={() => toggleState(true)}
-      onMouseLeave={() => toggleState(false)}
+      onMouseEnter={() => toggleState && toggleState(true)}
+      onMouseLeave={() => toggleState && toggleState(false)}
     >
       <Link to={to} className={`flex justify-start items-center`}>
         <div className="mt-0.5 mr-1 hover:text-white text-2xl">{icon}</div>

@@ -28,11 +28,11 @@ export const Input = ({
   }, [showSensitive]);
 
   return (
-    <div className="border border-transparent rounded-md bg-input w-full text-sm px-2 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
+    <div className="border border-transparent rounded-md bg-input w-full text-sm px-2 mb-2.5 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
       <input
         id={name}
         type={inputType}
-        onChange={(event) => onChangePerform(event.target.value)}
+        onChange={(event) => onChangePerform(event.target.value.trim())}
         required={isRequired}
         placeholder={placeholderText}
         value={value ? value : ""}
@@ -109,17 +109,17 @@ export const RadioBtn = ({ value, onChange, state }) => {
         <p className="text-base">{value}</p>
         <div className="w-12 flex justify-start items-center">
           <button
-            className={`ml-2 h-max w-9 p-0.5 text-base border border-pallete_zero flex items-center justify-center rounded-3xl transition-transform duration-500 overflow-clip ${
-              state ? " bg-pallete_one" : " bg-gray-300"
+            className={`ml-2 h-max w-9 p-0.5 text-base border border-transparent flex items-center justify-center rounded-3xl transition-transform duration-500 overflow-clip ${
+              state ? "bg-pallete_one" : "bg-gray-300"
             }`}
             onClick={() => onChange()}
             type="button"
           >
             <div
-              className={`h-4 w-4 rounded-full bg-white border border-pallete_zero text-sm font-extrabold transition-transform duration-300 ${
+              className={`h-4 w-4 rounded-full bg-white border border-gray-500 text-sm font-extrabold transition-transform duration-300 ${
                 state
-                  ? "text-pallete_zero translate-x-2/4"
-                  : " text-pallete_zero -translate-x-2/4"
+                  ? "text-gray-500 translate-x-2/4"
+                  : " text-gray-500 -translate-x-2/4"
               }`}
             >
               {state ? <RxCheck /> : <RxCross2 />}
@@ -172,7 +172,7 @@ export function DropDown({
     <div>
       <button
         type="button"
-        className=" w-max py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
+        className="w-max mx-2 py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
         onClick={() => {
           isDropdownOpen ? setDropdownOpen(false) : setDropdownOpen(true);
         }}

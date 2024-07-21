@@ -9,7 +9,7 @@ const Products = () => {
         <h1 className="w-full text-4xl font-semibold py-2 px-4">
           Manage your Products
         </h1>
-        <div className="flex justify-end items-center border rounded-full p-2 my-2 font-semibold border-pallete_zero ">
+        <div className="flex justify-end items-center border rounded-full p-2 py-4 my-2 font-semibold border-gray-300 hover:bg-stone-100">
           <div className="text-sm px-2">
             <p>Hey there! Welcome Back.</p>
             <p>
@@ -17,8 +17,8 @@ const Products = () => {
               want to list any new product?
             </p>
           </div>
-          <div className="ml-auto w-32">
-            <NavigateBtn name={"List New Product"} icon={<LuPlus />} to={"/add-product"}/>
+          <div className="ml-auto w-max">
+            <NavigateBtn name={"List New Product"} icon={<LuPlus />} to={"/add-product"} dark={true}/>
           </div>
         </div>
         
