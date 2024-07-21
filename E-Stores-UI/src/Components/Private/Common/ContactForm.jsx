@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import useStore from "../../Hooks/useStore";
 import { PiUserCirclePlusDuotone } from "react-icons/pi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FormHeader, Input, RadioBtn, SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const ContactForm = () => {
   const [contactId1, setContactId1] = useState("");
@@ -21,7 +21,7 @@ const ContactForm = () => {
   const [doDelete, setDoDelete] = useState("");
   const axiosInstance = AxiosPrivateInstance();
 
-  const { prevAddress, prevContacts } = useStore();
+  const { prevAddress, prevContacts } = useStarter();
 
   useEffect(() => {
     !contactPrimary1 && !contactPrimary2 && setContactPrimary1(true);

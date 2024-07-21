@@ -68,7 +68,6 @@ export const FormHeader = ({ icon, text }) => {
 export const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
   return (
     <button
-      onClick={submit}
       disabled={isSubmited}
       className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border-2 transition-colors duration-75 ease-in-out ${
         // applies for danger buttons
@@ -81,7 +80,7 @@ export const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
           : !danger &&
             "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:bg-white border-pallete_zero focus:bg-pallete_zero focus:text-white"
       }`}
-      type="button"
+      type="submit"
     >
       {isSubmited ? (
         <div className="flex">
@@ -169,17 +168,17 @@ export function DropDown({
   });
 
   return (
-    <div>
+    <div className="w-full mx-2 mb-2.5">
       <button
         type="button"
-        className="w-max mx-2 py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
+        className="w-full py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
         onClick={() => {
           isDropdownOpen ? setDropdownOpen(false) : setDropdownOpen(true);
         }}
       >
-        <div className="flex flex-col justify-start items-start w-fit">
+        <div className="flex flex-col justify-start items-start w-full">
           <div className="flex justify-center items-center w-max">
-            <p>
+            <p className="line-clamp-1">
               {value !== "" && value ? valueType + ": " + value : DefaultText}
             </p>
             <div className="ml-1">

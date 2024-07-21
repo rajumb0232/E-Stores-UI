@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { useTopCategories } from "../../Hooks/useOptions";
-import useStore from "../../Hooks/useStore";
 import useImage from "../../Hooks/useImage";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");
@@ -17,7 +17,7 @@ const AddStore = () => {
   const [isAnyModified, setAnyModified] = useState(false);
   const { topCategories } = useTopCategories();
 
-  const { store } = useStore();
+  const { store } = useStarter();
   const [prevStoreImage, setPrevStoreImage] = useState("");
   const { getImageURL } = useImage();
   const [selectedLogo, setSelectedLogo] = useState(null);

@@ -113,14 +113,18 @@ const Register = ({ role, isLogin }) => {
   }, [isSubmited]);
 
   //handling submit
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault();
     setSubmitFailed(false);
     setIsSubmited(true);
   };
 
   return (
     <div className="w-screen h-screen font-two flex flex-col items-center justify-start">
-      <form className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden">
+      <form
+        onSubmit={submit}
+        className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden"
+      >
         <div className="w-full bg-gray-100 text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
           {isLogin ? (
             <div className="p-2">
@@ -159,7 +163,7 @@ const Register = ({ role, isLogin }) => {
               value={email}
               onChangePerform={setEmail}
               placeholderText={"Enter your email: "}
-              isRequired={isSubmited}
+              isRequired={true}
               type={"email"}
               name={"Email"}
             />
@@ -173,7 +177,7 @@ const Register = ({ role, isLogin }) => {
               value={password}
               onChangePerform={setPassword}
               placeholderText={"Enter your password: "}
-              isRequired={isSubmited}
+              isRequired={true}
               type={"password"}
               name={"Password"}
             />

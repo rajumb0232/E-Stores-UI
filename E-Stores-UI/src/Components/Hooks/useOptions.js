@@ -78,9 +78,7 @@ export const useTopCategories = () => {
 
   const getTopCategories = async () => {
     const cache = await caches.open("user");
-    const topCategories = await cache.match(
-      "/top-categories"
-    );
+    const topCategories = await cache.match("/top-categories");
     let list = [];
     if (topCategories) {
       list = await topCategories.json();
@@ -92,10 +90,7 @@ export const useTopCategories = () => {
           return category.charAt(0) + category.slice(1).toLowerCase();
         });
         setTopCategories(list);
-        cache.put(
-          "/top-categories",
-          new Response(JSON.stringify(list))
-        );
+        cache.put("/top-categories", new Response(JSON.stringify(list)));
       } else alert("Something went wront!!");
     }
   };
@@ -108,3 +103,33 @@ export const useTopCategories = () => {
 };
 
 // --------------------------------------------------------------------------------------------------------
+
+export const useCategoryCatalogue = () => {
+  const [catagories, setCategories] = useState([]);
+  const axios = AxiosPrivateInstance();
+
+  const getCategories = async () => {
+    const backup = localStorage.getItem("categories");
+    const data = backup && JSON.parse(backup);
+    console.log("existing category list: ",backup);
+    if (data) {
+      setCategories(data);
+    } else {
+      const response = await axios.get("/categories");
+      if (response.status === 200) {
+        setCategories(response?.data);
+        localStorage.setItem("categories", JSON.stringify(response?.data));
+      }
+    }
+  };
+
+  let fetchingCategories = false;
+  useEffect(() => {
+    if (!fetchingCategories) {
+      fetchingCategories = true;
+      getCategories();
+    }
+  }, []);
+
+  return { catagories, getCategories };
+};
