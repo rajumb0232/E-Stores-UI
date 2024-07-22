@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Input } from "../../Util/Forms";
 import { useStarter } from "../../Context/Starter";
+import SearchCard from "../../Util/SearchCard";
 
 const AddUpdateProduct = ({ update }) => {
   const { catagories } = useStarter();
 
-  useEffect(() => console.log(catagories),[catagories]);
+  useEffect(() => console.log(catagories), [catagories]);
 
   return (
     <div className="min-h-screen mt-20 text-slate-700 w-full font-two flex flex-col justify-start items-center">
@@ -36,9 +37,12 @@ const AddUpdateProduct = ({ update }) => {
             </div>
             <div className="w-full m-2 flex flex-col justify-center items-center">
               {/* <DropDown valueType={"Product Type: "} value={"Shoe"}/> */}
-              <button className="py-2 px-4 mb-2.5 cursor-pointer w-full text-center border-2 border-pallete_zero rounded-lg text-lg">
+              <button className="py-2 px-4 mb-2.5 cursor-pointer w-full text-center border-2 border-pallete_zero rounded-lg text-lg"
+              type="button"
+              >
                 <span className="w-full text-center">Select Product Type</span>
               </button>
+              {true && <SearchCard/>}
               <Input
                 isRequired={true}
                 name={"title"}

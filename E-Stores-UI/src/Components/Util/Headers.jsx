@@ -171,7 +171,7 @@ const Headers = () => {
             <div className="text-xl mt-1">
               <VscListSelection />
               {addOnsHovered && (
-                <div className="shadow-lg shadow-slate-300 bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-3/4 -translate-y-2 flex flex-col justify-center transition-all duration-300">
+                <div className="shadow-xl border bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-3/4 -translate-y-2 flex flex-col justify-center transition-all duration-300">
                   <div className="flex flex-col justify-between items-center w-full p-2">
                     {addOns.map((item, i) => {
                       return (
@@ -244,7 +244,7 @@ export const UsersCard = ({ authenticated, roles, setDoLogout }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="shadow-lg shadow-slate-300 bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-5 -translate-y-1 flex flex-col justify-center transition-all duration-300">
+    <div className="shadow-xl border bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-5 -translate-y-1 flex flex-col justify-center transition-all duration-300">
       <div className="flex justify-between items-center w-full border-b-2 border-slate-300 p-2">
         <p className="text-slate-700 ">
           {authenticated ? "Need break?" : "New customer?"}

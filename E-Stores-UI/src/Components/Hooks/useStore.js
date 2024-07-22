@@ -11,7 +11,6 @@ const useStore = () => {
 
   useEffect(() => {
     if (store) {
-      console.log("Store updated: ", store);
       setPrevAddress(store?.address);
       setPrevContacts(store?.address?.contacts || []);
     }
@@ -19,7 +18,6 @@ const useStore = () => {
 
   const updateStoreState = (data) => {
     if (data) {
-      console.log("Updating store state with data: ", data);
       localStorage.setItem("store-data", JSON.stringify(data));
       setStore(data);
       return true;
@@ -48,10 +46,8 @@ const useStore = () => {
   const getStore = (force) => {
     if (!force) {
       const backup = localStorage.getItem("store-data");
-      console.log("Backup from localStorage: ", backup);
       if (backup) {
         const storeData = JSON.parse(backup);
-        console.log("Parsed store data: ", storeData);
         setStore(storeData);
       } else {
         fetch();

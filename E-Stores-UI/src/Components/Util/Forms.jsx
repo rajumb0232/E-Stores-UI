@@ -65,7 +65,7 @@ export const FormHeader = ({ icon, text }) => {
   );
 };
 
-export const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
+export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) => {
   return (
     <button
       disabled={isSubmited}
@@ -80,7 +80,8 @@ export const SubmitBtn = ({ submit, isSubmited, name, icon, danger }) => {
           : !danger &&
             "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:bg-white border-pallete_zero focus:bg-pallete_zero focus:text-white"
       }`}
-      type="submit"
+      type={btnType}
+      onClick={onClick}
     >
       {isSubmited ? (
         <div className="flex">
