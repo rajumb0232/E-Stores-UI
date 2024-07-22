@@ -17,7 +17,7 @@ const Image = ({ path }) => {
 
   return (
     <LazyLoad className="w-full">
-      <img src={imageUrl} alt="ksdahfka" className="w-full"/>
+      <img src={imageUrl} alt="image" className="w-full text-center"/>
     </LazyLoad>
   );
 };

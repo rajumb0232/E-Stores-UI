@@ -176,7 +176,7 @@ export function DropDown({
           isDropdownOpen ? setDropdownOpen(false) : setDropdownOpen(true);
         }}
       >
-        <div className="flex flex-col justify-start items-start w-full">
+        <div className="flex flex-col justify-center items-center w-full">
           <div className="flex justify-center items-center w-max">
             <p className="line-clamp-1">
               {value !== "" && value ? valueType + ": " + value : DefaultText}

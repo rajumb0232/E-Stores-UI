@@ -10,6 +10,10 @@ const Starter = ({ children }) => {
   const { store, prevAddress, prevContacts, cleanStore } = useStore();
   const { auth, setAuth } = useAuth();
 
+  useEffect(() => {
+    console.log(store);
+  },[store, prevAddress, prevContacts])
+
   const logout = () => {
     if (!auth.authenticated) {
       cleanStore();

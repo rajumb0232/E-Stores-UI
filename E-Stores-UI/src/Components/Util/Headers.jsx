@@ -102,7 +102,7 @@ const Headers = () => {
     },
     {
       title: "GitHub",
-      url: "https://localhost:8080/rajumb0232",
+      url: "https://github.com/rajumb0232",
       icon: <FaGithub />,
     },
     {

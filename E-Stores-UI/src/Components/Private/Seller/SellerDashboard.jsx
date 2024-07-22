@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import PerformanceRecord from "./PerformanceRecord";
 import Orders from "./Orders";
-import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import Products from "./Products";
 import Store from "./Store";
 import Image from "../../Util/Image";
@@ -38,13 +36,13 @@ const SellerDashboard = () => {
 
   useEffect(() => {
     // if (store?.storeId) {
-      const view = sessionStorage.getItem("currentView");
-      if (view) {
-        setCurrentView(view);
-      } else {
-        setCurrentView("dashboard");
-        sessionStorage.setItem("currentView", "dashboard");
-      }
+    const view = sessionStorage.getItem("currentView");
+    if (view) {
+      setCurrentView(view);
+    } else {
+      setCurrentView("dashboard");
+      sessionStorage.setItem("currentView", "dashboard");
+    }
     // } else checkForStore();
   }, [store]);
 
@@ -140,7 +138,7 @@ const SellerDashboard = () => {
                 }`}
               >
                 <div className="rounded-full overflow-hidden border border-slate-400 flex justify-center items-center">
-                  <Image path={store?.logoLink}/>
+                  <Image path={store?.logoLink} />
                 </div>
               </div>
               <div className="flex flex-col justify-center items-start hover:transition-all duration-500 delay-200 ease-in-out">
@@ -152,36 +150,39 @@ const SellerDashboard = () => {
                 <p
                   className={`text-xs font-normal text-slate-500 line-clamp-1`}
                 >
-                  {prevAddress.addressLine1 +
-                    ", " +
-                    prevAddress.addressLine2 +
-                    ", " +
-                    prevAddress.areaVillage +
-                    ", " +
-                    prevAddress.cityDistrict +
-                    ", " +
-                    prevAddress.state +
-                    ", India " +
-                    prevAddress.pincode}
+                  {prevAddress?.pincode
+                    ? prevAddress?.addressLine1 +
+                      ", " +
+                      prevAddress?.addressLine2 +
+                      ", " +
+                      prevAddress?.areaVillage +
+                      ", " +
+                      prevAddress?.cityDistrict +
+                      ", " +
+                      prevAddress?.state +
+                      ", India " +
+                      prevAddress?.pincode
+                    : "[Address] | e.g., #32 building name, street, landmark, India 900068"}
                 </p>
               </div>
             </div>
           )}
           <div className="w-10/12 h-max rounded-sm flex justify-center items-center">
-            {currentView === "dashboard" ? (
-              <PerformanceRecord />
-            ) : currentView === "products" ? (
-              <Products />
-            ) : currentView === "orders" ? (
-              <Orders />
-            ) : currentView === "store" && (
-              <Store/>
-            )
-            //  : currentView === "manage_address" ? (
-            //   <AddAddress />
-            // ) : (
-            //   currentView === "manage_contacts" && <ContactForm />
-            // )
+            {
+              currentView === "dashboard" ? (
+                <PerformanceRecord />
+              ) : currentView === "products" ? (
+                <Products />
+              ) : currentView === "orders" ? (
+                <Orders />
+              ) : (
+                currentView === "store" && <Store />
+              )
+              //  : currentView === "manage_address" ? (
+              //   <AddAddress />
+              // ) : (
+              //   currentView === "manage_contacts" && <ContactForm />
+              // )
             }
           </div>
         </div>
@@ -217,9 +218,7 @@ export const Switch = ({
       <p className="text-2xl">{icon}</p>
 
       {show && (
-        <p className={`pl-2 rounded-full font-semibold w-max`}>
-          {displayName}
-        </p>
+        <p className={`pl-2 rounded-full font-semibold w-max`}>{displayName}</p>
       )}
     </button>
   );
