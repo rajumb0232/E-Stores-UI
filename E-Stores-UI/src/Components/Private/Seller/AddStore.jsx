@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { useTopCategories } from "../../Hooks/useOptions";
-import useImage from "../../Hooks/useImage";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
 import { useStarter } from "../../Context/Starter";
+import Image from "../../Util/Image";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");
@@ -18,20 +18,11 @@ const AddStore = () => {
   const { topCategories } = useTopCategories();
 
   const { store } = useStarter();
-  const [prevStoreImage, setPrevStoreImage] = useState("");
-  const { getImageURL } = useImage();
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
 
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
-
-  const updateStoreImage = async (link) => {
-    if (store?.logoLink) {
-      const url = await getImageURL(link);
-      setPrevStoreImage(url);
-    }
-  };
 
   useEffect(() => {
     if (store?.storeId) {
@@ -40,7 +31,6 @@ const AddStore = () => {
       setAbout(store.about);
       setCategory(store.category);
       setPrevPresent(true);
-      if (store?.logoLink) updateStoreImage(store.logoLink);
     }
   }, [store]);
 
@@ -268,7 +258,7 @@ const AddStore = () => {
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
               ) : store?.logoLink ? (
-                <img src={prevStoreImage} className="w-full" />
+                <Image path={store.logoLink}/>
               ) : (
                 "Upload Logo"
               )}

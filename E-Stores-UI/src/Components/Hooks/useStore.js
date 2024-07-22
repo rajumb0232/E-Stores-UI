@@ -3,8 +3,8 @@ import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useAuth } from "../Auth/AuthProvider";
 
 const useStore = () => {
-  const [store, setStore] = useState({});
-  const [prevAddress, setPrevAddress] = useState({});
+  const [store, setStore] = useState(null);
+  const [prevAddress, setPrevAddress] = useState(null);
   const [prevContacts, setPrevContacts] = useState([]);
   const axiosInstance = AxiosPrivateInstance();
   const { auth } = useAuth();
@@ -14,39 +14,21 @@ const useStore = () => {
   useEffect(() => {
     if (!checked) {
       checked = true;
-      if (store.address) {
-        setPrevAddress(store.address);
+      if (store) {
+        console.log(store?.address);
+        setPrevAddress(store?.address);
+        setPrevContacts(store?.address?.contacts);
       }
     }
   }, [store]);
 
-  // update contact list if the address if updated
-  useEffect(() => {
-    if (prevAddress) {
-      setPrevContacts(prevAddress.contacts ? prevAddress.contacts : []);
-    } else {
-      getPrevStore(true);
-    }
-  }, [prevAddress]);
-
-  const checkForStore = async () => {
-    const response = await axiosInstance.get("/stores-exist");
-    try {
-      if (response.status === 200) {
-        if (response.data === true) {
-          localStorage.setItem("store", "true");
-          return true;
-        } else return false;
-      } else console.log(response.data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
   const updateStoreState = (data) => {
-    localStorage.setItem("store-data", JSON.stringify(data));
-    setStore(data);
-    return true;
+    if(data){
+      localStorage.setItem("store-data", JSON.stringify(data));
+      setStore(data);
+      return true;
+    } else console.log("Invalid Store Data Found.");
+    
   };
 
   const fetch = async () => {
@@ -65,31 +47,30 @@ const useStore = () => {
     }
   };
 
-  const getPrevStore = async (doForce) => {
-    if (!doForce) {
+  const getStore = (force) => {
+    if (!force) {
       const backup = localStorage.getItem("store-data");
-      const storeData = backup && JSON.parse(backup);
-      if (storeData) {
+      if (backup) {
+        const storeData = JSON.parse(backup);
+        console.log(storeData);
         setStore(storeData);
       } else fetch();
     } else fetch();
   };
 
   // begin
-  let flag = false;
   useEffect(() => {
-    if (!flag && auth.authenticated) {
-      flag = true;
-      getPrevStore();
+    if (auth?.authenticated && auth?.roles?.includes("SELLER")) {
+      getStore(false);
     }
   }, []);
 
   const cleanStore = () => {
     localStorage.removeItem("store-data");
     localStorage.removeItem("store");
-  }
+  };
 
-  return { store, prevAddress, prevContacts, cleanStore };
+  return { store, prevAddress, prevContacts, getStore, cleanStore };
 };
 
 export default useStore;

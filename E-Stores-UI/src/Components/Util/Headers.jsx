@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthProvider";
 import { useState } from "react";
@@ -18,7 +18,6 @@ import Logout from "../Private/Common/Logout";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxes, BsCart3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { GoCodescan } from "react-icons/go";
 import { TbZoomCode } from "react-icons/tb";
 import { SiHashnode, SiPostman } from "react-icons/si";
 import { LuUserCircle } from "react-icons/lu";

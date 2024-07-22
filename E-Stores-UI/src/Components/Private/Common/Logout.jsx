@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { IoWarningOutline } from "react-icons/io5";
 import { SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const Logout = ({ doAppear }) => {
   const [isSubmited, setIsSubmited] = useState(false);
   const axiosInstance = AxiosPrivateInstance();
   const [loginRequested, setLoginRequested] = useState(false);
+  const {logout} = useStarter();
 
   const handleLogout = async () => {
     const response = await axiosInstance.post("/logout");
     try {
       if (response.status === 200) {
-        localStorage.clear();
-        window.location.reload();
+        logout();
       } else {
         console.log(response?.data);
         setIsSubmited(false);
@@ -32,6 +33,7 @@ const Logout = ({ doAppear }) => {
       handleLogout();
     }
   }, [isSubmited]);
+  
   return (
     <div
       className={`absolute w-max h-max top-18 right-20 px-6 hover:px-7 py-4 bg-white shadow-even20 shadow-gray-300 rounded-md flex flex-col justify-start items-center z-50 transition-all duration-300 animate-pop`}

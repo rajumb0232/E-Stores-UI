@@ -3,22 +3,37 @@ import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
 import { useAuth } from "../Auth/AuthProvider";
 
-const StarterDataContext = createContext();
+const StarterDataContext = createContext(null);
 
 const Starter = ({ children }) => {
   const { catagories, getCategories } = useCategoryCatalogue();
   const { store, prevAddress, prevContacts, cleanStore } = useStore();
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
-  useEffect(() => {
-    if(!auth.authenticated){
-        cleanStore();
+  const logout = () => {
+    if (!auth.authenticated) {
+      cleanStore();
+      setAuth({
+        userId: "",
+        username: "",
+        roles: ["CUSTOMER"],
+        accessExpiration: null,
+        refreshExpiration: null,
+        authenticated: false,
+      });
     }
-  }, [auth]);
+  };
 
   return (
     <StarterDataContext.Provider
-      value={{ catagories, getCategories, store, prevAddress, prevContacts }}
+      value={{
+        catagories,
+        getCategories,
+        store,
+        prevAddress,
+        prevContacts,
+        logout,
+      }}
     >
       {children}
     </StarterDataContext.Provider>

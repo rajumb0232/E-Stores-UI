@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from "react";
-import useStore from "../../Hooks/useStore";
-import useImage from "../../Hooks/useImage";
+import React from "react";
 import { LuBadgeInfo } from "react-icons/lu";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { NavigateBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
+import Image from "../../Util/Image";
 
 const Store = () => {
-  const { store, prevAddress, prevContacts } = useStore();
-  const { getImageURL } = useImage();
-  const [storeImage, setStoreImage] = useState("");
-
-  useEffect(() => {
-    const render = async () => {
-      setStoreImage(await getImageURL(store?.logoLink));
-    };
-    render();
-  }, [store]);
+  const { store, prevAddress, prevContacts } = useStarter();
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen font-two">
       <div className="my-6 w-full h-full flex justify-center items-center">
         <div className="w-2/5 h-full py-6 px-4 m-2 flex flex-col justify-start items-center border rounded-lg">
           <div className="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
-            <img src={storeImage} alt="store image" className="w-full" />
+            <Image path={store?.logoLink} />
           </div>
           <div className="px-4 flex flex-col justify-center items-center">
             <h1 className="text-4xl w-full my-2">{store?.storeName}</h1>

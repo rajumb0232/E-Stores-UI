@@ -6,42 +6,38 @@ import { PiStorefrontDuotone } from "react-icons/pi";
 import PerformanceRecord from "./PerformanceRecord";
 import Orders from "./Orders";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import useStore from "../../Hooks/useStore";
-import useImage from "../../Hooks/useImage";
 import Products from "./Products";
 import Store from "./Store";
+import Image from "../../Util/Image";
+import { useStarter } from "../../Context/Starter";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
   const [storeHovered, setStoreHovered] = useState(false);
   const [switchHovered, setSwitchHovered] = useState(false);
-  const navigate = useNavigate();
-  const axiosInstance = AxiosPrivateInstance();
-  const { store, prevAddress } = useStore();
-  const [storeImage, setStoreImage] = useState("");
-  const { getImageURL } = useImage();
+  const { store, prevAddress } = useStarter();
 
-  let isChecked = false;
-  const checkForStore = async () => {
-    if (!isChecked) {
-      isChecked = true;
-      const response = await axiosInstance.get("/stores-exist", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+  // let isChecked = false;
+  // const checkForStore = async () => {
+  //   if (!isChecked) {
+  //     isChecked = true;
+  //     const response = await axiosInstance.get("/stores-exist", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       withCredentials: true,
+  //     });
 
-      if (response.status === 200) {
-        if (response.data === true) {
-          sessionStorage.setItem("currentView", "dashboard");
-        } else navigate("/setup-store");
-      } else alert("Something went wrong!!");
-    }
-  };
+  //     if (response.status === 200) {
+  //       if (response.data === true) {
+  //         sessionStorage.setItem("currentView", "dashboard");
+  //       } else navigate("/setup-store");
+  //     } else alert("Something went wrong!!");
+  //   }
+  // };
 
   useEffect(() => {
-    if (store?.storeId) {
+    // if (store?.storeId) {
       const view = sessionStorage.getItem("currentView");
       if (view) {
         setCurrentView(view);
@@ -49,16 +45,7 @@ const SellerDashboard = () => {
         setCurrentView("dashboard");
         sessionStorage.setItem("currentView", "dashboard");
       }
-    } else checkForStore();
-  }, [store]);
-
-  useEffect(() => {
-    if (store?.logoLink) {
-      const get = async () => {
-        setStoreImage(await getImageURL(store.logoLink));
-      };
-      get();
-    }
+    // } else checkForStore();
   }, [store]);
 
   const navs = [
@@ -153,7 +140,7 @@ const SellerDashboard = () => {
                 }`}
               >
                 <div className="rounded-full overflow-hidden border border-slate-400 flex justify-center items-center">
-                  <img src={storeImage} alt="" className="w-full" />
+                  <Image path={store?.logoLink}/>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-start hover:transition-all duration-500 delay-200 ease-in-out">
