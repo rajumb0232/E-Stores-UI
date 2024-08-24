@@ -28,21 +28,21 @@ export const Input = ({
   }, [showSensitive]);
 
   return (
-    <div className="border border-transparent rounded-md bg-input w-full text-sm px-2 mb-2.5 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
+    <div className="border border-gray-300 rounded-md w-full text-sm px-2 mb-2.5 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
       <input
-        id={name}
+        name={name}
         type={inputType}
-        onChange={(event) => onChangePerform(event.target.value.trim())}
+        onChange={(e) => onChangePerform(e.target.value)}
         required={isRequired}
         placeholder={placeholderText}
-        value={value ? value : ""}
-        className="rounded-md bg-transparent w-full py-2 text-base placeholder:font-normal text-slate-700 placeholder:text-slate-500"
+        value={value}
+        className="rounded-md bg-transparent w-full py-2.5 text-base placeholder:font-normal text-slate-700 placeholder:text-slate-500"
       />
       {isSecure && (
         <div
           className="border-l border-l-slate-300 pl-1"
           onClick={() =>
-            showSensitive ? setShowSensitive(false) : setShowSensitive(true)
+            setShowSensitive(!showSensitive) 
           }
         >
           {showSensitive ? (
@@ -104,8 +104,8 @@ export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) 
 
 export const RadioBtn = ({ value, onChange, state }) => {
   return (
-    <div className="w-max font-semibold text-slate-500">
-      <div className="w-full flex justify-center items-center m-2">
+    <div className="w-max font-semibold text-slate-700">
+      <div className="w-full flex justify-center items-center">
         <p className="text-base">{value}</p>
         <div className="w-12 flex justify-start items-center">
           <button
@@ -172,7 +172,7 @@ export function DropDown({
     <div className="w-full mx-2 mb-2.5">
       <button
         type="button"
-        className="w-full py-2 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
+        className="w-full py-2.5 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"
         onClick={() => {
           isDropdownOpen ? setDropdownOpen(false) : setDropdownOpen(true);
         }}
