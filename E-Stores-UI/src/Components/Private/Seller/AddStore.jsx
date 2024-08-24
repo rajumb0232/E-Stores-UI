@@ -312,7 +312,7 @@ const AddStore = () => {
               id="about"
               onChange={(event) => setAbout(event.target.value)}
               placeholder="About (optional):"
-              className="h-56 w-full overflow-x-clip placeholder:text-slate-500 text-start text-slate-700 bg-input hover:border-gray-300 focus:border-gray-300 border border-transparent rounded-md p-2 text-base"
+              className="h-56 w-full overflow-x-clip placeholder:text-slate-500 text-start  hover:border-gray-400 focus:border-gray-300 border border-gray-300 rounded-md p-2 text-base"
               value={about}
             />
           </div>
