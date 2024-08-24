@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { IoWarningOutline } from "react-icons/io5";
 import { SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const Logout = ({ doAppear }) => {
   const [isSubmited, setIsSubmited] = useState(false);
   const axiosInstance = AxiosPrivateInstance();
   const [loginRequested, setLoginRequested] = useState(false);
+  const { logout } = useStarter();
 
   const handleLogout = async () => {
     const response = await axiosInstance.post("/logout");
     try {
       if (response.status === 200) {
-        localStorage.clear();
-        window.location.reload();
+        setTimeout(() => {
+          logout();
+          setIsSubmited(false);
+          doAppear(false);
+        }, [2000]);
       } else {
         console.log(response?.data);
         setIsSubmited(false);
@@ -32,6 +37,7 @@ const Logout = ({ doAppear }) => {
       handleLogout();
     }
   }, [isSubmited]);
+
   return (
     <div
       className={`absolute w-max h-max top-18 right-20 px-6 hover:px-7 py-4 bg-white shadow-even20 shadow-gray-300 rounded-md flex flex-col justify-start items-center z-50 transition-all duration-300 animate-pop`}
@@ -47,10 +53,11 @@ const Logout = ({ doAppear }) => {
           isSubmited={isSubmited}
           name={"Logout"}
           danger={true}
-          submit={() => {
+          onClick={() => {
             console.log("submitted...");
             setIsSubmited(true);
           }}
+          btnType={"button"}
         />
         <button
           className=" font-bold rounded-full w-full min-w-32 px-4 py-2 border-2 bg-pallete_zero text-white hover:text-pallete_zero border-pallete_zero hover:bg-white focus:bg-pallete_zero focus:text-white my-2 ml-1 transition-colors duration-75 ease-in-out "

@@ -13,19 +13,23 @@ const Register = ({ role, isLogin }) => {
   const [password, setPassword] = useState("");
   const [isSubmited, setIsSubmited] = useState(false);
   const [isSubmitFailed, setSubmitFailed] = useState(false);
+  const [isEmailValid, setEmailValid] = useState(true);
+  const [isPwdValid, setPwdValid] = useState(true);
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const axiosInstance = AxiosPrivateInstance();
 
-  const emailRegex = /[a-zA-Z0-9+_.-]+@[g][m][a][i][l]+.[c][o][m]/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*#$^@]).{8,}$/;
 
-  const isEmailValid = (email) => emailRegex.test(email);
-  const isPwdValid = (pwd) => pwdRegex.test(pwd);
+  useEffect(() => {
+    setEmailValid(emailRegex.test(email));
+    setPwdValid(pwdRegex.test(password));
+  }, [email, password]);
 
   // when isSubmitFailed changed from false to true
   useEffect(() => {
-    if (isSubmitFailed !== false) {
+    if (isSubmitFailed === true) {
       setIsSubmited(false);
     }
   }, [isSubmitFailed]);
@@ -57,12 +61,6 @@ const Register = ({ role, isLogin }) => {
         setAuth(user);
         localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
-      } else {
-        setIsSubmited(false);
-        setSubmitFailed(true);
-        alert(
-          error.response.data.message + ": " + error.response.data.rootCause
-        );
       }
     } catch (error) {
       setIsSubmited(false);
@@ -100,39 +98,48 @@ const Register = ({ role, isLogin }) => {
     }
   };
 
-  // when isSubmited get changed perform login or register
+  // when isSubmited perform login or register
   useEffect(() => {
     if (isSubmited !== false) {
-      isLogin ? handleLogin() : handleRegister();
+      console.log("email", isEmailValid);
+      console.log("pwd", isPwdValid);
+      if (email && email !== " " && password && isEmailValid && isPwdValid) {
+        isLogin ? handleLogin() : handleRegister();
+      } else {
+        alert("Invalid Input");
+        setIsSubmited(false);
+      }
     }
   }, [isSubmited]);
 
   //handling submit
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault();
     setSubmitFailed(false);
     setIsSubmited(true);
   };
 
   return (
     <div className="w-screen h-screen font-two flex flex-col items-center justify-start">
-      <form className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden">
+      <form
+        onSubmit={submit}
+        className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden"
+      >
         <div className="w-full bg-gray-100 text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
           {isLogin ? (
             <div className="p-2">
-              <p className="text-3xl">
-                Looks like you are not logged in! 🧐
-              </p>
+              <p className="text-3xl">Looks like you are not logged in! 🧐</p>
               <p className="text-base my-6">
                 Login to sell/shop and get exclusive offers only for you 😃
               </p>
             </div>
           ) : (
             <div className="p-2 w-full flex flex-col justify-center items-start">
-              <p className="text-3xl">{
-                role === "SELLER"
-                ? "You're few step way 😃"
-                : "Looks like Your new 😇"
-              }</p>
+              <p className="text-3xl">
+                {role === "SELLER"
+                  ? "You're few step way 😃"
+                  : "Looks like Your new 😇"}
+              </p>
               <p className="text-base my-6">
                 {role === "SELLER"
                   ? "1 2 and done! start selling immediately"
@@ -156,12 +163,12 @@ const Register = ({ role, isLogin }) => {
               value={email}
               onChangePerform={setEmail}
               placeholderText={"Enter your email: "}
-              isRequired={isSubmited}
+              isRequired={true}
               type={"email"}
               name={"Email"}
             />
             <p className="text-xs text-red-400  font-mono font-normal h-4 px-2 mb-2">
-              {email !== "" && !isEmailValid(email) ? "Invalid Email Id" : ""}
+              {email !== "" && !isEmailValid ? "Invalid Email Id" : ""}
             </p>
           </div>
 
@@ -170,12 +177,12 @@ const Register = ({ role, isLogin }) => {
               value={password}
               onChangePerform={setPassword}
               placeholderText={"Enter your password: "}
-              isRequired={isSubmited}
+              isRequired={true}
               type={"password"}
               name={"Password"}
             />
             <p className="text-xs text-red-400  font-mono font-normal h-4 px-2">
-              {password !== "" && !isPwdValid(password)
+              {password !== "" && !isPwdValid
                 ? "Password must contain at least 1 letter, 1 number, 1 special character"
                 : ""}
             </p>
@@ -184,11 +191,11 @@ const Register = ({ role, isLogin }) => {
           {/* SUBMIT BUTTON */}
           <div className="w-full flex justify-end mt-4">
             {/* <div className="w-max"> */}
-              <SubmitBtn
-                submit={submit}
-                isSubmited={isSubmited}
-                name={"Submit"}
-              />
+            <SubmitBtn
+              submit={submit}
+              isSubmited={isSubmited}
+              name={"Submit"}
+            />
             {/* </div> */}
           </div>
 

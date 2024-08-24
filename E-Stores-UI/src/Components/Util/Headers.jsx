@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthProvider";
 import { useState } from "react";
@@ -18,7 +18,6 @@ import Logout from "../Private/Common/Logout";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxes, BsCart3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { GoCodescan } from "react-icons/go";
 import { TbZoomCode } from "react-icons/tb";
 import { SiHashnode, SiPostman } from "react-icons/si";
 import { LuUserCircle } from "react-icons/lu";
@@ -30,10 +29,6 @@ const Headers = () => {
   const [loginHovered, setLoginHovered] = useState(false);
   const [addOnsHovered, setAddOnsHovered] = useState(false);
   const [doLogout, setDoLogout] = useState(false);
-
-  useEffect(() => {
-    console.log(roles);
-  }, [roles]);
 
   const preAuthNavs = [
     {
@@ -107,7 +102,7 @@ const Headers = () => {
     },
     {
       title: "GitHub",
-      url: "https://localhost:8080/rajumb0232",
+      url: "https://github.com/rajumb0232",
       icon: <FaGithub />,
     },
     {
@@ -176,20 +171,15 @@ const Headers = () => {
             <div className="text-xl mt-1">
               <VscListSelection />
               {addOnsHovered && (
-                <div className="shadow-lg shadow-slate-300 bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-3/4 -translate-y-2 flex flex-col justify-center transition-all duration-300">
+                <div className="shadow-xl border bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-3/4 -translate-y-2 flex flex-col justify-center transition-all duration-300">
                   <div className="flex flex-col justify-between items-center w-full p-2">
                     {addOns.map((item, i) => {
                       return (
-                        // <HoverOptions
-                        //   name={item.title}
-                        //   to={item.url}
-                        //   icon={item.icon}
-                        //   key={i}
-                        // />
                         <a
                           href={item.url}
                           target="_blank"
                           className="text-slate-700 w-full hover:bg-slate-100 text-base h-max"
+                          key={i}
                         >
                           <div className="px-2 flex justify-start items-center w-full py-2 hover:bg-gray-100">
                             {item.icon}
@@ -223,8 +213,8 @@ export const MyNav = ({
   return (
     <div
       className="mx-2 px-4 py-2 rounded-full flex justify-start items-center hover:bg-pallete_zero hover:text-white bg-transparent text-slate-700"
-      onMouseEnter={() => toggleState(true)}
-      onMouseLeave={() => toggleState(false)}
+      onMouseEnter={() => toggleState && toggleState(true)}
+      onMouseLeave={() => toggleState && toggleState(false)}
     >
       <Link to={to} className={`flex justify-start items-center`}>
         <div className="mt-0.5 mr-1 hover:text-white text-2xl">{icon}</div>
@@ -254,7 +244,7 @@ export const UsersCard = ({ authenticated, roles, setDoLogout }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="shadow-lg shadow-slate-300 bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-5 -translate-y-1 flex flex-col justify-center transition-all duration-300">
+    <div className="shadow-xl border bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-5 -translate-y-1 flex flex-col justify-center transition-all duration-300">
       <div className="flex justify-between items-center w-full border-b-2 border-slate-300 p-2">
         <p className="text-slate-700 ">
           {authenticated ? "Need break?" : "New customer?"}

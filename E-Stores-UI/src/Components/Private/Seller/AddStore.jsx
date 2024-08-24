@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
-import { useTopCategories } from "../../Hooks/useOptions";
-import useStore from "../../Hooks/useStore";
-import useImage from "../../Hooks/useImage";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
+import Image from "../../Util/Image";
+import { useCategoryCatalogue } from "../../Hooks/useOptions";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");
@@ -15,23 +15,26 @@ const AddStore = () => {
   const [isSubmited, setIsSubmited] = useState(false);
   const [isPrevPresent, setPrevPresent] = useState(false);
   const [isAnyModified, setAnyModified] = useState(false);
-  const { topCategories } = useTopCategories();
+  const { catagories } = useCategoryCatalogue();
 
-  const { store } = useStore();
-  const [prevStoreImage, setPrevStoreImage] = useState("");
-  const { getImageURL } = useImage();
+  const { store } = useStarter();
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
 
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
 
-  const updateStoreImage = async (link) => {
-    if (store?.logoLink) {
-      const url = await getImageURL(link);
-      setPrevStoreImage(url);
+  const topCategories = catagories.map((category, i) => {
+      return category.displayName;
+    })
+
+  useEffect(() => {
+    if(catagories.length > 0){
+      console.log(catagories);
+      console.log(topCategories);
     }
-  };
+  }, [catagories])
+
 
   useEffect(() => {
     if (store?.storeId) {
@@ -40,7 +43,6 @@ const AddStore = () => {
       setAbout(store.about);
       setCategory(store.category);
       setPrevPresent(true);
-      if (store?.logoLink) updateStoreImage(store.logoLink);
     }
   }, [store]);
 
@@ -260,7 +262,7 @@ const AddStore = () => {
             )}
             <div
               className={`w-40 ${
-                displayLogoURL || store.logoLink
+                displayLogoURL || store?.logoLink
                   ? "h-max rounded-full border hover:border-slate-300 bg-transparent bg-opacity-0"
                   : "h-40 rounded-full bg-cyan-950 bg-opacity-5"
               } overflow-hidden mb-4 flex justify-center items-center text-slate-400 font-semibold`}
@@ -268,7 +270,7 @@ const AddStore = () => {
               {displayLogoURL ? (
                 <img src={displayLogoURL} className="h-full" />
               ) : store?.logoLink ? (
-                <img src={prevStoreImage} className="w-full" />
+                <Image path={store.logoLink}/>
               ) : (
                 "Upload Logo"
               )}
@@ -294,7 +296,7 @@ const AddStore = () => {
 
         <div className="w-full flex flex-col justify-center items-center">
           <div className="w-full flex flex-col items-center">
-            <div className="w-full flex justify-center items-center mb-4">
+            <div className="w-full flex justify-center items-center mb-1">
               <Input
                 isRequired={true}
                 placeholderText={"Your store name here:"}
@@ -310,7 +312,7 @@ const AddStore = () => {
               id="about"
               onChange={(event) => setAbout(event.target.value)}
               placeholder="About (optional):"
-              className="h-56 w-full overflow-x-clip text-start text-slate-700 bg-input hover:border-gray-300 focus:border-gray-300 border border-transparent rounded-md p-2 text-base"
+              className="h-56 w-full overflow-x-clip placeholder:text-slate-500 text-start text-slate-700 bg-input hover:border-gray-300 focus:border-gray-300 border border-transparent rounded-md p-2 text-base"
               value={about}
             />
           </div>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { RiUserLocationLine } from "react-icons/ri";
 import { useCityDistricts, useStates } from "../../Hooks/useOptions";
-import useStore from "../../Hooks/useStore";
 import { DropDown, FormHeader, Input, SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const AddAddress = () => {
   const [addressId, setAddressId] = useState("");
@@ -19,7 +19,7 @@ const AddAddress = () => {
 
   const { districts, updateDistricts } = useCityDistricts();
   const { states } = useStates();
-  const { store, prevAddress } = useStore();
+  const { store, prevAddress } = useStarter();
 
   // Fetching the District information and updating the cityDistrict
   let fired2 = false;
@@ -151,42 +151,33 @@ const AddAddress = () => {
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen">
       <div
-        className={`w-full h-max flex flex-col justify-end items-center text-slate `}
+        className={`w-full h-max flex flex-col justify-center items-center text-slate `}
       >
         <FormHeader icon={<RiUserLocationLine />} text={"Address Details"} />
         <div className="w-full px-4 py-2 h-full">
-          <div className="w-full flex justify-center items-center mb-4">
             <Input
               isRequired={true}
               onChangePerform={setAddressLine1}
               placeholderText={"Address Line 1: "}
               value={addressLine1}
             />
-          </div>
 
-          <div className="w-full flex justify-center items-center mb-4">
             <Input
               isRequired={true}
               onChangePerform={setAddressLine2}
               placeholderText={"Address Line 2 (optional): "}
               value={addressLine2}
             />
-          </div>
 
           <div className="flex justify-center items-center w-full">
-            <div className="w-full flex justify-center items-center mb-4">
               <Input
                 isRequired={true}
                 onChangePerform={setAreaVillage}
                 value={areaVillage}
-                placeholderText={"Area/Village: "}
+                placeholderText={"City/Village: "}
               />
-            </div>
             
-            <div className="w-full mb-4 flex justify-start items-center">
-              <div
-                className={`py-1 mx-1 min-w-max rounded-md bg-my_yellow`}
-              >
+            <div className="w-full flex justify-evenly items-center">
                 <DropDown
                   valueType={"State"}
                   value={state}
@@ -194,10 +185,6 @@ const AddAddress = () => {
                   DefaultText={"Select State"}
                   options={states}
                 />
-              </div>
-              <div
-                className={`py-1 mx-1 min-w-max rounded-md bg-my_yellow`}
-              >
                 <DropDown
                   valueType={"District"}
                   value={cityDistrict}
@@ -205,7 +192,6 @@ const AddAddress = () => {
                   DefaultText={"Select District"}
                   options={districts}
                 />
-              </div>
             </div>
           </div>
           <div className="w-1/6">

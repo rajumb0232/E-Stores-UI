@@ -1,11 +1,12 @@
-import axios from "axios"
+import axios from "axios";
 
-const baseURL = "http://localhost:7000/api/fkv1"
+const baseURL = `${import.meta.env.VITE_API_URL}`;
 
-const AxiosPrivateInstance = () => axios.create({
+const AxiosPrivateInstance = () =>
+  axios.create({
     baseURL,
-    headers:{"Content-Type":"application/json"},
-    withCredentials: true
-})
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  });
 
 export default AxiosPrivateInstance;
