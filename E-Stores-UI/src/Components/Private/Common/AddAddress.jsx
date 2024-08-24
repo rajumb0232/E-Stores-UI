@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { RiUserLocationLine } from "react-icons/ri";
 import { useCityDistricts, useStates } from "../../Hooks/useOptions";
-import useStore from "../../Hooks/useStore";
 import { DropDown, FormHeader, Input, SubmitBtn } from "../../Util/Forms";
+import { useStarter } from "../../Context/Starter";
 
 const AddAddress = () => {
   const [addressId, setAddressId] = useState("");
@@ -19,7 +19,7 @@ const AddAddress = () => {
 
   const { districts, updateDistricts } = useCityDistricts();
   const { states } = useStates();
-  const { store, prevAddress } = useStore();
+  const { store, prevAddress } = useStarter();
 
   // Fetching the District information and updating the cityDistrict
   let fired2 = false;
@@ -177,7 +177,7 @@ const AddAddress = () => {
                 placeholderText={"City/Village: "}
               />
             
-            <div className="w-full flex justify-start items-center">
+            <div className="w-full flex justify-evenly items-center">
                 <DropDown
                   valueType={"State"}
                   value={state}
