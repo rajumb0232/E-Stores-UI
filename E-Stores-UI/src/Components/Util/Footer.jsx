@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="h-max w-full pt-4 bg-gray-100 text-slate-700 text-center text-lg flex justify-center items-center">
-      <div className=" w-10/12 h-full flex flex-col justify-center items-center px-10 py-4">
+      <div className=" w-5/6 h-full ml-auto flex flex-col justify-center items-center px-10 py-4">
         <div className=" w-full flex justify-evenly items-start">
           <FooterBlock name={"Social Profiles"}>
             <FooterLink

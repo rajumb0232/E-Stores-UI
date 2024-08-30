@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
-import PerformanceRecord from "./PerformanceRecord";
 import Orders from "./Orders";
 import Products from "./Products";
 import Store from "./Store";
@@ -15,27 +14,7 @@ const SellerDashboard = () => {
   const [switchHovered, setSwitchHovered] = useState(false);
   const { store, prevAddress } = useStarter();
 
-  // let isChecked = false;
-  // const checkForStore = async () => {
-  //   if (!isChecked) {
-  //     isChecked = true;
-  //     const response = await axiosInstance.get("/stores-exist", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       withCredentials: true,
-  //     });
-
-  //     if (response.status === 200) {
-  //       if (response.data === true) {
-  //         sessionStorage.setItem("currentView", "dashboard");
-  //       } else navigate("/setup-store");
-  //     } else alert("Something went wrong!!");
-  //   }
-  // };
-
   useEffect(() => {
-    // if (store?.storeId) {
     const view = sessionStorage.getItem("currentView");
     if (view) {
       setCurrentView(view);
@@ -43,7 +22,6 @@ const SellerDashboard = () => {
       setCurrentView("dashboard");
       sessionStorage.setItem("currentView", "dashboard");
     }
-    // } else checkForStore();
   }, [store]);
 
   const navs = [
@@ -69,63 +47,13 @@ const SellerDashboard = () => {
     },
   ];
 
-  const subOptions = (options) => {
-    return options.map((tab, i) => {
-      return (
-        <Switch
-          icon={tab.icon}
-          displayName={tab.display_name}
-          onClick={() => {
-            sessionStorage.setItem("currentView", tab.name);
-            setCurrentView(tab.name);
-          }}
-          isSubSwitch={true}
-          hovered={switchHovered}
-          key={i}
-        />
-      );
-    });
-  };
-
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
       {/* NAVIGATION */}
-      <div
-        className={`w-14 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 ${
-          switchHovered
-            ? "animate-expand bg-white shadow-even10"
-            : "animate-contract bg-white"
-        }`}
-        onMouseEnter={() => setSwitchHovered(true)}
-        onMouseLeave={() => setSwitchHovered(false)}
-      >
-        {navs.map((option, i) => {
-          return (
-            <Switch
-              icon={option.icon}
-              displayName={option.display_name}
-              onClick={() => {
-                sessionStorage.setItem("currentView", option.name);
-                setCurrentView(option.name);
-              }}
-              isSubSwitch={false}
-              hovered={switchHovered}
-              key={i}
-            />
-          );
-        })}
-
-        {/* {storeOptions.some((o) => o.name === currentView) && (
-          <div className="bg-black py-0.5 w-full">
-            {subOptions(storeOptions)}
-          </div>
-        )} */}
-      </div>
-
-      <div className="w-full max-w-mid_screen lg:mx-2 flex justify-center items-center">
-        {/* DASHBOARD ANALYSIS VIEW */}
+      <SideBar navs={navs}/>
+      
+      {/* <div className="w-full max-w-mid_screen lg:mx-2 flex justify-center items-center">
         <div className="w-full lg:ml-4 xl:ml-2 h-full flex flex-col justify-center items-center rounded-sm ">
-          {currentView === "dashboard" && (
             <div
               className={`w-10/12 px-2 py-0.5 flex items-center justify-center border-b-2 cursor-pointer hover:bg-gradient-to-r from-transparent from-0% via-stone-100 via-50% to-transparent to-100% `}
               onClick={() => setCurrentView("store")}
@@ -166,32 +94,38 @@ const SellerDashboard = () => {
                 </p>
               </div>
             </div>
-          )}
-          <div className="w-10/12 h-max rounded-sm flex justify-center items-center">
-            {
-              currentView === "dashboard" ? (
-                <PerformanceRecord />
-              ) : currentView === "products" ? (
-                <Products />
-              ) : currentView === "orders" ? (
-                <Orders />
-              ) : (
-                currentView === "store" && <Store />
-              )
-              //  : currentView === "manage_address" ? (
-              //   <AddAddress />
-              // ) : (
-              //   currentView === "manage_contacts" && <ContactForm />
-              // )
-            }
-          </div>
+          
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
 export default SellerDashboard;
+
+export const SideBar = ({navs}) => {
+  return (
+    <div
+      className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-white`}
+    >
+      {navs.map((option, i) => {
+        return (
+          <Switch
+            icon={option.icon}
+            displayName={option.display_name}
+            onClick={() => {
+              sessionStorage.setItem("currentView", option.name);
+              setCurrentView(option.name);
+            }}
+            isSubSwitch={false}
+            hovered={true}
+            key={i}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export const Switch = ({
   icon,
@@ -208,7 +142,7 @@ export const Switch = ({
   }, [hovered]);
   return (
     <button
-      className={`text-xs w-full border-2 border-transparent rounded-full py-2 px-2 flex justify-start items-center ${
+      className={`text-xs w-full border-2 border-transparent rounded-full py-2 px-4 flex justify-start items-center ${
         isSubSwitch
           ? "text-white hover:bg-white hover:pallete_zero"
           : "hover:bg-pallete_one text-pallete_zero "
@@ -218,7 +152,9 @@ export const Switch = ({
       <p className="text-2xl">{icon}</p>
 
       {show && (
-        <p className={`pl-2 rounded-full font-semibold w-max`}>{displayName}</p>
+        <p className={`pl-2 rounded-full text-sm font-normal w-max`}>
+          {displayName}
+        </p>
       )}
     </button>
   );
