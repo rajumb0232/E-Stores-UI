@@ -52,6 +52,10 @@ export const commonPostAuthRoutes = [
   {
     path: "update-profile",
     element: <LazyUpdateProfile />,
+  },
+  {
+    path: "logout",
+    element: <LazyLogout/>
   }
 ]
 
