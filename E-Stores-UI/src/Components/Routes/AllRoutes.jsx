@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import App from "../../App";
 import {
-  navs,
   noAuthRoutes,
   preAuthRoutes,
   commonPostAuthRoutes,
@@ -12,16 +11,13 @@ import {
 import { useAuth } from "../Auth/AuthProvider";
 
 const AllRoutes = () => {
-  const { auth } = useAuth();
-  const { authenticated, roles } = auth;
+  const { auth: { authenticated, roles } } = useAuth();
 
-  const route = (index, path, element) => (
-    <Route key={index} path={path} element={element} />
-  );
-
-  const routes = (list) =>
-    list.map((item, index) => (
-      <Route key={index} path={item.path} element={item.element} />
+  const generateRoutes = (routesList) => 
+    routesList.map((route, index) => (
+      <Route key={index} path={route.path} element={route.element}>
+        {route.subRoutes && generateRoutes(route.subRoutes)}
+      </Route>
     ));
 
   return (
@@ -29,21 +25,19 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/" element={<App />}>
           {/* Public Routes */}
-          {route(noAuthRoutes)}
+          {generateRoutes(noAuthRoutes)}
 
           {/* Pre Authentication Routes */}
-          {!authenticated && route(preAuthRoutes)}
+          {!authenticated && generateRoutes(preAuthRoutes)}
 
           {/* Common Post Authentication Routes */}
-          {authenticated && routes(commonPostAuthRoutes)}
+          {authenticated && generateRoutes(commonPostAuthRoutes)}
 
           {/* Seller Routes */}
-          {authenticated && roles.includes("SELLER") && routes(sellerRoutes)}
+          {authenticated && roles.includes("SELLER") && generateRoutes(sellerRoutes)}
 
           {/* Customer Routes */}
-          {authenticated &&
-            roles.includes("CUSTOMER") &&
-            routes(customerRoutes)}
+          {authenticated && roles.includes("CUSTOMER") && generateRoutes(customerRoutes)}
 
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" />} />

@@ -7,6 +7,7 @@ import Products from "./Products";
 import Store from "./Store";
 import Image from "../../Util/Image";
 import { useStarter } from "../../Context/Starter";
+import { Outlet } from "react-router-dom";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
@@ -51,6 +52,7 @@ const SellerDashboard = () => {
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
       {/* NAVIGATION */}
       <SideBar navs={navs}/>
+      <Outlet/>
       
       {/* <div className="w-full max-w-mid_screen lg:mx-2 flex justify-center items-center">
         <div className="w-full lg:ml-4 xl:ml-2 h-full flex flex-col justify-center items-center rounded-sm ">

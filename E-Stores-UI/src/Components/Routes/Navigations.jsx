@@ -12,22 +12,23 @@ const LazyVerifyOTP = React.lazy(() => import("../Public/VerifyOTP"));
 const LazySetUpStoreAndRelated = React.lazy(() => import("../Private/Seller/SetUpStoreAndRelated"));
 const LazyLogout = React.lazy(() => import("../Private/Common/Logout"));
 const LazyExplore = React.lazy(() => import("../Public/Explore"));
+const LazyProducts = React.lazy(() => import("../Private/Seller/Products"))
 
 export const preAuthRoutes = [
   {
-    path: "/seller/register",
+    path: "seller/register",
     element: <LazyRegister role={"SELLER"} isLogin={false} />,
   },
   {
-    path: "/customer/register",
+    path: "customer/register",
     element: <LazyRegister role={"CUSTOMER"} isLogin={false} />,
   },
   {
-    path: "/login",
+    path: "login",
     element: <LazyRegister role={""} isLogin={true} />,
   },
   {
-    path: "/verify-email",
+    path: "verify-email",
     element: <LazyVerifyOTP />,
   }
 ]
@@ -41,49 +42,55 @@ export const noAuthRoutes = [
 
 export const commonPostAuthRoutes = [
   {
-    path: "/account",
+    path: "account",
     element: <LazyAccount />,
   },
   {
-    path: "/reset-credentials",
+    path: "reset-credentials",
     element: <LazyResetCredentials />,
   },
   {
-    path: "/update-profile",
+    path: "update-profile",
     element: <LazyUpdateProfile />,
   }
 ]
 
 export const customerRoutes = [
   {
-    path: "/cart",
+    path: "cart",
     element: <LazyCart />,
   },
   {
-    path: "/wishlist",
+    path: "wishlist",
     element: <LazyWishlist />,
   }
 ]
 
 export const sellerRoutes = [
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <LazySellerDashboard />,
+    subRoutes: [
+      {
+        path: "products",
+        element: <LazyProducts/>
+      },
+      {
+        path: "add-product",
+        element: <LazyAddUpdateProduct update={false}/>,
+      },
+      {
+        path: "update-product",
+        element: <LazyAddUpdateProduct update={true}/>,
+      },
+      {
+        path: "orders",
+        element: <LazyOrders />,
+      },
+    ]
   },
   {
-    path: "/add-product",
-    element: <LazyAddUpdateProduct update={false}/>,
-  },
-  {
-    path: "/update-product",
-    element: <LazyAddUpdateProduct update={true}/>,
-  },
-  {
-    path: "/orders",
-    element: <LazyOrders />,
-  },
-  {
-    path: "/setup-store",
+    path: "setup-store",
     element: <LazySetUpStoreAndRelated />,
   }
 ]
