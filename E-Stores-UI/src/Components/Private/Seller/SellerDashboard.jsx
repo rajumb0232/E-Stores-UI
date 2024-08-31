@@ -56,7 +56,7 @@ export default SellerDashboard;
 export const SideBar = ({ navs, hero }) => {
   return (
     <div
-      className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-white`}
+      className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-pallete_three`}
     >
       <div>{hero}</div>
       <div className="my-4 w-full">
