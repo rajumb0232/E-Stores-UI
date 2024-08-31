@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
-import Orders from "./Orders";
-import Products from "./Products";
-import Store from "./Store";
 import Image from "../../Util/Image";
 import { useStarter } from "../../Context/Starter";
 import { Outlet } from "react-router-dom";
@@ -13,7 +10,7 @@ const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
   const [storeHovered, setStoreHovered] = useState(false);
   const [switchHovered, setSwitchHovered] = useState(false);
-  const { store, prevAddress } = useStarter();
+  const { store } = useStarter();
 
   useEffect(() => {
     const view = sessionStorage.getItem("currentView");
@@ -50,55 +47,8 @@ const SellerDashboard = () => {
 
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
-      {/* NAVIGATION */}
       <SideBar navs={navs} hero={<Hero store={store} />} />
       <Outlet />
-
-      {/* <div className="w-full max-w-mid_screen lg:mx-2 flex justify-center items-center">
-        <div className="w-full lg:ml-4 xl:ml-2 h-full flex flex-col justify-center items-center rounded-sm ">
-            <div
-              className={`w-10/12 px-2 py-0.5 flex items-center justify-center border-b-2 cursor-pointer hover:bg-gradient-to-r from-transparent from-0% via-stone-100 via-50% to-transparent to-100% `}
-              onClick={() => setCurrentView("store")}
-              onMouseEnter={() => setStoreHovered(true)}
-              onMouseLeave={() => setStoreHovered(false)}
-            >
-              <div
-                className={`w-18 h-max m-2 transition-all duration-500 ease-in-out ${
-                  storeHovered && "w-24"
-                }`}
-              >
-                <div className="rounded-full overflow-hidden border border-slate-400 flex justify-center items-center">
-                  <Image path={store?.logoLink} />
-                </div>
-              </div>
-              <div className="flex flex-col justify-center items-start hover:transition-all duration-500 delay-200 ease-in-out">
-                <p
-                  className={`text-lg text-slate-700 font-semibold py-1 line-clamp-1`}
-                >
-                  {store?.storeName ? store.storeName : "Your store name"}
-                </p>
-                <p
-                  className={`text-xs font-normal text-slate-500 line-clamp-1`}
-                >
-                  {prevAddress?.pincode
-                    ? prevAddress?.addressLine1 +
-                      ", " +
-                      prevAddress?.addressLine2 +
-                      ", " +
-                      prevAddress?.areaVillage +
-                      ", " +
-                      prevAddress?.cityDistrict +
-                      ", " +
-                      prevAddress?.state +
-                      ", India " +
-                      prevAddress?.pincode
-                    : "[Address] | e.g., #32 building name, street, landmark, India 900068"}
-                </p>
-              </div>
-            </div>
-          
-        </div>
-      </div> */}
     </div>
   );
 };
