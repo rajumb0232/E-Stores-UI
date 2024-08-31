@@ -8,8 +8,6 @@ import { Outlet } from "react-router-dom";
 
 const SellerDashboard = () => {
   const [currentView, setCurrentView] = useState("");
-  const [storeHovered, setStoreHovered] = useState(false);
-  const [switchHovered, setSwitchHovered] = useState(false);
   const { store } = useStarter();
 
   useEffect(() => {
