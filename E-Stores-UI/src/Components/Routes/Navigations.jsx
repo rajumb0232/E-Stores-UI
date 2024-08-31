@@ -13,7 +13,7 @@ const LazySetUpStoreAndRelated = React.lazy(() => import("../Private/Seller/SetU
 const LazyLogout = React.lazy(() => import("../Private/Common/Logout"));
 const LazyExplore = React.lazy(() => import("../Public/Explore"));
 const LazyProducts = React.lazy(() => import("../Private/Seller/Products"))
-
+const LazyStore = React.lazy(() => import("../Private/Seller/Store"))
 export const preAuthRoutes = [
   {
     path: "seller/register",
@@ -90,6 +90,10 @@ export const sellerRoutes = [
       {
         path: "orders",
         element: <LazyOrders />,
+      },
+      {
+        path: "store",
+        element: <LazyStore />,
       },
     ]
   },

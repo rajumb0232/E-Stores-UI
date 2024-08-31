@@ -30,7 +30,7 @@ const SellerDashboard = () => {
     {
       name: "store",
       display_name: "Store",
-      url: "/dashboard/setup-store",
+      url: "/dashboard/store",
       icon: <PiStorefrontDuotone />,
     },
   ];

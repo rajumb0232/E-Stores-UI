@@ -4,26 +4,14 @@ import { NavigateBtn } from '../../Util/Forms'
 
 const Products = () => {
   return (
-    <div className="min-h-screen w-full text-slate-700 font-two flex flex-col justify-start items-center">
-      <div className="w-11/12 h-max py-2 px-4 flex flex-col">
-        <h1 className="w-full text-4xl font-semibold py-2 px-4">
+    <div className="min-h-screen w-5/6 text-slate-700 font-two flex flex-col justify-start items-center ml-auto">
+      <div className="w-5/6 h-max py-2 pt-6 px-4 flex justify-center items-end border-b">
+        <h1 className="w-full text-4xl font-semibold py-1">
           Manage your Products
         </h1>
-        <div className="flex justify-end items-center border rounded-full p-2 py-4 my-2 font-semibold border-gray-300 hover:bg-stone-100">
-          <div className="text-sm px-2">
-            <p>Hey there! Welcome Back.</p>
-            <p>
-              Here is all your need to manage your products, by the way do you
-              want to list any new product?
-            </p>
-          </div>
-          <div className="ml-auto w-max">
+        <div className="ml-auto w-max">
             <NavigateBtn name={"List New Product"} icon={<LuPlus />} to={"/add-product"} dark={true}/>
-          </div>
         </div>
-        
-        {/* <hr className='border-slate-300 mt-3' />
-        <h3 className="w-full text-xl font-semibold py-2 px-4">Your Products</h3> */}
       </div>
     </div>
   )
