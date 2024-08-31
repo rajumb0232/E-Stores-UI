@@ -164,7 +164,7 @@ const Headers = () => {
 
           {/* OPTIONS */}
           <div
-            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-full flex justify-center items-center "
+            className="mx-2 px-4 py-2 hover:bg-pallete_zero hover:text-white rounded-md flex justify-center items-center "
             onMouseEnter={() => setAddOnsHovered(true)}
             onMouseLeave={() => setAddOnsHovered(false)}
           >
@@ -212,7 +212,7 @@ export const MyNav = ({
 
   return (
     <div
-      className="mx-2 px-4 py-2 rounded-full flex justify-start items-center hover:bg-pallete_zero hover:text-white bg-transparent text-slate-700"
+      className="mx-2 px-4 py-2 rounded-md flex justify-start items-center hover:bg-pallete_zero hover:text-white bg-transparent text-slate-700"
       onMouseEnter={() => toggleState && toggleState(true)}
       onMouseLeave={() => toggleState && toggleState(false)}
     >
@@ -250,7 +250,7 @@ export const UsersCard = ({ authenticated, roles, setDoLogout }) => {
           {authenticated ? "Need break?" : "New customer?"}
         </p>
         <button
-          className="text-pallete_zero text-base border-2 border-transparent bg-transparent rounded-full font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
+          className="text-pallete_zero text-base border border-transparent bg-transparent rounded-md font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
           onClick={() => {
             authenticated ? setDoLogout(true) : navigate("/customer/register");
           }}

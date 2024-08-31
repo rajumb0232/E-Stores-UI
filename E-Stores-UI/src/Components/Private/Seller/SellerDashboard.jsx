@@ -106,7 +106,7 @@ export const Switch = ({
   }, [hovered]);
   return (
     <button
-      className={`text-xs w-full border-2 border-transparent rounded-full py-2 px-4 flex justify-start items-center ${
+      className={`text-xs w-full border-1 border-transparent rounded-full my-1 py-2 px-4 flex justify-start items-center ${
         isSubSwitch
           ? "text-white hover:bg-white hover:pallete_zero"
           : "hover:bg-pallete_one text-pallete_zero "
