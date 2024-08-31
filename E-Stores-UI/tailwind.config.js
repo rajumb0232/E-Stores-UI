@@ -14,9 +14,12 @@ export default {
       },
       colors: {
         pallete_one: "#FFCE32",
-        pallete_two: "#30E6F7",
+        pallete_two: "#0334F4",
+        pallete_three: "#E8E9E1",
+        pallete_four: "#EE414C",
+        pallete_five: "#7C15EB",
         text_b: "#7B590B",
-        pallete_zero: "#141411",
+        pallete_zero: "#1D1D1B",
         danger: "#DD2627",
         input: "#F3F4F6"
       },
