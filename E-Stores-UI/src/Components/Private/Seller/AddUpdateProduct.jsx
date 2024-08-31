@@ -57,38 +57,16 @@ const AddUpdateProduct = ({ update }) => {
   };
 
   return (
-    <div className="min-h-screen mt-20 text-slate-700 w-full font-two flex flex-col justify-start items-center">
+    <div className="min-h-screen text-slate-700 w-full font-two flex flex-col justify-start items-center">
       <div className="w-11/12 h-max py-2 px-4 flex flex-col">
         <form action="" className="flex flex-col justify-center items-center">
           <h1 className="text-3xl my-4 px-4 w-full font-semibold">
             {update
               ? "Look Around, Modify and Update your Product. "
-              : "Enter your Product Details here: "}
+              : "Enter your Product Details: "}
           </h1>
           <div className="w-full h-full flex justify-center items-start">
             <div className="w-full m-2 flex flex-col justify-center items-center">
-              {/* IMAGE INPUT */}
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                id="product_images"
-                hidden={true}
-                className="border "
-              />
-              <div className="w-full h-40 flex justify-center items-center rounded-lg rounded-b-none border-2 border-b-0 border-dotted border-gray-300 bg-gray-50 text-slate-400">
-                No Images Selected
-              </div>
-              <button
-                type="button"
-                onClick={() =>
-                  document.getElementById("product_images").click()
-                }
-                className="w-full p-1 mb-2.5 rounded-b-lg border-2 border-gray-300 border-dotted border-t-0 text-sm font-bold text-blue-400 underline bg-gray-50"
-              >
-                UPLOAD PHOTOS
-              </button>
-
               {/* TITLE */}
               <Input
                 isRequired={true}
@@ -112,7 +90,17 @@ const AddUpdateProduct = ({ update }) => {
             </div>
 
             <div className="w-full m-2 flex flex-col justify-center items-center">
-              <div className="w-full p-2 rounded-lg">
+              <h3 className="text-base font-semibold text-start w-full p-1">
+                Select Product type:{" "}
+              </h3>
+              <button
+                className="mb-2.5 w-full overflow-x-clip text-center bg-gray-50 placeholder:text-gray-500 text-slate-700 hover:border-gray-400 focus:border-gray-400 border border-gray-300 rounded-md p-2 text-base"
+                onClick={() => setViewSearchCard(true)}
+                type="button"
+              >
+                Click here
+              </button>
+              <div className="w-full p-1 rounded-lg">
                 <div className="w-full bg-white rounded-full">
                   <span className="font-semibold">Prime Category: </span>
                   <span className="text-blue-400">
@@ -130,13 +118,6 @@ const AddUpdateProduct = ({ update }) => {
                   <span className="text-blue-400">{selectedType}</span>
                 </div>
               </div>
-              <button
-                className="mb-2.5 w-full overflow-x-clip text-start bg-gray-50 placeholder:text-gray-500 text-slate-700 hover:border-gray-400 focus:border-gray-400 border border-gray-300 rounded-md p-2 text-base"
-                onClick={() => setViewSearchCard(true)}
-                type="button"
-              >
-                Select Product Type
-              </button>
 
               {viewSearchCard && (
                 <SearchCard
@@ -145,7 +126,7 @@ const AddUpdateProduct = ({ update }) => {
                   setFor={setSelectedType}
                 />
               )}
-              <div className="w-full flex justify-start items-center p-2">
+              <div className="w-full flex justify-start items-center p-1">
                 <RadioBtn
                   value={"Create Varients? "}
                   onChange={() => setVaryingView(!varyingView)}
@@ -183,6 +164,31 @@ const AddUpdateProduct = ({ update }) => {
               <div className="border border-gray-300 hover:border-gray-400 focus-within:border-gray-400 "></div>
             </div>
           </div>
+
+          {/* IMAGE INPUT */}
+          <div className="w-full">
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              id="product_images"
+              hidden={true}
+              className="border "
+            />
+            <div className="w-full min-h-40 max-h-max mx-2 p-2 flex flex-col justify-center items-center rounded-lg border-2 border-dotted border-gray-300 text-slate-400">
+              <button
+                type="button"
+                onClick={() =>
+                  document.getElementById("product_images").click()
+                }
+                className="w-full p-1 mb-auto text-sm font-bold text-blue-400 underline"
+              >
+                UPLOAD PHOTOS
+              </button>
+              No Images Selected
+            </div>
+          </div>
+          
         </form>
       </div>
     </div>

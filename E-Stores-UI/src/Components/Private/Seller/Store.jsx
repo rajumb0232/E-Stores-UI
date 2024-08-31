@@ -11,7 +11,7 @@ const Store = () => {
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen font-two">
-      <div className="my-6 w-full h-full flex justify-center items-center">
+      <div className="my-6 w-11/12 h-full flex justify-center items-center">
         <div className="w-2/5 h-full py-6 px-4 m-2 flex flex-col justify-start items-center border rounded-lg">
           <div className="w-32 h-32 rounded-full overflow-hidden border border-gray-300">
             <Image path={store?.logoLink} />

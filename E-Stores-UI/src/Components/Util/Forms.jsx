@@ -72,7 +72,7 @@ export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) 
       className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border transition-colors duration-75 ease-in-out ${
         // applies for danger buttons
         danger &&
-        "border-danger hover:bg-danger hover:text-white bg-transparent text-danger"
+        "border-pallete_four hover:bg-pallete_four hover:text-white bg-transparent text-danger"
       }  ${
         // appies when submitted
         isSubmited

@@ -7,7 +7,6 @@ import { useStarter } from "../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const SellerDashboard = () => {
-
   const navs = [
     {
       name: "dashboard",
@@ -18,19 +17,19 @@ const SellerDashboard = () => {
     {
       name: "products",
       display_name: "Products",
-      url: "/dashboard/products",
+      url: "products",
       icon: <BsBoxArrowInDown />,
     },
     {
       name: "orders",
       display_name: "Orders",
-      url: "/dashboard/orders",
+      url: "orders",
       icon: <BsBoxes />,
     },
     {
       name: "store",
       display_name: "Store",
-      url: "/dashboard/store",
+      url: "store",
       icon: <PiStorefrontDuotone />,
     },
   ];
@@ -38,7 +37,9 @@ const SellerDashboard = () => {
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
       <SideBar navs={navs} />
-      <Outlet />
+      <div className="min-h-screen max-h-max w-5/6 ml-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };

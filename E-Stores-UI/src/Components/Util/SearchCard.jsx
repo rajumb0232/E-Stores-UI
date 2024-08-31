@@ -4,39 +4,10 @@ import { SubmitBtn } from "./Forms";
 const SearchCard = ({options, closeView, setFor}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selection, setSelection] = useState("");
-  // const [options] = useState([
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  //   "Option 1",
-  //   "Option 2",
-  //   "Option 3",
-  //   "Option 4",
-  // ]);
-  // const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  // const handleOptionClick = (option) => {
-  //   if (!selectedOptions.includes(option)) {
-  //     setSelectedOptions([...selectedOptions, option]);
-  //   }
-  // };
 
   const handleConfirm = () => {
     setFor(selection);
@@ -50,16 +21,6 @@ const SearchCard = ({options, closeView, setFor}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 font-two">
       <div className="bg-white h-3/5 rounded-lg shadow-md p-4 w-1/2 flex flex-col justify-center items-center">
-        {/* <div className="mb-4">
-          {selectedOptions.map((option, index) => (
-            <span
-              key={index}
-              className="inline-block bg-pallete_one font-semibold border border-pallete_zero text-xs p-2 rounded-full mr-2 mb-2"
-            >
-              {option}
-            </span>
-          ))}
-        </div> */}
         <h1 className="py-3 px-2 text-2xl font-semibold w-full">Select Product Type</h1>
         <input
           type="text"
