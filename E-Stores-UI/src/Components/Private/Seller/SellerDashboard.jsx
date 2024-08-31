@@ -51,9 +51,9 @@ const SellerDashboard = () => {
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
       {/* NAVIGATION */}
-      <SideBar navs={navs}/>
-      <Outlet/>
-      
+      <SideBar navs={navs} hero={<Hero store={store} />} />
+      <Outlet />
+
       {/* <div className="w-full max-w-mid_screen lg:mx-2 flex justify-center items-center">
         <div className="w-full lg:ml-4 xl:ml-2 h-full flex flex-col justify-center items-center rounded-sm ">
             <div
@@ -105,26 +105,44 @@ const SellerDashboard = () => {
 
 export default SellerDashboard;
 
-export const SideBar = ({navs}) => {
+export const SideBar = ({ navs, hero }) => {
   return (
     <div
       className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-white`}
     >
-      {navs.map((option, i) => {
-        return (
-          <Switch
-            icon={option.icon}
-            displayName={option.display_name}
-            onClick={() => {
-              sessionStorage.setItem("currentView", option.name);
-              setCurrentView(option.name);
-            }}
-            isSubSwitch={false}
-            hovered={true}
-            key={i}
-          />
-        );
-      })}
+      <div>{hero}</div>
+      <div className="my-4 w-full">
+        {navs.map((option, i) => {
+          return (
+            <Switch
+              icon={option.icon}
+              displayName={option.display_name}
+              onClick={() => {
+                sessionStorage.setItem("currentView", option.name);
+                setCurrentView(option.name);
+              }}
+              isSubSwitch={false}
+              hovered={true}
+              key={i}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export const Hero = ({ store }) => {
+  return (
+    <div>
+      <div className="mx-14 mt-4 rounded-full overflow-hidden border shadow-sm border-slate-600 flex justify-center items-center">
+        <Image path={store?.logoLink} />
+      </div>
+      <div className="mx-4">
+        <p className={`text-lg text-slate-700 font-semibold py-1 text-center line-clamp-2`}>
+          {store?.storeName ? store.storeName : "Your store name"}
+        </p>
+      </div>
     </div>
   );
 };
