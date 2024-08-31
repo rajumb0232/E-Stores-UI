@@ -7,18 +7,6 @@ import { useStarter } from "../../Context/Starter";
 import { Outlet } from "react-router-dom";
 
 const SellerDashboard = () => {
-  const [currentView, setCurrentView] = useState("");
-  const { store } = useStarter();
-
-  useEffect(() => {
-    const view = sessionStorage.getItem("currentView");
-    if (view) {
-      setCurrentView(view);
-    } else {
-      setCurrentView("dashboard");
-      sessionStorage.setItem("currentView", "dashboard");
-    }
-  }, [store]);
 
   const navs = [
     {
@@ -45,7 +33,7 @@ const SellerDashboard = () => {
 
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
-      <SideBar navs={navs} hero={<Hero store={store} />} />
+      <SideBar navs={navs} />
       <Outlet />
     </div>
   );
@@ -53,12 +41,14 @@ const SellerDashboard = () => {
 
 export default SellerDashboard;
 
-export const SideBar = ({ navs, hero }) => {
+export const SideBar = ({ navs }) => {
   return (
     <div
       className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-pallete_three`}
     >
-      <div>{hero}</div>
+      <div>
+        <Hero />
+      </div>
       <div className="my-4 w-full">
         {navs.map((option, i) => {
           return (
@@ -80,14 +70,17 @@ export const SideBar = ({ navs, hero }) => {
   );
 };
 
-export const Hero = ({ store }) => {
+export const Hero = () => {
+  const { store } = useStarter();
   return (
     <div>
       <div className="mx-14 mt-4 rounded-full overflow-hidden border shadow-sm border-slate-600 flex justify-center items-center">
         <Image path={store?.logoLink} />
       </div>
       <div className="mx-4">
-        <p className={`text-lg text-slate-700 font-semibold py-1 text-center line-clamp-2`}>
+        <p
+          className={`text-lg text-slate-700 font-semibold py-1 text-center line-clamp-2`}
+        >
           {store?.storeName ? store.storeName : "Your store name"}
         </p>
       </div>
