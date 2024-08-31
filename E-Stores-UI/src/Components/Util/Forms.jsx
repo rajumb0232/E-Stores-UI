@@ -69,7 +69,7 @@ export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) 
   return (
     <button
       disabled={isSubmited}
-      className={` font-bold rounded-md w-full min-w-32 px-4 py-2 border transition-colors duration-75 ease-in-out ${
+      className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border transition-colors duration-75 ease-in-out ${
         // applies for danger buttons
         danger &&
         "border-danger hover:bg-danger hover:text-white bg-transparent text-danger"
@@ -136,7 +136,7 @@ export const NavigateBtn = ({ name, icon, to, dark }) => {
 
   return (
     <button
-      className={`w-max p-1 px-4 my-2 rounded-md flex justify-center items-center border-pallete_zero border ${
+      className={`w-max p-1.5 px-3 my-2 rounded-full flex justify-center items-center border-pallete_zero border ${
         dark
           ? "text-white bg-pallete_zero hover:bg-white hover:text-pallete_zero"
           : "text-pallete_zero bg-white hover:bg-pallete_zero hover:text-white"
