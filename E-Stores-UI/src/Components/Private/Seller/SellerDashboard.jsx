@@ -18,19 +18,19 @@ const SellerDashboard = () => {
     {
       name: "products",
       display_name: "Products",
-      url: "/products",
+      url: "/dashboard/products",
       icon: <BsBoxArrowInDown />,
     },
     {
       name: "orders",
       display_name: "Orders",
-      url: "/orders",
+      url: "/dashboard/orders",
       icon: <BsBoxes />,
     },
     {
       name: "store",
       display_name: "Store",
-      url: "/setup-store",
+      url: "/dashboard/setup-store",
       icon: <PiStorefrontDuotone />,
     },
   ];

@@ -11,15 +11,20 @@ import {
 import { useAuth } from "../Auth/AuthProvider";
 
 const AllRoutes = () => {
-  const { auth: { authenticated, roles } } = useAuth();
+  const {
+    auth: { authenticated, roles },
+  } = useAuth();
+  
 
-  const generateRoutes = (routesList) => 
+  const generateRoutes = (routesList) =>
     routesList.map((route, index) => {
       console.log(route.path);
-      return <Route key={index} path={route.path} element={route.element}>
-        {route.subRoutes && generateRoutes(route.subRoutes)}
-      </Route>
-});
+      return (
+        <Route key={index} path={route.path} element={route.element}>
+          {route.subRoutes && generateRoutes(route.subRoutes)}
+        </Route>
+      );
+    });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -35,10 +40,14 @@ const AllRoutes = () => {
           {authenticated && generateRoutes(commonPostAuthRoutes)}
 
           {/* Seller Routes */}
-          {authenticated && roles.includes("SELLER") && generateRoutes(sellerRoutes)}
+          {authenticated &&
+            roles.includes("SELLER") &&
+            generateRoutes(sellerRoutes)}
 
           {/* Customer Routes */}
-          {authenticated && roles.includes("CUSTOMER") && generateRoutes(customerRoutes)}
+          {authenticated &&
+            roles.includes("CUSTOMER") &&
+            generateRoutes(customerRoutes)}
 
           {/* Fallback route */}
           <Route path="*" element={<Navigate to="/" />} />
