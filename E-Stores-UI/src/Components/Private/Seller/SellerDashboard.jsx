@@ -4,7 +4,7 @@ import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import Image from "../../Util/Image";
 import { useStarter } from "../../Context/Starter";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const SellerDashboard = () => {
 
@@ -12,21 +12,25 @@ const SellerDashboard = () => {
     {
       name: "dashboard",
       display_name: "Dashboard",
+      url: "/dashboard",
       icon: <RxDashboard />,
     },
     {
       name: "products",
       display_name: "Products",
+      url: "/products",
       icon: <BsBoxArrowInDown />,
     },
     {
       name: "orders",
       display_name: "Orders",
+      url: "/orders",
       icon: <BsBoxes />,
     },
     {
       name: "store",
       display_name: "Store",
+      url: "/setup-store",
       icon: <PiStorefrontDuotone />,
     },
   ];
@@ -42,6 +46,8 @@ const SellerDashboard = () => {
 export default SellerDashboard;
 
 export const SideBar = ({ navs }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-pallete_three`}
@@ -55,10 +61,7 @@ export const SideBar = ({ navs }) => {
             <Switch
               icon={option.icon}
               displayName={option.display_name}
-              onClick={() => {
-                sessionStorage.setItem("currentView", option.name);
-                setCurrentView(option.name);
-              }}
+              onClick={() => navigate(option.url)}
               isSubSwitch={false}
               hovered={true}
               key={i}
