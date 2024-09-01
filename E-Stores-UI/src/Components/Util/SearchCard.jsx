@@ -64,7 +64,7 @@ const SearchCard = ({ options, viewOn, setFor }) => {
             </div>
           )}
         </div>
-        <div className="w-full mt-auto flex justify-end items-center">
+        <div className="w-full mt-auto flex justify-end items-center border-t border-slate-400">
           <div className="w-max m-2">
             <SubmitBtn
               onClick={handleClose}
