@@ -122,7 +122,7 @@ const AddUpdateProduct = ({ update }) => {
               {viewSearchCard && (
                 <SearchCard
                   options={productTypes}
-                  closeView={setViewSearchCard}
+                  viewOn={setViewSearchCard}
                   setFor={setSelectedType}
                 />
               )}
