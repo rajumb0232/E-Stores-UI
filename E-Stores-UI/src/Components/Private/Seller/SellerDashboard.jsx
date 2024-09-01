@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import Image from "../../Util/Image";
 import { useStarter } from "../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useSidebarVisibilityObserver } from "../../Hooks/useSidebarVisibilityObsorver";
 
 const SellerDashboard = () => {
   const navs = [
@@ -48,9 +49,13 @@ export default SellerDashboard;
 
 export const SideBar = ({ navs }) => {
   const navigate = useNavigate();
+  const sidebarRef = useRef(null);
+
+  useSidebarVisibilityObserver(sidebarRef);
 
   return (
     <div
+      ref={sidebarRef}
       className={`w-1/6 flex flex-col justify-start items-center overflow-hidden h-full border pt-2 border-gray-200 border-l-0 font-semibold text-sm fixed z-10 left-0 bg-pallete_three`}
     >
       <div>

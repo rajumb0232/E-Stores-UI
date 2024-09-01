@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useStarter } from "../Context/Starter";
 
 const Footer = () => {
+  const { sidebarVisible } = useStarter();
+
+  useEffect(() => console.log(sidebarVisible), [sidebarVisible])
+  
   return (
     <footer className="h-max w-full pt-4 bg-gray-100 text-slate-700 text-center text-lg flex justify-center items-center">
       <div className=" w-5/6 h-full ml-auto flex flex-col justify-center items-center px-10 py-4">
@@ -27,15 +32,11 @@ const Footer = () => {
             />
             <FooterLink
               title={"Source Code (API)"}
-              url={
-                "https://github.com/rajumb0232/E-Stores-API.git"
-              }
+              url={"https://github.com/rajumb0232/E-Stores-API.git"}
             />
             <FooterLink
               title={"Source Code (UI)"}
-              url={
-                "https://github.com/rajumb0232/E-Stores-UI.git"
-              }
+              url={"https://github.com/rajumb0232/E-Stores-UI.git"}
             />
             <FooterLink
               title={"Postman"}

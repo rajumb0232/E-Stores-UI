@@ -18,7 +18,6 @@ const AllRoutes = () => {
 
   const generateRoutes = (routesList) =>
     routesList.map((route, index) => {
-      console.log(route.path);
       return (
         <Route key={index} path={route.path} element={route.element}>
           {route.subRoutes && generateRoutes(route.subRoutes)}
