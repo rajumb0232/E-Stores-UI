@@ -26,9 +26,15 @@ const Footer = () => {
               url={"http://localhost:7000/swagger-ui.html"}
             />
             <FooterLink
-              title={"Source code (GitHub Repo)"}
+              title={"Source Code (API)"}
               url={
-                "https://github.com/rajumb0232/E-Stores-Shopping-Application"
+                "https://github.com/rajumb0232/E-Stores-API.git"
+              }
+            />
+            <FooterLink
+              title={"Source Code (UI)"}
+              url={
+                "https://github.com/rajumb0232/E-Stores-UI.git"
               }
             />
             <FooterLink

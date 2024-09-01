@@ -86,8 +86,13 @@ const Headers = () => {
       icon: <IoDocumentTextOutline />,
     },
     {
-      title: "Source Code",
-      url: "https://github.com/rajumb0232/E-Stores-Shopping-Application",
+      title: "Source Code (API)",
+      url: "https://github.com/rajumb0232/E-Stores-API.git",
+      icon: <TbZoomCode />,
+    },
+    {
+      title: "Source Code (UI)",
+      url: "https://github.com/rajumb0232/E-Stores-UI.git",
       icon: <TbZoomCode />,
     },
     {
