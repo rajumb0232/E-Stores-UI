@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useStarter } from "../Context/Starter";
+import { useStarter } from "../../Context/Starter";
 
 const Footer = () => {
   const { sidebarVisible } = useStarter();

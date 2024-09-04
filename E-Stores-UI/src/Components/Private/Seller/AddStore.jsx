@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { PiStorefrontDuotone } from "react-icons/pi";
-import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
+import AxiosPrivateInstance from "../../../API/AxiosPrivateInstance";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { Input, DropDown, FormHeader, SubmitBtn } from "../../Util/Forms";
-import { useStarter } from "../../Context/Starter";
+import { useStarter } from "../../../Context/Starter";
 import Image from "../../Util/Image";
-import { useCategoryCatalogue } from "../../Hooks/useOptions";
+import { useCategoryCatalogue } from "../../../Hooks/useOptions";
 
 const AddStore = () => {
   const [storeId, setStoreId] = useState("");

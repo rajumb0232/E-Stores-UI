@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Auth/AuthProvider";
-import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
+import { useAuth } from "../../Auth/AuthProvider";
+import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";

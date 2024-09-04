@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Input, RadioBtn } from "../../Util/Forms";
-import { useStarter } from "../../Context/Starter";
+import { useStarter } from "../../../Context/Starter";
 import SearchCard from "../../Util/SearchCard";
-import useStore from "../../Hooks/useStore";
+import useStore from "../../../Hooks/useStore";
 import { IoSearchOutline } from "react-icons/io5";
 
 const AddUpdateProduct = ({ update }) => {
