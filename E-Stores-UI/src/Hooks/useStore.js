@@ -37,7 +37,6 @@ const useStore = () => {
       if (error.response && error.response.data.status === 302) {
         updateStoreState(error?.response?.data?.data);
       } else {
-        console.log(error.stack);
         return false;
       }
     }
