@@ -4,6 +4,7 @@ import { useAuth } from "../../Auth/AuthProvider";
 import { useState } from "react";
 import { VscListSelection } from "react-icons/vsc";
 import { PiStorefront, PiUserCircle } from "react-icons/pi";
+import logo from "/images/e-stores.png";
 import {
   MdArticle,
   MdKeyboardArrowDown,
@@ -133,7 +134,7 @@ const Headers = () => {
         {/* LOGO */}
         <div className="mr-auto flex items-center justify-center">
           <Link to={"/"}>
-            <img src="src\Images\e-stores.png" alt="" className="w-32" />
+            <img src={logo} alt="" className="w-32" />
           </Link>
         </div>
 
