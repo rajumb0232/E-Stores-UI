@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
 import { useAuth } from "../Auth/AuthProvider";
@@ -9,6 +9,7 @@ const Starter = ({ children }) => {
   const { catagories, getCategories } = useCategoryCatalogue();
   const { store, prevAddress, prevContacts, cleanStore } = useStore();
   const { auth, setAuth } = useAuth();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const logout = () => {
     if (auth.authenticated) {
@@ -34,6 +35,8 @@ const Starter = ({ children }) => {
         prevAddress,
         prevContacts,
         logout,
+        sidebarVisible,
+        setSidebarVisible
       }}
     >
       {children}

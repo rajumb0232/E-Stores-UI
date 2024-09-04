@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LazyLoad from "react-lazyload";
-import useImage from "../Hooks/useImage";
+import useImage from "../../Hooks/useImage";
 
-const Image = ({ path }) => {
+const Image = ({ path, defaultUrl }) => {
   const { getImageURL } = useImage();
   const [imageUrl, setImageUrl] = useState("");
 
@@ -17,7 +17,7 @@ const Image = ({ path }) => {
 
   return (
     <LazyLoad className="w-full">
-      <img src={imageUrl} alt="image" className="w-full text-center"/>
+      <img src={imageUrl ? imageUrl : defaultUrl} alt="image" className="w-full text-center"/>
     </LazyLoad>
   );
 };

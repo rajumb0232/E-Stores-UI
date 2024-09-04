@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../Auth/AuthProvider";
+import { useAuth } from "../../Auth/AuthProvider";
 import { useState } from "react";
 import { VscListSelection } from "react-icons/vsc";
 import { PiStorefront, PiUserCircle } from "react-icons/pi";
+import logo from "/images/e-stores.png";
 import {
   MdArticle,
   MdKeyboardArrowDown,
@@ -86,8 +87,13 @@ const Headers = () => {
       icon: <IoDocumentTextOutline />,
     },
     {
-      title: "Source Code",
-      url: "https://github.com/rajumb0232/E-Stores-Shopping-Application",
+      title: "Source Code (API)",
+      url: "https://github.com/rajumb0232/E-Stores-API.git",
+      icon: <TbZoomCode />,
+    },
+    {
+      title: "Source Code (UI)",
+      url: "https://github.com/rajumb0232/E-Stores-UI.git",
       icon: <TbZoomCode />,
     },
     {
@@ -128,7 +134,7 @@ const Headers = () => {
         {/* LOGO */}
         <div className="mr-auto flex items-center justify-center">
           <Link to={"/"}>
-            <img src="src\Images\e-stores.png" alt="" className="w-32" />
+            <img src={logo} alt="" className="w-32" />
           </Link>
         </div>
 
@@ -250,7 +256,7 @@ export const UsersCard = ({ authenticated, roles, setDoLogout }) => {
           {authenticated ? "Need break?" : "New customer?"}
         </p>
         <button
-          className="text-pallete_zero text-base border-2 border-transparent bg-transparent rounded-full font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
+          className="text-pallete_zero text-base border border-transparent bg-transparent rounded-full font-semibold px-3 py-0.5 hover:bg-pallete_one  hover:border-pallete_zero"
           onClick={() => {
             authenticated ? setDoLogout(true) : navigate("/customer/register");
           }}

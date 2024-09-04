@@ -76,8 +76,8 @@ export default SetUpStoreAndRelated;
 export const Tab = ({ tabName, icon, onClick, activeTabName }) => {
   return (
     <button
-      className={`w-full p-1 my-2 flex justify-start items-center border-2 rounded-full px-2 ${
-        tabName === activeTabName ? " bg-pallete_one border-pallete_zero border-2 text-pallete_zero" : "border-transparent hover:border-pallete_zero"
+      className={`w-full py-1.5 px-3 my-2 flex justify-start items-center border rounded-full ${
+        tabName === activeTabName ? " bg-pallete_one border-pallete_zero text-pallete_zero" : "border-transparent hover:border-pallete_zero"
       }`}
       type="button"
       onClick={onClick}
