@@ -6,6 +6,7 @@ import Image from "../../Util/Image";
 import { useStarter } from "../../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";
+import logo1 from "/images/e_logo2.webp"
 
 const SellerDashboard = () => {
   const navs = [
@@ -84,13 +85,13 @@ export const Hero = () => {
   return (
     <div>
       <div className="mx-14 mt-4 rounded-full overflow-hidden border shadow-sm border-slate-600 flex justify-center items-center">
-        <Image path={store?.logoLink} />
+        <Image path={store?.logoLink } defaultUrl={logo1} />
       </div>
       <div className="mx-4">
         <p
           className={`text-lg text-slate-700 font-semibold py-1 text-center line-clamp-2`}
         >
-          {store?.storeName ? store.storeName : "Your store name"}
+          {store?.storeName ? store.storeName : "E Store"}
         </p>
       </div>
     </div>
