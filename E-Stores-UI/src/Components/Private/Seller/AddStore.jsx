@@ -24,7 +24,7 @@ const AddStore = () => {
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
 
-  const topCategories = catagories.map((category, i) => {
+  const topCategories = catagories.map((category) => {
       return category.displayName;
     })
 
