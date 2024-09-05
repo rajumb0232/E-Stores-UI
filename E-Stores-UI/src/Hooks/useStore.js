@@ -30,7 +30,6 @@ const useStore = () => {
 
   // Initializing setUpInfo state from local storage once on mount
   useEffect(() => {
-    console.log("hi");
     const loadedSetUpInfo = loadSetUpInfoFromLocalStorage();
     if (loadedSetUpInfo) {
       setSetUpInfo(loadedSetUpInfo);
@@ -39,13 +38,11 @@ const useStore = () => {
 
   // Update localStorage whenever setUpInfo changes
   useEffect(() => {
-    console.log("hello");
     localStorage.setItem("sac", JSON.stringify(setUpInfo));
   }, [setUpInfo]);
 
   // Update address and contacts when store changes
   useEffect(() => {
-    console.log("hmmm");
     if (store) {
       setPrevAddress(store?.address);
       setPrevContacts(store?.address?.contacts || []);
