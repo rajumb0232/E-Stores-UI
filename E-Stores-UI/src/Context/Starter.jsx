@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
 import { useAuth } from "../Hooks/useAuth";
@@ -7,9 +7,16 @@ export const StarterDataContext = createContext({});
 
 const Starter = ({ children }) => {
   const { catagories, getCategories } = useCategoryCatalogue();
-  const { store, prevAddress, prevContacts, cleanStore } = useStore();
+  const { store, prevAddress, prevContacts, cleanStore, getStore } = useStore();
   const { auth, setAuth } = useAuth();
   const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  useEffect(() => {
+    const isFound = getStore(false);
+    if(!isFound){
+      getStore(true)
+    }
+  }, [])
 
   const logout = () => {
     if (auth.authenticated) {

@@ -13,6 +13,7 @@ export const Input = ({
   action,
   isRequired,
   placeholderText,
+  label
 }) => {
   const [isSecure, setSecure] = useState(false);
   const [showSensitive, setShowSensitive] = useState(false);
@@ -28,37 +29,44 @@ export const Input = ({
   }, [showSensitive]);
 
   return (
-    <div className="border border-gray-300 rounded-md w-full text-sm px-2 mb-2.5 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
-      <input
-        name={name}
-        type={inputType}
-        onChange={action}
-        required={isRequired}
-        placeholder={placeholderText}
-        value={value}
-        className="rounded-md bg-transparent w-full py-2.5 text-base placeholder:font-normal text-slate-700 placeholder:text-slate-500"
-      />
-      {isSecure && (
-        <div
-          className="border-l border-l-slate-300 pl-1"
-          onClick={() =>
-            setShowSensitive(!showSensitive) 
-          }
-        >
-          {showSensitive ? (
-            <ImEye className="text-slate-600" />
-          ) : (
-            <TbEyeClosed className="text-slate-600" />
-          )}
-        </div>
-      )}
+    <div className="mb-2.5 w-full">
+      <label
+        htmlFor={name}
+        className="block text-base font-medium text-slate-700 mb-1"
+      >
+        {label} {/* Display the label */}
+      </label>
+      <div className="border border-gray-300 rounded-md w-full text-sm px-2 hover:border-slate-400 focus-within:border-slate-400 flex justify-center items-center">
+        <input
+          id={name}
+          name={name}
+          type={inputType}
+          onChange={action}
+          required={isRequired}
+          placeholder={placeholderText}
+          value={value}
+          className="rounded-md bg-transparent w-full py-2.5 text-base placeholder:font-normal text-slate-700 placeholder:text-slate-500"
+        />
+        {isSecure && (
+          <div
+            className="border-l border-l-slate-300 pl-1 cursor-pointer"
+            onClick={() => setShowSensitive(!showSensitive)}
+          >
+            {showSensitive ? (
+              <ImEye className="text-slate-600" />
+            ) : (
+              <TbEyeClosed className="text-slate-600" />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export const FormHeader = ({ icon, text }) => {
   return (
-    <h1 className="text-slate-700 font-semibold text-4xl my-8 flex justify-start w-full">
+    <h1 className="text-slate-700 text-3xl my-6 py-2 flex justify-start w-full border-b border-slate-300">
       <div className="mt-1 mr-2">{icon}</div>
       {text}
     </h1>
@@ -169,7 +177,7 @@ export function DropDown({
   });
 
   return (
-    <div className="w-full mx-2 mb-2.5">
+    <div className="w-full mb-2.5">
       <button
         type="button"
         className="w-full py-2.5 px-2 font-semibold text-slate-700 bg-pallete_one rounded-md"

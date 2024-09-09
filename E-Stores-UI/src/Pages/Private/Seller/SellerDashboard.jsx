@@ -32,7 +32,7 @@ const SellerDashboard = () => {
     {
       name: "store",
       display_name: "Store",
-      url: store ? "store" : "setup-store",
+      url: store?.storeId ? "store" : "setup-store",
       icon: <PiStorefrontDuotone />,
     },
   ];

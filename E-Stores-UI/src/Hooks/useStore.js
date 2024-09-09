@@ -3,8 +3,14 @@ import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useAuth } from "./useAuth";
 
 const useStore = () => {
-  const [store, setStore] = useState(null);
-  const [prevAddress, setPrevAddress] = useState(null);
+  const [store, setStore] = useState({
+    storeId: "",
+    storeName: "",
+    topCategory: "",
+    logoLink: "",
+    about: "",
+  });
+  const [prevAddress, setPrevAddress] = useState({});
   const [prevContacts, setPrevContacts] = useState([]);
   const axiosInstance = AxiosPrivateInstance();
   const { auth } = useAuth();
@@ -44,6 +50,7 @@ const useStore = () => {
   // Update address and contacts when store changes
   useEffect(() => {
     if (store) {
+      localStorage.setItem("store-data", JSON.stringify(store));
       setPrevAddress(store?.address);
       setPrevContacts(store?.address?.contacts || []);
 
@@ -55,30 +62,18 @@ const useStore = () => {
     }
   }, [store]);
 
-  // Updates the store data to the state and localStorage
-  const updateStoreState = (store) => {
-    if (store) {
-      localStorage.setItem("store-data", JSON.stringify(store));
-      setStore(store);
-      return true;
-    } else {
-      console.log("Invalid Store Data Found.");
-      return false;
-    }
-  };
-
   // fetching store info through API Call
   const fetch = async () => {
     if (setUpInfo.store) {
       try {
         const response = await axiosInstance.get("/stores");
         if (response.status === 302) {
-          updateStoreState(response?.data?.data);
+          setStore({ ...store, ...response?.data?.data });
           setSetUpInfo({ ...setUpInfo, store: true });
         }
       } catch (error) {
         if (error.response && error.response.data.status === 302) {
-          updateStoreState(error?.response?.data?.data);
+          setStore({ ...store, ...error.response?.data?.data });
           setSetUpInfo({ ...setUpInfo, store: true });
         } else {
           setSetUpInfo({
@@ -100,17 +95,18 @@ const useStore = () => {
       if (backup) {
         const storeData = JSON.parse(backup);
         setStore(storeData);
-        return;
-      }
+        if (store?.storeId && store?.storeId !== "") return true;
+        else return false;
+      } else return false;
     }
     fetch();
   };
 
-  useEffect(() => {
-      if (auth?.authenticated && auth?.roles?.includes("SELLER")) {
-        getStore(false);
-      }
-  }, [auth]);
+  // useEffect(() => {
+  //   if (auth?.authenticated && auth?.roles?.includes("SELLER")) {
+  //     getStore(false);
+  //   }
+  // }, [auth]);
 
   // cleans up the localStorage by removing store related data.
   const cleanStore = () => {
@@ -119,7 +115,86 @@ const useStore = () => {
     localStorage.removeItem("sac");
   };
 
-  return { store, prevAddress, prevContacts, getStore, cleanStore };
+  const addStore = async (data) => {
+    try {
+      const response = await axiosInstance.post("/stores", data);
+      // validating response
+      if (response.status === 201) {
+        updateCache(response?.data?.data);
+        localStorage.setItem("store", "true");
+        setStore({ ...store, ...response?.data?.data });
+        return true;
+      } else {
+        alert(response?.data.message || response?.message);
+        return false;
+      }
+    } catch (error) {
+      alert(error?.response?.message);
+      return false;
+    }
+  };
+
+  const updateStore = async (data) => {
+    try {
+      const response = await axiosInstance.put(
+        `/stores/${store?.storeId}`,
+        data
+      );
+
+      // validating response
+      if (response.status === 200) {
+        localStorage.setItem("store", "true");
+        setStore({ ...store, ...response?.data?.data });
+      } else {
+        alert(response?.data.message || response?.message);
+        return false;
+      }
+    } catch (error) {
+      alert(error?.response?.message);
+      return false;
+    }
+  };
+
+  // uploade new LOGO
+  const uploadStoreImage = async (selectedLogo) => {
+    const formData = new FormData();
+    formData.append("image", selectedLogo);
+
+    try {
+      const response = await axiosInstance.post(
+        `/stores/${store?.storeId}/images`,
+        formData,
+        {
+          headers: { "Content-Type": "image/*" },
+        }
+      );
+
+      if (response.status === 200) {
+        setStore({ ...store, logoLink: response?.data?.data });
+        alert("Upload successful");
+        return true;
+      } else {
+        alert(response?.data.message || response?.message);
+        return false;
+      }
+    } catch (error) {
+      alert(error?.response?.message);
+      return false;
+    }
+  };
+
+  return {
+    store,
+    prevAddress,
+    prevContacts,
+    getStore,
+    cleanStore,
+    addStore,
+    updateStore,
+    uploadStoreImage,
+  };
 };
 
 export default useStore;
+
+export const updateStore = () => {};

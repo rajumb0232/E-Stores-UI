@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import AddStore from "./AddStore"
 
 const AddUpdateStore = () => {
-  return (
-    <div>AddUpdateStore</div>
-  )
+  return( <AddStore/> )
 }
 
-export default AddUpdateStore
+export default AddUpdateStore;
