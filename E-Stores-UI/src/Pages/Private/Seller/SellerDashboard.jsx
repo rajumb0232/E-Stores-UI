@@ -7,10 +7,9 @@ import { useStarter } from "../../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";
 import logo1 from "/images/e_logo2.webp";
-import useStore from "../../../Hooks/useStore";
 
 const SellerDashboard = () => {
-  const { store } = useStore();
+  const { store } = useStarter();
   const navs = [
     {
       name: "dashboard",
