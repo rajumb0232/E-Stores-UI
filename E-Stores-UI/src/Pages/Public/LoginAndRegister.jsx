@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
-import { Input, SubmitBtn } from "../Util/Forms";
+import { Input, SubmitBtn } from "../../Components/Forms";
 import { useInputHandler } from "../../Hooks/useInputHandler";
 import { useAuth } from "../../Hooks/useAuth";
 

@@ -2,9 +2,9 @@ import React from "react";
 import { LuBadgeInfo } from "react-icons/lu";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
-import { NavigateBtn } from "../../Util/Forms";
+import { NavigateBtn } from "../../../Components/Forms";
 import { useStarter } from "../../../Context/Starter";
-import Image from "../../Util/Image";
+import Image from "../../../Components/Image";
 
 const Store = () => {
   const { store, prevAddress, prevContacts } = useStarter();

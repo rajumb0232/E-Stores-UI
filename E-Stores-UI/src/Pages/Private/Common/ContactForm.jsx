@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../../API/AxiosPrivateInstance";
 import { PiUserCirclePlusDuotone } from "react-icons/pi";
 import { AiOutlineDelete } from "react-icons/ai";
-import { FormHeader, Input, RadioBtn, SubmitBtn } from "../../Util/Forms";
+import { FormHeader, Input, RadioBtn, SubmitBtn } from "../../../Components/Forms";
 import { useStarter } from "../../../Context/Starter";
 
 const ContactForm = () => {
