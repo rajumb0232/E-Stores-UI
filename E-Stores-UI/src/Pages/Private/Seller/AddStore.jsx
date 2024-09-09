@@ -24,17 +24,9 @@ const AddStore = () => {
   const axiosInstance = AxiosPrivateInstance();
   const [imageHovered, setImageHovered] = useState(false);
 
-  const topCategories = catagories.map((category, i) => {
+  const topCategories = catagories.map((category) => {
       return category.displayName;
     })
-
-  useEffect(() => {
-    if(catagories.length > 0){
-      console.log(catagories);
-      console.log(topCategories);
-    }
-  }, [catagories])
-
 
   useEffect(() => {
     if (store?.storeId) {
@@ -316,10 +308,11 @@ const AddStore = () => {
               value={about}
             />
           </div>
+
           {/* SUBMIT BUTTON */}
           <div className="ml-auto my-8 w-max flex justify-end">
             <SubmitBtn
-              submit={submit}
+              onClick={submit}
               isSubmited={isSubmited}
               name={isPrevPresent ? "Update" : "Confirm"}
             />

@@ -8,7 +8,7 @@ import {
   customerRoutes,
   sellerRoutes,
 } from "./Navigations";
-import { useAuth } from "../Auth/AuthProvider";
+import { useAuth } from "../Hooks/useAuth";
 
 const AllRoutes = () => {
   const {

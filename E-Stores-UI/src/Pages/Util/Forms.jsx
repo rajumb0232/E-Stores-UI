@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ImEye } from "react-icons/im";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { RiLoader4Fill } from "react-icons/ri";
@@ -10,7 +10,7 @@ export const Input = ({
   type,
   name,
   value,
-  onChangePerform,
+  action,
   isRequired,
   placeholderText,
 }) => {
@@ -32,7 +32,7 @@ export const Input = ({
       <input
         name={name}
         type={inputType}
-        onChange={(e) => onChangePerform(e.target.value)}
+        onChange={action}
         required={isRequired}
         placeholder={placeholderText}
         value={value}

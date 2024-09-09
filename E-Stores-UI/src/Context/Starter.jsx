@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
-import { useAuth } from "../Auth/AuthProvider";
+import { useAuth } from "../Hooks/useAuth";
 
-const StarterDataContext = createContext(null);
+export const StarterDataContext = createContext({});
 
 const Starter = ({ children }) => {
   const { catagories, getCategories } = useCategoryCatalogue();
