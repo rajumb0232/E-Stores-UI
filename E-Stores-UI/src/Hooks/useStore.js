@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
-import { useAuth } from "../Auth/AuthProvider";
+import { useAuth } from "./useAuth";
 
 const useStore = () => {
   const [store, setStore] = useState(null);

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../Auth/AuthProvider";
 import { useState } from "react";
 import { VscListSelection } from "react-icons/vsc";
 import { PiStorefront, PiUserCircle } from "react-icons/pi";
@@ -23,6 +22,7 @@ import { TbZoomCode } from "react-icons/tb";
 import { SiHashnode, SiPostman } from "react-icons/si";
 import { LuUserCircle } from "react-icons/lu";
 import { FaGithub } from "react-icons/fa";
+import { useAuth } from "../../Hooks/useAuth";
 
 const Headers = () => {
   const { auth } = useAuth();

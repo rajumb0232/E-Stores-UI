@@ -1,8 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
+import { Link } from "react-router-dom";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
@@ -46,7 +45,6 @@ const Register = ({ role, isLogin }) => {
 
   // when isSubmited perform login or register
   useEffect(() => {
-    console.log(isSubmited);
     if (isSubmited !== false) {
       if (isEmailValid && isPwdValid) {
         handleSubmit();
