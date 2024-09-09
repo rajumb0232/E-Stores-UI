@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input, RadioBtn } from "../../../Components/Forms";
 import { useStarter } from "../../../Context/Starter";
-import SearchCard from "../../Util/SearchCard";
-import useStore from "../../../Hooks/useStore";
+import SearchCard from "../../../Components/SearchCard";
 import { IoSearchOutline } from "react-icons/io5";
 import { useInputHandler } from "../../../Hooks/useInputHandler";
 

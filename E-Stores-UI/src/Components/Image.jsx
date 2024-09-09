@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LazyLoad from "react-lazyload";
-import useImage from "../../Hooks/useImage";
+import useImage from "../Hooks/useImage";
 
 const Image = ({ path, defaultUrl }) => {
   const { getImageURL } = useImage();
