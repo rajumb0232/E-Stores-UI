@@ -8,14 +8,18 @@ import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
 import { Input, SubmitBtn } from "../Util/Forms";
+import { useInputHandler } from "../../Hooks/useInputHandler";
 
 const Register = ({ role, isLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmited, setIsSubmited] = useState(false);
-  const [isSubmitFailed, setSubmitFailed] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  })
+  const handleInput = useInputHandler();
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPwdValid, setPwdValid] = useState(true);
+  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmitFailed, setSubmitFailed] = useState(false);
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const axiosInstance = AxiosPrivateInstance();
@@ -24,9 +28,9 @@ const Register = ({ role, isLogin }) => {
   const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*#$^@]).{8,}$/;
 
   useEffect(() => {
-    setEmailValid(emailRegex.test(email));
-    setPwdValid(pwdRegex.test(password));
-  }, [email, password]);
+    setEmailValid(emailRegex.test(formData.email));
+    setPwdValid(pwdRegex.test(formData.password));
+  }, [formData]);
 
   // when isSubmitFailed changed from false to true
   useEffect(() => {
@@ -40,12 +44,12 @@ const Register = ({ role, isLogin }) => {
     ? "/login"
     : role === "SELLER"
     ? "/sellers/register"
-    : "customers/register";
+    : "/customers/register";
 
   // method to handle login reguest
   const handleLogin = async () => {
     try {
-      const response = await axiosInstance.post(endPoint, { email, password });
+      const response = await axiosInstance.post(endPoint, formData);
       if (response.status === 200) {
         const accessExpiration = response.data.data.accessExpiration;
         const refreshExpiration = response.data.data.refreshExpiration;
@@ -73,15 +77,12 @@ const Register = ({ role, isLogin }) => {
   // method to handle register request
   const handleRegister = async () => {
     try {
-      const response = await axiosInstance.post(endPoint, {
-        email,
-        password,
-      });
+      const response = await axiosInstance.post(endPoint, formData);
       if (response.status === 202) {
         setAuth({
           ...auth,
           userId: response.data.data.userId,
-          username: email,
+          username: response.data.data.email,
         });
         sessionStorage.setItem("email", response.data.data.email);
         navigate("/verify-email");
@@ -102,9 +103,7 @@ const Register = ({ role, isLogin }) => {
   // when isSubmited perform login or register
   useEffect(() => {
     if (isSubmited !== false) {
-      console.log("email", isEmailValid);
-      console.log("pwd", isPwdValid);
-      if (email && email !== " " && password && isEmailValid && isPwdValid) {
+      if (isEmailValid && isPwdValid) {
         isLogin ? handleLogin() : handleRegister();
       } else {
         alert("Invalid Input");
@@ -161,29 +160,29 @@ const Register = ({ role, isLogin }) => {
 
           <div className="flex flex-col justify-center items-start">
             <Input
-              value={email}
-              onChangePerform={setEmail}
+              value={formData.email}
+              action={handleInput(setFormData, formData)}
               placeholderText={"Enter your email: "}
               isRequired={true}
               type={"email"}
-              name={"Email"}
+              name={"email"}
             />
             <p className="text-xs text-red-400  font-mono font-normal h-4 px-2 mb-2">
-              {email !== "" && !isEmailValid ? "Invalid Email Id" : ""}
+              {formData.email !== "" && !isEmailValid ? "Invalid Email Id" : ""}
             </p>
           </div>
 
           <div className="flex flex-col justify-center items-start">
             <Input
-              value={password}
-              onChangePerform={setPassword}
+              value={formData.password}
+              action={handleInput(setFormData, formData)}
               placeholderText={"Enter your password: "}
               isRequired={true}
               type={"password"}
-              name={"Password"}
+              name={"password"}
             />
             <p className="text-xs text-red-400  font-mono font-normal h-4 px-2">
-              {password !== "" && !isPwdValid
+              {formData.password !== "" && !isPwdValid
                 ? "Password must contain at least 1 letter, 1 number, 1 special character"
                 : ""}
             </p>
@@ -191,13 +190,11 @@ const Register = ({ role, isLogin }) => {
 
           {/* SUBMIT BUTTON */}
           <div className="w-full flex justify-end mt-4">
-            {/* <div className="w-max"> */}
             <SubmitBtn
               submit={submit}
               isSubmited={isSubmited}
               name={"Submit"}
             />
-            {/* </div> */}
           </div>
 
           {/* TOGGLE REDIRECTS TO LOGIN AND REGISTER */}
