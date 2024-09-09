@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
-import { SubmitBtn } from "../../Util/Forms";
+import { SubmitBtn } from "../../../Components/Forms";
 import { useAuth } from "../../../Hooks/useAuth";
 
 const Logout = ({ doAppear }) => {

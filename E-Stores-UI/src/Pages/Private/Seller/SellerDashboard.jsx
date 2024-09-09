@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
-import Image from "../../Util/Image";
+import Image from "../../../Components/Image";
 import { useStarter } from "../../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";

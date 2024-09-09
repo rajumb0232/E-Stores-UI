@@ -6,7 +6,7 @@ import { PiStorefrontDuotone } from "react-icons/pi";
 import { MdOutlineEditLocationAlt } from "react-icons/md";
 import { RiContactsLine } from "react-icons/ri";
 import { IoMdArrowBack } from "react-icons/io";
-import { NavigateBtn } from "../../Util/Forms";
+import { NavigateBtn } from "../../../Components/Forms";
 
 const SetUpStoreAndRelated = () => {
   const [view, setView] = useState("Store");

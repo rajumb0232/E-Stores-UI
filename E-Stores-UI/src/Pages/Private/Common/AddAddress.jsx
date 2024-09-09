@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../../../API/AxiosPrivateInstance";
 import { RiUserLocationLine } from "react-icons/ri";
 import { useCityDistricts, useStates } from "../../../Hooks/useOptions";
-import { DropDown, FormHeader, Input, SubmitBtn } from "../../Util/Forms";
+import { DropDown, FormHeader, Input, SubmitBtn } from "../../../Components/Forms";
 import { useStarter } from "../../../Context/Starter";
 
 const AddAddress = () => {
