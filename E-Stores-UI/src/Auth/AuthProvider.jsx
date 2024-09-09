@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import useLoginRefresher from "./useLoginRefersher";
 
 // context
-const AuthContext = createContext({});
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const { user } = useLoginRefresher();

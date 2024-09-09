@@ -2,27 +2,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../Auth/AuthProvider";
 import AxiosPrivateInstance from "../../API/AxiosPrivateInstance";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiShoppingBag2Line } from "react-icons/ri";
 import { HiOutlineTag } from "react-icons/hi2";
 import { Input, SubmitBtn } from "../Util/Forms";
 import { useInputHandler } from "../../Hooks/useInputHandler";
+import { useAuth } from "../../Hooks/useAuth";
 
 const Register = ({ role, isLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
   const handleInput = useInputHandler();
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPwdValid, setPwdValid] = useState(true);
   const [isSubmited, setIsSubmited] = useState(false);
-  const [isSubmitFailed, setSubmitFailed] = useState(false);
-  const navigate = useNavigate();
-  const { auth, setAuth } = useAuth();
-  const axiosInstance = AxiosPrivateInstance();
+  const { handleLogin, handleRegister } = useAuth();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
   const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[*#$^@]).{8,}$/;
@@ -32,13 +29,6 @@ const Register = ({ role, isLogin }) => {
     setPwdValid(pwdRegex.test(formData.password));
   }, [formData]);
 
-  // when isSubmitFailed changed from false to true
-  useEffect(() => {
-    if (isSubmitFailed === true) {
-      setIsSubmited(false);
-    }
-  }, [isSubmitFailed]);
-
   // basic request config
   const endPoint = isLogin
     ? "/login"
@@ -46,65 +36,20 @@ const Register = ({ role, isLogin }) => {
     ? "/sellers/register"
     : "/customers/register";
 
-  // method to handle login reguest
-  const handleLogin = async () => {
-    try {
-      const response = await axiosInstance.post(endPoint, formData);
-      if (response.status === 200) {
-        const accessExpiration = response.data.data.accessExpiration;
-        const refreshExpiration = response.data.data.refreshExpiration;
-        const user = {
-          ...response.data.data,
-          accessExpiration: new Date(
-            new Date().getTime() + accessExpiration * 1000
-          ),
-          refreshExpiration: new Date(
-            new Date().getTime() + refreshExpiration * 1000
-          ),
-        };
-
-        setAuth(user);
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/");
-      }
-    } catch (error) {
-      setIsSubmited(false);
-      setSubmitFailed(true);
-      alert(error.response.data.message + ": " + error.response.data.rootCause);
-    }
-  };
-
-  // method to handle register request
-  const handleRegister = async () => {
-    try {
-      const response = await axiosInstance.post(endPoint, formData);
-      if (response.status === 202) {
-        setAuth({
-          ...auth,
-          userId: response.data.data.userId,
-          username: response.data.data.email,
-        });
-        sessionStorage.setItem("email", response.data.data.email);
-        navigate("/verify-email");
-      } else {
-        setIsSubmited(false);
-        setSubmitFailed(true);
-        alert(
-          error.response.data.message + ": " + error.response.data.rootCause
-        );
-      }
-    } catch (error) {
-      setIsSubmited(false);
-      setSubmitFailed(true);
-      alert(error.response.data.message + ": " + error.response.data.rootCause);
-    }
+  const handleSubmit = async () => {
+    setIsSubmited(
+      isLogin
+        ? await handleLogin(endPoint, formData)
+        : await handleRegister(endPoint, formData)
+    );
   };
 
   // when isSubmited perform login or register
   useEffect(() => {
+    console.log(isSubmited);
     if (isSubmited !== false) {
       if (isEmailValid && isPwdValid) {
-        isLogin ? handleLogin() : handleRegister();
+        handleSubmit();
       } else {
         alert("Invalid Input");
         setIsSubmited(false);
@@ -112,17 +57,9 @@ const Register = ({ role, isLogin }) => {
     }
   }, [isSubmited]);
 
-  //handling submit
-  const submit = (e) => {
-    e.preventDefault();
-    setSubmitFailed(false);
-    setIsSubmited(true);
-  };
-
   return (
     <div className="w-screen h-screen font-two flex flex-col items-center justify-start">
       <form
-        onSubmit={submit}
         className="flex flex-row justify-center items-center w-4/6 h-4/5 mt-24 rounded-md bg-white border border-gray-400 overflow-hidden"
       >
         <div className="w-full bg-gray-100 text-slate-700 font-semibold h-full flex flex-col justify-center items-center p-5">
@@ -191,9 +128,10 @@ const Register = ({ role, isLogin }) => {
           {/* SUBMIT BUTTON */}
           <div className="w-full flex justify-end mt-4">
             <SubmitBtn
-              submit={submit}
+              onClick={() => setIsSubmited(true)}
               isSubmited={isSubmited}
               name={"Submit"}
+              btnType={"button"}
             />
           </div>
 
