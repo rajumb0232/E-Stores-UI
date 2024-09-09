@@ -14,7 +14,7 @@ export const useSidebarVisibilityObserver = (elementRef) => {
 
     if (elementRef.current) {
       observer.observe(elementRef.current);
-      console.log(elementRef.current);
+      // console.log(elementRef.current);
     }
 
     return () => {

@@ -1,40 +1,22 @@
 import React, { useEffect, useState } from "react";
-import AxiosPrivateInstance from "../../../API/AxiosPrivateInstance";
 import { IoWarningOutline } from "react-icons/io5";
 import { SubmitBtn } from "../../Util/Forms";
-import { useStarter } from "../../../Context/Starter";
+import { useAuth } from "../../../Hooks/useAuth";
 
 const Logout = ({ doAppear }) => {
   const [isSubmited, setIsSubmited] = useState(false);
-  const axiosInstance = AxiosPrivateInstance();
-  const [loginRequested, setLoginRequested] = useState(false);
-  const { logout } = useStarter();
+  const { handleLogout } = useAuth();
 
-  const handleLogout = async () => {
-    const response = await axiosInstance.post("/logout");
-    try {
-      if (response.status === 200) {
-        setTimeout(() => {
-          logout();
-          setIsSubmited(false);
-          doAppear(false);
-        }, [2000]);
-      } else {
-        console.log(response?.data);
-        setIsSubmited(false);
-        alert(response?.data?.message);
-      }
-    } catch (error) {
-      console.log(error);
-      setIsSubmited(false);
-      alert(error?.response?.message);
+  const handleSubmit = async () => {
+    const result = await handleLogout();
+    if (result) {
+      doAppear(false);
     }
   };
 
   useEffect(() => {
-    if (!loginRequested && isSubmited) {
-      setLoginRequested(true);
-      handleLogout();
+    if (isSubmited) {
+      handleSubmit();
     }
   }, [isSubmited]);
 

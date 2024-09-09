@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../Auth/AuthProvider";
 import { useState } from "react";
 import { VscListSelection } from "react-icons/vsc";
 import { PiStorefront, PiUserCircle } from "react-icons/pi";
@@ -23,6 +22,7 @@ import { TbZoomCode } from "react-icons/tb";
 import { SiHashnode, SiPostman } from "react-icons/si";
 import { LuUserCircle } from "react-icons/lu";
 import { FaGithub } from "react-icons/fa";
+import { useAuth } from "../../Hooks/useAuth";
 
 const Headers = () => {
   const { auth } = useAuth();
@@ -178,7 +178,7 @@ const Headers = () => {
               <VscListSelection />
               {addOnsHovered && (
                 <div className="shadow-xl border bg-white rounded-sm h-max absolute top-14 w-1/5 -translate-x-3/4 -translate-y-2 flex flex-col justify-center transition-all duration-300">
-                  <div className="flex flex-col justify-between items-center w-full p-2">
+                  <div className="flex flex-col justify-between items-center w-full">
                     {addOns.map((item, i) => {
                       return (
                         <a
@@ -187,7 +187,7 @@ const Headers = () => {
                           className="text-slate-700 w-full hover:bg-slate-100 text-base h-max"
                           key={i}
                         >
-                          <div className="px-2 flex justify-start items-center w-full py-2 hover:bg-gray-100">
+                          <div className="px-4 flex justify-start items-center w-full py-2 hover:bg-gray-100">
                             {item.icon}
                             <p className="ml-1.5">{item.title}</p>
                           </div>
