@@ -6,9 +6,11 @@ import Image from "../../Util/Image";
 import { useStarter } from "../../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";
-import logo1 from "/images/e_logo2.webp"
+import logo1 from "/images/e_logo2.webp";
+import useStore from "../../../Hooks/useStore";
 
 const SellerDashboard = () => {
+  const { store } = useStore();
   const navs = [
     {
       name: "dashboard",
@@ -31,7 +33,7 @@ const SellerDashboard = () => {
     {
       name: "store",
       display_name: "Store",
-      url: "store",
+      url: store ? "store" : "/setup-store",
       icon: <PiStorefrontDuotone />,
     },
   ];
@@ -85,7 +87,7 @@ export const Hero = () => {
   return (
     <div>
       <div className="mx-14 mt-4 rounded-full overflow-hidden border shadow-sm border-slate-600 flex justify-center items-center">
-        <Image path={store?.logoLink } defaultUrl={logo1} />
+        <Image path={store?.logoLink} defaultUrl={logo1} />
       </div>
       <div className="mx-4">
         <p

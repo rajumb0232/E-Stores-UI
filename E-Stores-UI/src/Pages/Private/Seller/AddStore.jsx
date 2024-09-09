@@ -29,14 +29,6 @@ const AddStore = () => {
     })
 
   useEffect(() => {
-    if(catagories.length > 0){
-      console.log(catagories);
-      console.log(topCategories);
-    }
-  }, [catagories])
-
-
-  useEffect(() => {
     if (store?.storeId) {
       setStoreId(store.storeId);
       setStoreName(store.storeName);
@@ -316,10 +308,11 @@ const AddStore = () => {
               value={about}
             />
           </div>
+
           {/* SUBMIT BUTTON */}
           <div className="ml-auto my-8 w-max flex justify-end">
             <SubmitBtn
-              submit={submit}
+              onClick={submit}
               isSubmited={isSubmited}
               name={isPrevPresent ? "Update" : "Confirm"}
             />
