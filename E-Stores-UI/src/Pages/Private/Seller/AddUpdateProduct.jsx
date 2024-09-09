@@ -4,10 +4,11 @@ import { useStarter } from "../../../Context/Starter";
 import SearchCard from "../../Util/SearchCard";
 import useStore from "../../../Hooks/useStore";
 import { IoSearchOutline } from "react-icons/io5";
+import { useInputHandler } from "../../../Hooks/useInputHandler";
 
 const AddUpdateProduct = ({ update }) => {
-  const { catagories } = useStarter();
-  const { store } = useStore();
+  const handleInput = useInputHandler();
+  const { catagories, store } = useStarter();
   const [viewSearchCard, setViewSearchCard] = useState(false);
   const [productTypes, setProductTypes] = useState([]);
   const [selectedType, setSelectedType] = useState("");
@@ -52,10 +53,12 @@ const AddUpdateProduct = ({ update }) => {
   }, [selectedType]);
 
   //  HANDLING THE INPUT CHANGES
-  const handleTextInput = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-  };
+  const handleTextInput = handleInput(setProduct, product);
+  // const handleTextInput = (e) => {
+  //   handleInput(setProduct, product, e);
+  // const { name, value } = e.target;
+  // setProduct({ ...product, [name]: value });
+  // };
 
   return (
     <div className="min-h-screen text-slate-700 w-full font-two flex justify-center items-start">
@@ -78,7 +81,7 @@ const AddUpdateProduct = ({ update }) => {
               name="title"
               type="text"
               placeholderText="Title"
-              onChangePerform={handleTextInput}
+              action={handleTextInput}
               value={product.title}
             />
 
@@ -98,30 +101,32 @@ const AddUpdateProduct = ({ update }) => {
             {/* CATEGORY SELECTION BLOCK */}
             <div className="w-full border p-2 rounded-md bg-pallete_three">
               <table className="w-full bg-white">
-                <tr className=" border-y border-slate-400">
-                  <td className="border-x border-slate-400 p-2 font-semibold">
-                    Category{" "}
-                  </td>
-                  <td className="border-x border-slate-400 p-2 text-blue-400">
-                    {store?.category?.toLowerCase()}
-                  </td>
-                </tr>
-                <tr className=" border-y border-slate-400">
-                  <td className="border-x border-slate-400 p-2 font-semibold">
-                    Sub-Category{" "}
-                  </td>
-                  <td className="border-x border-slate-400 p-2 text-blue-400">
-                    {product?.subCategory?.toLowerCase()}
-                  </td>
-                </tr>
-                <tr className=" border-y border-slate-400 ">
-                  <td className="border-x border-slate-400 p-2 font-semibold">
-                    Type
-                  </td>
-                  <td className="border-x  border-slate-400 p-2 text-blue-400">
-                    {selectedType}
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className=" border-y border-slate-400">
+                    <td className="border-x border-slate-400 p-2 font-semibold">
+                      Category{" "}
+                    </td>
+                    <td className="border-x border-slate-400 p-2 text-blue-400">
+                      {store?.category?.toLowerCase()}
+                    </td>
+                  </tr>
+                  <tr className=" border-y border-slate-400">
+                    <td className="border-x border-slate-400 p-2 font-semibold">
+                      Sub-Category{" "}
+                    </td>
+                    <td className="border-x border-slate-400 p-2 text-blue-400">
+                      {product?.subCategory?.toLowerCase()}
+                    </td>
+                  </tr>
+                  <tr className=" border-y border-slate-400 ">
+                    <td className="border-x border-slate-400 p-2 font-semibold">
+                      Type
+                    </td>
+                    <td className="border-x  border-slate-400 p-2 text-blue-400">
+                      {selectedType}
+                    </td>
+                  </tr>
+                </tbody>
               </table>
               <button
                 className="w-max ml-auto text-center bg-pallete_zero text-white rounded-md p-2 my-2 text-base flex justify-start items-center hover:bg-white hover:text-pallete_zero border border-transparent hover:border-pallete_zero"
@@ -162,7 +167,7 @@ const AddUpdateProduct = ({ update }) => {
             {varyingView && (
               <Varying handleInput={handleTextInput} product={product} />
             )}
-            
+
             {/* IMAGE INPUT */}
             <div className="w-full">
               <input
@@ -204,7 +209,7 @@ export const NotVarying = ({ handleInput, product }) => {
           name="stockQuantity"
           type="text"
           placeholderText="Stock Quantity"
-          onChangePerform={handleInput}
+          action={handleInput}
           value={
             product.stockQuantity === 0 ? undefined : product.stockQuantity
           }
@@ -216,7 +221,7 @@ export const NotVarying = ({ handleInput, product }) => {
           name="price"
           type="text"
           placeholderText="Price"
-          onChangePerform={handleInput}
+          action={handleInput}
           value={product.price === 0 ? undefined : product.price}
         />
       </div>

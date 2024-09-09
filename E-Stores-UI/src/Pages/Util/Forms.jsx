@@ -10,7 +10,7 @@ export const Input = ({
   type,
   name,
   value,
-  onChangePerform,
+  action,
   isRequired,
   placeholderText,
 }) => {
@@ -32,7 +32,7 @@ export const Input = ({
       <input
         name={name}
         type={inputType}
-        onChange={(e) => onChangePerform(e.target.value)}
+        onChange={action}
         required={isRequired}
         placeholder={placeholderText}
         value={value}
