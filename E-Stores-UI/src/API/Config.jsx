@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useRefershLogin } from './auth'; // Import your refresh login function
+// Import your refresh login function
 
 const axiosInstance = axios.create();
-const {handleRefresh} = useRefershLogin();
+// const {handleRefresh} = useLoginRefresher();
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   async (config) => {
@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(
       if (expiryDate < currentDate) {
         console.log("refreshing from interceptor...")
         // Call the refresh login function
-        handleRefresh();
+        // handleRefresh();
         // useRefershLogin(true) // Assuming doRefreshLogin is an async function
       }
     }

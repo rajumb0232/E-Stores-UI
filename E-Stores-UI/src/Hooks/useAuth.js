@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { AuthContext } from "../Auth/AuthProvider";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useStarter } from "./useStarter";
+import { AuthContext } from "../Context/AuthProvider";
 
 export const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext);

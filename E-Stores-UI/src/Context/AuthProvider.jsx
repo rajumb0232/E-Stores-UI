@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-import React, { createContext, useContext, useEffect, useState } from "react";
-import useLoginRefresher from "./useLoginRefersher";
+import React, { createContext, useEffect, useState } from "react";
+import useLoginRefresher from "../Hooks/useLoginRefersher";
 
 // context
 export const AuthContext = createContext({});

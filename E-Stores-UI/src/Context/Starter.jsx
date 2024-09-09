@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
 import { useAuth } from "../Hooks/useAuth";
