@@ -14,7 +14,7 @@ import {
   IoLogoLinkedin,
   IoSearchOutline,
 } from "react-icons/io5";
-import Logout from "../Private/Common/Logout";
+import Logout from "../Pages/Private/Common/Logout";
 import { RxDashboard } from "react-icons/rx";
 import { BsBoxes, BsCart3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -22,7 +22,7 @@ import { TbZoomCode } from "react-icons/tb";
 import { SiHashnode, SiPostman } from "react-icons/si";
 import { LuUserCircle } from "react-icons/lu";
 import { FaGithub } from "react-icons/fa";
-import { useAuth } from "../../Hooks/useAuth";
+import { useAuth } from "..//Hooks/useAuth";
 
 const Headers = () => {
   const { auth } = useAuth();

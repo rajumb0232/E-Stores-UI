@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input, RadioBtn } from "../../../Components/Forms";
 import { useStarter } from "../../../Context/Starter";
-import SearchCard from "../../Util/SearchCard";
-import useStore from "../../../Hooks/useStore";
+import SearchCard from "../../../Components/SearchCard";
 import { IoSearchOutline } from "react-icons/io5";
 import { useInputHandler } from "../../../Hooks/useInputHandler";
 
@@ -54,11 +53,6 @@ const AddUpdateProduct = ({ update }) => {
 
   //  HANDLING THE INPUT CHANGES
   const handleTextInput = handleInput(setProduct, product);
-  // const handleTextInput = (e) => {
-  //   handleInput(setProduct, product, e);
-  // const { name, value } = e.target;
-  // setProduct({ ...product, [name]: value });
-  // };
 
   return (
     <div className="min-h-screen text-slate-700 w-full font-two flex justify-center items-start">
