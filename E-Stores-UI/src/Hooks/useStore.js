@@ -117,6 +117,7 @@ const useStore = () => {
 
   const addStore = async (data) => {
     try {
+      console.log(axiosInstance);
       const response = await axiosInstance.post("/stores", data);
       // validating response
       if (response.status === 201) {
