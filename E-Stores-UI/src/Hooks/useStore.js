@@ -102,12 +102,6 @@ const useStore = () => {
     fetch();
   };
 
-  // useEffect(() => {
-  //   if (auth?.authenticated && auth?.roles?.includes("SELLER")) {
-  //     getStore(false);
-  //   }
-  // }, [auth]);
-
   // cleans up the localStorage by removing store related data.
   const cleanStore = () => {
     localStorage.removeItem("store-data");
