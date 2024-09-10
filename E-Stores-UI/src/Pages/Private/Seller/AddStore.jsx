@@ -101,7 +101,8 @@ const AddStore = () => {
               <textarea
                 type="text"
                 id="about"
-                onChange={(event) => setAbout(event.target.value)}
+                name="about"
+                onChange={handleInput(updateStoreInForm, storeInForm)}
                 placeholder="About (optional):"
                 className="h-56 w-full overflow-x-clip placeholder:text-slate-500 text-start  hover:border-gray-400 focus:border-gray-300 border border-gray-300 rounded-md p-2 text-base"
                 value={storeInForm?.about}
