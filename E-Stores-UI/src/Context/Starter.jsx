@@ -18,6 +18,8 @@ const Starter = ({ children }) => {
     }
   }, [])
 
+  useEffect(() => console.log("from starter: ", store), [store])
+
   const logout = () => {
     if (auth.authenticated) {
       localStorage.removeItem("user");

@@ -76,29 +76,29 @@ export const FormHeader = ({ icon, text }) => {
 export const SubmitBtn = ({
   onClick,
   btnType,
-  isSubmited,
+  isSubmitted,
   name,
   icon,
   danger,
 }) => {
   return (
     <button
-      disabled={isSubmited}
+      disabled={isSubmitted}
       className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border transition-colors duration-75 ease-in-out ${
         !danger
-          ? // aplies to regular buttons
+          ? // applies to regular buttons
             "hover:bg-white border-pallete_zero bg-pallete_zero text-slate-100 hover:text-pallete_zero"
           : // applies for danger buttons
             "border-pallete_four hover:bg-pallete_four hover:text-white bg-transparent text-danger"
       }  ${
         // applies when submitted
-        isSubmited &&
+        isSubmitted &&
         "bg-transparent hover:bg-transparent bg-pallete_two border-transparent"
       }`}
       type={btnType}
       onClick={onClick}
     >
-      {isSubmited ? (
+      {isSubmitted ? (
         <div className="flex">
           <div className="text-lg animate-spin">
             <RiLoader4Fill />

@@ -6,16 +6,31 @@ import { MdAdd, MdEdit } from "react-icons/md";
 import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
 
-const AddStore = ({ isSubmited, setIsSubmited }) => {
-  const { store, catagories } = useStarter();
+const AddStore = ({ isSubmitted, setIsSubmitted }) => {
+  const { catagories } = useStarter();
+  const { store, addStore, updateStore } = useStore();
   const [storeInForm, updateStoreInForm] = useState({
-    storeName: store?.storeName,
-    about: store?.about,
-    category: store?.category,
+    storeName: "",
+    about: "",
+    category: "",
   });
   const handleInput = useInputHandler();
-  const { addStore, updateStore } = useStore();
 
+
+  useEffect(() => {
+    if(store?.storeId && store?.storeId !== ""){
+      // ensures smooth rendering in the UI
+      setTimeout(() => {
+        updateStoreInForm({
+          storeName: store?.storeName,
+          about: store?.about,
+          category: store?.category,
+        })
+      },[300])
+    }
+  }, [store])
+
+  // update the StoreInForm Category attribute to Upper Case, as it is an Enum.
   const refreshStoreInForm = () => {
     updateStoreInForm({
       ...storeInForm,
@@ -24,20 +39,22 @@ const AddStore = ({ isSubmited, setIsSubmited }) => {
   };
 
   const handleSubmit = async () => {
+    // updating the storeInForm Data 
     refreshStoreInForm();
+    // Submits and set the submitted status accordingly
     if (!store?.storeId || store?.storeId === "")
-      setIsSubmited(!(await addStore(storeInForm)));
-    else setIsSubmited(!(await updateStore(storeInForm)));
+      setIsSubmitted(!(await addStore(storeInForm)));
+    else setIsSubmitted(!(await updateStore(storeInForm)));
   };
 
   useEffect(() => {
-    if (isSubmited) {
+    if (isSubmitted) {
       if (storeInForm.category === "") {
         alert("Category not selected!!");
-        setIsSubmited(false);
+        setIsSubmitted(false);
       } else if (storeInForm.storeName === "") {
         alert("Please Enter Store Name!!");
-        setIsSubmited(false);
+        setIsSubmitted(false);
       } else if (
         store?.storeName !== storeInForm.storeName ||
         store?.about !== storeInForm.about ||
@@ -46,7 +63,7 @@ const AddStore = ({ isSubmited, setIsSubmited }) => {
         handleSubmit();
       }
     }
-  }, [isSubmited]);
+  }, [isSubmitted]);
 
   return (
     <div className="w-full">
