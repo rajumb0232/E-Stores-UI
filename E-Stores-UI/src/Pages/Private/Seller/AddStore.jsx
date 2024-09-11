@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useStarter } from "../../../Hooks/useStarter";
-import {
-  DropDown,
-  FormHeader,
-  Input,
-  SubmitBtn,
-} from "../../../Components/Forms";
+import { DropDown, Input } from "../../../Components/Forms";
 import Image from "../../../Components/Image";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
 
-const AddStore = ({isSubmited, setIsSubmited}) => {
+const AddStore = ({ isSubmited, setIsSubmited }) => {
   const { store, catagories } = useStarter();
   const [storeInForm, updateStoreInForm] = useState({
     storeName: store?.storeName,
@@ -19,7 +14,7 @@ const AddStore = ({isSubmited, setIsSubmited}) => {
     category: store?.category,
   });
   const handleInput = useInputHandler();
-  const {addStore, updateStore} = useStore();
+  const { addStore, updateStore } = useStore();
 
   const refreshStoreInForm = () => {
     updateStoreInForm({
@@ -98,10 +93,7 @@ const AddStore = ({isSubmited, setIsSubmited}) => {
           />
         </div>
       )}
-      {/* </div> */}
-      
     </div>
-    // </div>
   );
 };
 
