@@ -38,8 +38,8 @@ const Register = ({ role, isLogin }) => {
   const handleSubmit = async () => {
     setIsSubmited(
       isLogin
-        ? await handleLogin(endPoint, formData)
-        : await handleRegister(endPoint, formData)
+        ? setIsSubmited(!(await handleLogin(endPoint, formData)))
+        : setIsSubmited(!(await handleRegister(endPoint, formData)))
     );
   };
 

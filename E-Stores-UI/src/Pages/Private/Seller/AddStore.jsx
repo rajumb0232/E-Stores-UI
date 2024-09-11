@@ -12,11 +12,11 @@ import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
 
 const AddStore = () => {
-  const { store, prevAddress, prevContancts, catagories } = useStarter();
+  const { store, catagories } = useStarter();
   const [storeInForm, updateStoreInForm] = useState({
     storeName: store?.storeName,
     about: store?.about,
-    category: store?.topCategory,
+    category: store?.category,
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
@@ -48,29 +48,38 @@ const AddStore = () => {
     }
   }, [selectedLogo]);
 
+  const refreshStoreInForm = () => {
+    updateStoreInForm({
+      ...storeInForm,
+      category: storeInForm.category.toUpperCase(),
+    });
+  };
+
   const handleSubmit = async () => {
+    refreshStoreInForm();
     if (!store?.storeId || store?.storeId === "")
       setIsSubmited(!(await addStore(storeInForm)));
     else setIsSubmited(!(await updateStore(storeInForm)));
   };
 
   useEffect(() => {
-    if (
-      store?.storeName !== storeInForm.storeName ||
-      store?.about !== storeInForm.about ||
-      store?.topCategory !== storeInForm.category
-    )
-      handleSubmit();
+    if (isSubmited) handleSubmit();
   }, [isSubmited]);
 
-  // handling the submit event by validating the data submitted
-  const submit = (event) => {
-    event.preventDefault();
-    storeInForm.category === ""
-      ? alert("Category not selected!!")
-      : storeInForm.storeName === ""
-      ? alert("Please Enter Store Name!!")
-      : setIsSubmited(true);
+  const submit = () => {
+    if (storeInForm.category === "") {
+      alert("Category not selected!!");
+      setIsSubmited(false);
+    } else if (storeInForm.storeName === "") {
+      alert("Please Enter Store Name!!");
+      setIsSubmited(false);
+    } else if (
+      store?.storeName !== storeInForm.storeName ||
+      store?.about !== storeInForm.about ||
+      store?.category !== storeInForm.category
+    ) {
+      setIsSubmited(true);
+    }
   };
 
   return (
@@ -109,12 +118,11 @@ const AddStore = () => {
               />
             </div>
 
-            {!store?.topCategory && (
+            {!store?.category && (
               <div className="my-6 w-fit">
                 <DropDown
-                  valueType={"topCategory"}
+                  valueType={"Category "}
                   setter={(option) => {
-                    console.log(option);
                     updateStoreInForm({ ...storeInForm, category: option });
                   }}
                   value={storeInForm?.category}
@@ -126,7 +134,7 @@ const AddStore = () => {
             )}
           </div>
 
-          <div className="w-max flex flex-col items-center justify-center mx-6">
+          <div className="w-max flex flex-col items-center justify-center m-6">
             <div
               className="relative"
               onMouseEnter={() => setImageHovered(true)}
@@ -193,6 +201,7 @@ const AddStore = () => {
             onClick={submit}
             isSubmited={isSubmited}
             name={storeInForm?.storeId ? "Update" : "Confirm"}
+            btnType={"button"}
           />
         </div>
       </div>

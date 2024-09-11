@@ -69,7 +69,7 @@ const Store = () => {
             <NavigateBtn
               dark={true}
               name={"Manage Store"}
-              to={"/setup-store"}
+              to={"/dashboard/setup-store"}
             />
           </div>
         </div>

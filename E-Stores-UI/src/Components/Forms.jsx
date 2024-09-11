@@ -74,6 +74,8 @@ export const FormHeader = ({ icon, text }) => {
 };
 
 export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) => {
+  
+  useEffect(() => console.log("Is submited: ", isSubmited), [isSubmited])
   return (
     <button
       disabled={isSubmited}

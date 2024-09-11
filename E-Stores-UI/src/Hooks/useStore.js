@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useAuth } from "./useAuth";
+import axios from "axios";
 
 const useStore = () => {
   const [store, setStore] = useState({
     storeId: "",
     storeName: "",
-    topCategory: "",
+    category: "",
     logoLink: "",
     about: "",
   });
@@ -34,12 +35,24 @@ const useStore = () => {
     return null;
   };
 
+  const loadStoreFromLocalStorage = () => {
+    const backup = localStorage.getItem("store-data");
+      if (backup) {
+        const storeData = JSON.parse(backup);
+        if (storeData?.storeId && storeData?.storeId !== "") {
+          setStore(storeData);
+          return true;
+        }
+      }
+  }
+
   // Initializing setUpInfo state from local storage once on mount
   useEffect(() => {
     const loadedSetUpInfo = loadSetUpInfoFromLocalStorage();
     if (loadedSetUpInfo) {
       setSetUpInfo(loadedSetUpInfo);
     }
+    loadStoreFromLocalStorage();
   }, []);
 
   // Update localStorage whenever setUpInfo changes
@@ -49,7 +62,7 @@ const useStore = () => {
 
   // Update address and contacts when store changes
   useEffect(() => {
-    if (store) {
+    if (store?.storeId && store?.storeId !== "") {
       localStorage.setItem("store-data", JSON.stringify(store));
       setPrevAddress(store?.address);
       setPrevContacts(store?.address?.contacts || []);
@@ -91,13 +104,7 @@ const useStore = () => {
   // helps loading the store data from localStorage if present, else laods through API Call
   const getStore = (force) => {
     if (!force) {
-      const backup = localStorage.getItem("store-data");
-      if (backup) {
-        const storeData = JSON.parse(backup);
-        setStore(storeData);
-        if (store?.storeId && store?.storeId !== "") return true;
-        else return false;
-      } else return false;
+      return loadStoreFromLocalStorage();
     }
     fetch();
   };
@@ -109,26 +116,24 @@ const useStore = () => {
     localStorage.removeItem("sac");
   };
 
+  // Adds Store to the database and localstoarage and return true
   const addStore = async (data) => {
     try {
-      console.log(axiosInstance);
       const response = await axiosInstance.post("/stores", data);
       // validating response
       if (response.status === 201) {
-        updateCache(response?.data?.data);
         localStorage.setItem("store", "true");
         setStore({ ...store, ...response?.data?.data });
-        return true;
-      } else {
-        alert(response?.data.message || response?.message);
-        return false;
+        alert("Store created successfully.");
       }
     } catch (error) {
-      alert(error?.response?.message);
-      return false;
+      if (error.status === 400) alert("Please fill all the details.");
+      else alert("Something went wrong.");
     }
+    return true;
   };
 
+  // Updates Store to the database and localstoarage and returns true
   const updateStore = async (data) => {
     try {
       const response = await axiosInstance.put(
@@ -136,18 +141,16 @@ const useStore = () => {
         data
       );
 
-      // validating response
       if (response.status === 200) {
         localStorage.setItem("store", "true");
         setStore({ ...store, ...response?.data?.data });
-      } else {
-        alert(response?.data.message || response?.message);
-        return false;
+        alert("Store updated successfully.");
       }
     } catch (error) {
-      alert(error?.response?.message);
-      return false;
+      if (error.status === 400) alert("Please fill all the details.");
+      else alert("Something went wrong.");
     }
+    return true;
   };
 
   // uploade new LOGO
@@ -156,11 +159,12 @@ const useStore = () => {
     formData.append("image", selectedLogo);
 
     try {
-      const response = await axiosInstance.post(
+      const response = await axios.post(
         `/stores/${store?.storeId}/images`,
         formData,
         {
           headers: { "Content-Type": "image/*" },
+          withCredentials: true,
         }
       );
 

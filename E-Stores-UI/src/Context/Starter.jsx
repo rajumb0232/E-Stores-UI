@@ -14,6 +14,7 @@ const Starter = ({ children }) => {
   useEffect(() => {
     const isFound = getStore(false);
     if(!isFound){
+      console.log(isFound);
       getStore(true)
     }
   }, [])
