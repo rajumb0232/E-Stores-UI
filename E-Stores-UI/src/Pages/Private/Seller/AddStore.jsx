@@ -7,8 +7,8 @@ import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
 
 const AddStore = ({ isSubmitted, setIsSubmitted }) => {
-  const { catagories } = useStarter();
-  const { store, addStore, updateStore } = useStore();
+  const { store, catagories } = useStarter();
+  const { addStore, updateStore } = useStore();
   const [storeInForm, updateStoreInForm] = useState({
     storeName: "",
     about: "",

@@ -187,6 +187,7 @@ const useStore = () => {
     store,
     prevAddress,
     prevContacts,
+    setStore,
     getStore,
     cleanStore,
     addStore,

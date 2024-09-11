@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddStore, { AddStoreImage } from "./AddStore";
 import { FormHeader, SubmitBtn } from "../../../Components/Forms";
-import useStore from "../../../Hooks/useStore";
+import { useStarter } from "../../../Context/Starter";
 
 const AddUpdateStore = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -9,11 +9,13 @@ const AddUpdateStore = () => {
   const [imageSubmitted, setImageSubmitted] = useState(false);
   const [addressSubmitted, setAddressSubmitted] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
-  const { store } = useStore();
+  const { store } = useStarter();
 
   const submit = () => {
     setStoreSubmitted(true);
   };
+
+  useEffect(() => console.log("from add Update store: ", store), [store])
 
   return (
     <div className="flex justify-center items-start w-full h-max">

@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
 import useStore from "../Hooks/useStore";
 import { useAuth } from "../Hooks/useAuth";
@@ -13,12 +18,12 @@ const Starter = ({ children }) => {
 
   useEffect(() => {
     const isFound = getStore(false);
-    if(!isFound){
-      getStore(true)
+    if (!isFound) {
+      getStore(true);
     }
-  }, [])
+  }, []);
 
-  useEffect(() => console.log("from starter: ", store), [store])
+  useEffect(() => console.log("from starter: ", store), [store]);
 
   const logout = () => {
     if (auth.authenticated) {
@@ -35,19 +40,19 @@ const Starter = ({ children }) => {
     }
   };
 
+  const contextValue = {
+      catagories,
+      getCategories,
+      store,
+      prevAddress,
+      prevContacts,
+      logout,
+      sidebarVisible,
+      setSidebarVisible,
+    }
+
   return (
-    <StarterDataContext.Provider
-      value={{
-        catagories,
-        getCategories,
-        store,
-        prevAddress,
-        prevContacts,
-        logout,
-        sidebarVisible,
-        setSidebarVisible
-      }}
-    >
+    <StarterDataContext.Provider value={contextValue}>
       {children}
     </StarterDataContext.Provider>
   );
