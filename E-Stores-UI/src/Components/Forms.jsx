@@ -13,7 +13,7 @@ export const Input = ({
   action,
   isRequired,
   placeholderText,
-  label
+  label,
 }) => {
   const [isSecure, setSecure] = useState(false);
   const [showSensitive, setShowSensitive] = useState(false);
@@ -73,22 +73,27 @@ export const FormHeader = ({ icon, text }) => {
   );
 };
 
-export const SubmitBtn = ({ onClick, btnType, isSubmited, name, icon, danger }) => {
-  
-  useEffect(() => console.log("Is submited: ", isSubmited), [isSubmited])
+export const SubmitBtn = ({
+  onClick,
+  btnType,
+  isSubmited,
+  name,
+  icon,
+  danger,
+}) => {
   return (
     <button
       disabled={isSubmited}
       className={` font-bold rounded-full w-full min-w-32 px-4 py-2 border transition-colors duration-75 ease-in-out ${
-        // applies for danger buttons
-        danger &&
-        "border-pallete_four hover:bg-pallete_four hover:text-white bg-transparent text-danger"
+        !danger
+          ? // aplies to regular buttons
+            "hover:bg-white border-pallete_zero bg-pallete_zero text-slate-100 hover:text-pallete_zero"
+          : // applies for danger buttons
+            "border-pallete_four hover:bg-pallete_four hover:text-white bg-transparent text-danger"
       }  ${
-        // appies when submitted
-        isSubmited
-          ? "bg-transparent hover:bg-transparent bg-pallete_two border-transparent"
-          : !danger &&
-            "bg-pallete_zero text-slate-100 hover:text-pallete_zero hover:bg-white border-pallete_zero focus:bg-pallete_zero focus:text-white"
+        // applies when submitted
+        isSubmited &&
+        "bg-transparent hover:bg-transparent bg-pallete_two border-transparent"
       }`}
       type={btnType}
       onClick={onClick}
