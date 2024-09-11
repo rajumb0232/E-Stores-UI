@@ -1,8 +1,8 @@
 import React from "react";
-import { useStarter } from "../Context/Starter";
+import { useSellerBin } from "../Hooks/useSellerBin";
 
 const Footer = () => {
-  const { sidebarVisible } = useStarter();
+  const { sidebarVisible } = useSellerBin();
 
   return (
     <footer className="h-max w-full pt-4 bg-gray-100 text-slate-700 text-center text-lg flex justify-center items-center">

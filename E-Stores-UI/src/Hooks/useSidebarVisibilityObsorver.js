@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useStarter } from "../Context/Starter";
+import { useSellerBin } from "./useSellerBin";
 
 export const useSidebarVisibilityObserver = (elementRef) => {
-  const { setSidebarVisible } = useStarter();
+  const { setSidebarVisible } = useSellerBin();
 
   useEffect(() => {
     const observer = new IntersectionObserver(

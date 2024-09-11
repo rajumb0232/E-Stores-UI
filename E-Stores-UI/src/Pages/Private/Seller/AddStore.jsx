@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useStarter } from "../../../Hooks/useStarter";
 import { DropDown, Input } from "../../../Components/Forms";
 import Image from "../../../Components/Image";
 import { MdAdd, MdEdit } from "react-icons/md";
 import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
+import { useSellerBin } from "../../../Hooks/useSellerBin";
 
 const AddStore = ({ isSubmitted, setIsSubmitted }) => {
-  const { store, catagories } = useStarter();
+  const { store, catagories } = useSellerBin();
   const { addStore, updateStore } = useStore();
   const [storeInForm, updateStoreInForm] = useState({
     storeName: "",
@@ -123,7 +123,7 @@ export const AddStoreImage = () => {
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
   const [imageHovered, setImageHovered] = useState(false);
   const { uploadStoreImage } = useStore();
-  const { store } = useStarter();
+  const { store } = useSellerBin();
 
   useEffect(() => {
     if (

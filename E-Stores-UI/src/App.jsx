@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Starter from "./Context/Starter";
 import Headers from "./Components/Headers";
 import Footer from "./Components/Footer";
 import { useAuth } from "./Hooks/useAuth";
+import SellerBin from "./Context/SellerBin";
 
 function App() {
   const { auth } = useAuth();
@@ -11,11 +11,11 @@ function App() {
   return (
     <>
       {roles.includes("SELLER") ? (
-        <Starter>
+        <SellerBin>
           <Headers />
           <Outlet />
           <Footer />
-        </Starter>
+        </SellerBin>
       ) : (
         <>
           <Headers />

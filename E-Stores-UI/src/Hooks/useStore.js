@@ -2,17 +2,10 @@ import { useEffect, useState } from "react";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
 import { useAuth } from "./useAuth";
 import axios from "axios";
+import { useSellerBin } from "./useSellerBin";
 
 const useStore = () => {
-  const [store, setStore] = useState({
-    storeId: "",
-    storeName: "",
-    category: "",
-    logoLink: "",
-    about: "",
-  });
-  const [prevAddress, setPrevAddress] = useState({});
-  const [prevContacts, setPrevContacts] = useState([]);
+  const {store, setStore, address, setAddress, contacts, setContacts} = useSellerBin();
   const axiosInstance = AxiosPrivateInstance();
   const { auth } = useAuth();
   const [setUpInfo, setSetUpInfo] = useState({
@@ -21,7 +14,7 @@ const useStore = () => {
     contacts: true,
   });
 
-  // Laods setUpInfo from the localstorage
+  // Loads setUpInfo from the localstorage
   const loadSetUpInfoFromLocalStorage = () => {
     const sac = localStorage.getItem("sac");
     if (sac) {
@@ -65,8 +58,8 @@ const useStore = () => {
     console.log("from UseStore", store);
     if (store?.storeId && store?.storeId !== "") {
       localStorage.setItem("store-data", JSON.stringify(store));
-      setPrevAddress(store?.address);
-      setPrevContacts(store?.address?.contacts || []);
+      setAddress(store?.address);
+      setContacts(store?.address?.contacts || []);
 
       setSetUpInfo((prev) => ({
         ...prev,
@@ -102,7 +95,7 @@ const useStore = () => {
     }
   };
 
-  // helps loading the store data from localStorage if present, else laods through API Call
+  // helps loading the store data from localStorage if present, else loads through API Call
   const getStore = (force) => {
     if (!force) {
       return loadStoreFromLocalStorage();
@@ -117,7 +110,7 @@ const useStore = () => {
     localStorage.removeItem("sac");
   };
 
-  // Adds Store to the database and localstoarage and return true
+  // Adds Store to the database and localstorage and return true
   const addStore = async (data) => {
     try {
       const response = await axiosInstance.post("/stores", data);
@@ -134,7 +127,7 @@ const useStore = () => {
     return true;
   };
 
-  // Updates Store to the database and localstoarage and returns true
+  // Updates Store to the database and localstorage and returns true
   const updateStore = async (data) => {
     try {
       const response = await axiosInstance.put(
@@ -154,7 +147,7 @@ const useStore = () => {
     return true;
   };
 
-  // uploade new LOGO
+  // uploads new LOGO
   const uploadStoreImage = async (selectedLogo) => {
     const formData = new FormData();
     formData.append("image", selectedLogo);
@@ -185,9 +178,8 @@ const useStore = () => {
 
   return {
     store,
-    prevAddress,
-    prevContacts,
-    setStore,
+    address,
+    contacts,
     getStore,
     cleanStore,
     addStore,

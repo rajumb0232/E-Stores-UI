@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddStore, { AddStoreImage } from "./AddStore";
 import { FormHeader, SubmitBtn } from "../../../Components/Forms";
-import { useStarter } from "../../../Context/Starter";
+import { useSellerBin } from "../../../Hooks/useSellerBin";
 
 const AddUpdateStore = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -9,7 +9,7 @@ const AddUpdateStore = () => {
   const [imageSubmitted, setImageSubmitted] = useState(false);
   const [addressSubmitted, setAddressSubmitted] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
-  const { store } = useStarter();
+  const { store } = useSellerBin();
 
   const submit = () => {
     setStoreSubmitted(true);

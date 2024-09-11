@@ -3,11 +3,11 @@ import { LuBadgeInfo } from "react-icons/lu";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { NavigateBtn } from "../../../Components/Forms";
-import { useStarter } from "../../../Context/Starter";
 import Image from "../../../Components/Image";
+import { useSellerBin } from "../../../Hooks/useSellerBin";
 
 const Store = () => {
-  const { store, prevAddress, prevContacts } = useStarter();
+  const { store, contacts, address} = useSellerBin();
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-screen font-two">
@@ -44,25 +44,25 @@ const Store = () => {
               <h4 className="ml-1 font-bold text-lg w-full">Address</h4>
             </div>
             <p className="w-full my-2 text-base">
-              {prevAddress?.pincode
-                ? prevAddress?.addressLine1 +
+              {address?.pincode
+                ? address?.addressLine1 +
                   ", " +
-                  prevAddress?.addressLine2 +
+                  address?.addressLine2 +
                   ", " +
-                  prevAddress?.areaVillage +
+                 address?.areaVillage +
                   ", " +
-                  prevAddress?.cityDistrict +
+                  address?.cityDistrict +
                   ", " +
-                  prevAddress?.state +
+                aAddress?.state +
                   ", India " +
-                  prevAddress?.pincode
+                  aAddress?.pincode
                 : "[Address] | e.g., #32 building name, street, landmark, India 900068"}
             </p>
           </div>
           <div className="h-max w-full m-2 pt-2 px-4 flex flex-col justify-start items-start">
             <div className="flex flex-col justify-start items-start text-sm">
-              <GetContact contacts={prevContacts} isPrimary={true} />
-              <GetContact contacts={prevContacts} isPrimary={false} />
+              <GetContact contacts={contacts} isPrimary={true} />
+              <GetContact contacts={contacts} isPrimary={false} />
             </div>
           </div>
           <div className="w-full flex justify-end items-center mr-2">

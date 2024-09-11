@@ -3,13 +3,13 @@ import { RxDashboard } from "react-icons/rx";
 import { BsBoxArrowInDown, BsBoxes } from "react-icons/bs";
 import { PiStorefrontDuotone } from "react-icons/pi";
 import Image from "../../../Components/Image";
-import { useStarter } from "../../../Context/Starter";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";
 import logo1 from "/images/e_logo2.webp";
+import { useSellerBin } from "../../../Hooks/useSellerBin";
 
 const SellerDashboard = () => {
-  const { store } = useStarter();
+  const { store } = useSellerBin();
   const navs = [
     {
       name: "dashboard",
@@ -82,7 +82,7 @@ export const SideBar = ({ navs }) => {
 };
 
 export const Hero = () => {
-  const { store } = useStarter();
+  const { store } = useSellerBin();
   return (
     <div>
       <div className="mx-14 mt-4 rounded-full overflow-hidden border shadow-sm border-slate-600 flex justify-center items-center">
