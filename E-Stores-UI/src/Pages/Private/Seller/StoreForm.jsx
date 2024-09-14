@@ -4,7 +4,7 @@ import { useInputHandler } from "../../../Hooks/useInputHandler";
 import useStore from "../../../Hooks/useStore";
 import { useSellerBin } from "../../../Hooks/useSellerBin";
 
-const StoreForm = ({ isSubmitted, setIsSubmitted }) => {
+const StoreForm = ({ isSubmitted, setIsSubmitted, setStoreExists }) => {
   const { store, catagories } = useSellerBin();
   const { addStore, updateStore } = useStore();
   const [storeInForm, updateStoreInForm] = useState({
@@ -14,19 +14,18 @@ const StoreForm = ({ isSubmitted, setIsSubmitted }) => {
   });
   const handleInput = useInputHandler();
 
-
   useEffect(() => {
-    if(store?.storeId && store?.storeId !== ""){
+    if (store?.storeId && store?.storeId !== "") {
       // ensures smooth rendering in the UI
       setTimeout(() => {
         updateStoreInForm({
           storeName: store?.storeName,
           about: store?.about,
           category: store?.category,
-        })
-      },[300])
+        });
+      }, [300]);
     }
-  }, [store])
+  }, [store]);
 
   // update the StoreInForm Category attribute to Upper Case, as it is an Enum.
   const refreshStoreInForm = () => {
@@ -36,16 +35,23 @@ const StoreForm = ({ isSubmitted, setIsSubmitted }) => {
     });
   };
 
+  const updateStates = (completed) =>
+    completed && setIsSubmitted(false) && setStoreExists(true);
+
   const handleSubmit = async () => {
-    // updating the storeInForm Data 
+    // updating the storeInForm Data
     refreshStoreInForm();
     // Submits and set the submitted status accordingly
-    if (!store?.storeId || store?.storeId === "")
-      setIsSubmitted(!(await addStore(storeInForm)));
-    else setIsSubmitted(!(await updateStore(storeInForm)));
+    if (!store?.storeId || store?.storeId === "") {
+      updateStates(await addStore(storeInForm));
+    } else {
+      const completed = await updateStore(storeInForm);
+      updateStates(await addStore(storeInForm));
+    }
   };
 
   useEffect(() => {
+    console.log("is store submitted? ", isSubmitted);
     if (isSubmitted) {
       if (storeInForm.category === "") {
         alert("Category not selected!!");
@@ -59,7 +65,7 @@ const StoreForm = ({ isSubmitted, setIsSubmitted }) => {
         store?.category !== storeInForm.category
       ) {
         handleSubmit();
-      }
+      } else setIsSubmitted(false);
     }
   }, [isSubmitted]);
 

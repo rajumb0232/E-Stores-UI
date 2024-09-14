@@ -10,9 +10,36 @@ const AddUpdateStore = () => {
   const [imageSubmitted, setImageSubmitted] = useState(false);
   const [addressSubmitted, setAddressSubmitted] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [storeExits, setStoreExists] = useState(false);
   const { store } = useSellerBin();
 
+  /* Updates global isSubmitted state to false when all other submission states are updated to false.*/
+  useEffect(() => {
+    !storeSubmitted &&
+      !imageSubmitted &&
+      !addressSubmitted &&
+      !contactSubmitted &&
+      setIsSubmitted(false);
+  }, [storeSubmitted, imageSubmitted, addressSubmitted, contactSubmitted]);
+
+  /* Runs if store exists and if the form is submitted and when store submitted is updated to false.*/
+  useEffect(() => {
+    console.log("submitted state is: ", isSubmitted);
+    if (storeExits && isSubmitted && !storeSubmitted) {
+      setAddressSubmitted(true);
+      setContactSubmitted(true);
+      setImageSubmitted(true);
+    }
+  }, [storeExits, isSubmitted, storeSubmitted]);
+
+  /* When isSubmitted and storeId is present then setsStoreExists to true 
+     triggering other related submissions.*/
+  useEffect(() => {
+    isSubmitted && store?.storeId && setStoreExists(true);
+  }, [store]);
+
   const submit = () => {
+    setIsSubmitted(true);
     setStoreSubmitted(true);
   };
 

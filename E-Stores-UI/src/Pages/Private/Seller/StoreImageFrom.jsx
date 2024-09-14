@@ -2,29 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useSellerBin } from "../../../Hooks/useSellerBin";
 import useStore from "../../../Hooks/useStore";
 import { MdAdd, MdEdit } from "react-icons/md";
+import Image from "../../../Components/Image";
 
-const StoreImageFrom = ({isSubmitted, setIsSubmitted}) => {
+const StoreImageFrom = ({ isSubmitted, setIsSubmitted }) => {
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
   const [imageHovered, setImageHovered] = useState(false);
   const { uploadStoreImage } = useStore();
   const { store } = useSellerBin();
 
-//   useEffect(() => {
-//     if (
-//       store?.storeId &&
-//       store?.storeId !== "" &&
-//       selectedLogo &&
-//       displayLogoURL
-//     )
-//       uploadStoreImage(selectedLogo);
-//   }, [store]);
-
   // updating Selected logo state once the image is selected
   const handleImageChange = (event) => {
     setSelectedLogo(event.target.files[0]);
   };
 
+  // updating selectedLogo to render
   useEffect(() => {
     if (selectedLogo) {
       const reader = new FileReader();
@@ -32,6 +24,20 @@ const StoreImageFrom = ({isSubmitted, setIsSubmitted}) => {
       reader.readAsDataURL(selectedLogo);
     }
   }, [selectedLogo]);
+
+  // uploads image to the form
+  const handleSubmit = async () => {
+    setIsSubmitted(!(await uploadStoreImage(selectedLogo)));
+  };
+
+  // triggering form submission
+  useEffect(() => {
+    console.log("is image submitted? ", isSubmitted);
+    if (isSubmitted)
+      setTimeout(() => {
+        handleSubmit();
+      }, 1000);
+  }, [isSubmitted]);
 
   return (
     <div className="w-max flex flex-col items-center justify-center m-6">

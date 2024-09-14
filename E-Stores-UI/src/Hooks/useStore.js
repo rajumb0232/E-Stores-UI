@@ -5,7 +5,8 @@ import axios from "axios";
 import { useSellerBin } from "./useSellerBin";
 
 const useStore = () => {
-  const {store, setStore, address, setAddress, contacts, setContacts} = useSellerBin();
+  const { store, setStore, address, setAddress, contacts, setContacts } =
+    useSellerBin();
   const axiosInstance = AxiosPrivateInstance();
   const { auth } = useAuth();
   const [setUpInfo, setSetUpInfo] = useState({
@@ -30,14 +31,14 @@ const useStore = () => {
 
   const loadStoreFromLocalStorage = () => {
     const backup = localStorage.getItem("store-data");
-      if (backup) {
-        const storeData = JSON.parse(backup);
-        if (storeData?.storeId && storeData?.storeId !== "") {
-          setStore(storeData);
-          return true;
-        }
+    if (backup) {
+      const storeData = JSON.parse(backup);
+      if (storeData?.storeId && storeData?.storeId !== "") {
+        setStore(storeData);
+        return true;
       }
-  }
+    }
+  };
 
   // Initializing setUpInfo state from local storage once on mount
   useEffect(() => {
@@ -152,7 +153,7 @@ const useStore = () => {
     formData.append("image", selectedLogo);
 
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `/stores/${store?.storeId}/images`,
         formData,
         {
