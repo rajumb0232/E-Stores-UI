@@ -52,7 +52,7 @@ const StoreImageFrom = () => {
               className="hidden"
             />
 
-            {store?.logoLink ? (
+            {store?.logoLink || selectedLogo ? (
               <button
                 type="button"
                 onClick={() => document.getElementById("imageInput").click()}
