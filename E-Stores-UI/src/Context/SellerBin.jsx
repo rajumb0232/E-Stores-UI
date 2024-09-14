@@ -20,13 +20,6 @@ const SellerBin = ({ children }) => {
   const [contacts, setContacts] = useState({})
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  // useEffect(() => {
-  //   const isFound = getStore(false);
-  //   if (!isFound) {
-  //     getStore(true);
-  //   }
-  // }, []);
-
   useEffect(() => console.log("from starter: ", store), [store]);
 
   // const logout = () => {

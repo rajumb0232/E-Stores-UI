@@ -7,35 +7,42 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useSidebarVisibilityObserver } from "../../../Hooks/useSidebarVisibilityObsorver";
 import logo1 from "/images/e_logo2.webp";
 import { useSellerBin } from "../../../Hooks/useSellerBin";
+import useStore from "../../../Hooks/useStore";
 
 const SellerDashboard = () => {
-  const { store } = useSellerBin();
-  const navs = [
-    {
-      name: "dashboard",
-      display_name: "Dashboard",
-      url: "/dashboard",
-      icon: <RxDashboard />,
-    },
-    {
-      name: "products",
-      display_name: "Products",
-      url: "products",
-      icon: <BsBoxArrowInDown />,
-    },
-    {
-      name: "orders",
-      display_name: "Orders",
-      url: "orders",
-      icon: <BsBoxes />,
-    },
-    {
-      name: "store",
-      display_name: "Store",
-      url: store?.storeId ? "store" : "setup-store",
-      icon: <PiStorefrontDuotone />,
-    },
-  ];
+  const { store } = useStore();
+  const [navs, setNavs] = useState([]);
+
+  useEffect(() => {
+    console.log(store?.storeId);
+    console.log(store?.storeId ? "store" : "setup-store");
+    setNavs([
+      {
+        name: "dashboard",
+        display_name: "Dashboard",
+        url: "/dashboard",
+        icon: <RxDashboard />,
+      },
+      {
+        name: "products",
+        display_name: "Products",
+        url: "products",
+        icon: <BsBoxArrowInDown />,
+      },
+      {
+        name: "orders",
+        display_name: "Orders",
+        url: "orders",
+        icon: <BsBoxes />,
+      },
+      {
+        name: "store",
+        display_name: "Store",
+        url: store?.storeId ? "store" : "setup-store",
+        icon: <PiStorefrontDuotone />,
+      },
+    ])
+  }, [store]);
 
   return (
     <div className="w-full border-2 border-transparent h-max flex justify-center items-start bg-white mt-14">
