@@ -8,19 +8,26 @@ import SellerBin from "./Context/SellerBin";
 function App() {
   const { auth } = useAuth();
   const { roles } = auth;
+
+  const body = () => {
+    return (
+      <>
+        <Headers />
+        <Outlet />
+        <Footer />
+      </>
+    );
+  };
+  
   return (
     <>
       {roles.includes("SELLER") ? (
         <SellerBin>
-          <Headers />
-          <Outlet />
-          <Footer />
+          {body}
         </SellerBin>
       ) : (
         <>
-          <Headers />
-          <Outlet />
-          <Footer />
+          {body}
         </>
       )}
     </>
