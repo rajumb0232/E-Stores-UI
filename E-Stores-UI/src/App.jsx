@@ -23,11 +23,11 @@ function App() {
     <>
       {roles.includes("SELLER") ? (
         <SellerBin>
-          {body}
+          {body()}
         </SellerBin>
       ) : (
         <>
-          {body}
+          {body()}
         </>
       )}
     </>
