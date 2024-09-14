@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AddStore, { AddStoreImage } from "./AddStore";
+import StoreForm from "./StoreForm";
 import { FormHeader, SubmitBtn } from "../../../Components/Forms";
 import { useSellerBin } from "../../../Hooks/useSellerBin";
+import StoreImageFrom from "./StoreImageFrom";
 
 const AddUpdateStore = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -20,11 +21,11 @@ const AddUpdateStore = () => {
       <div className="w-10/12 flex flex-col justify-center items-start">
         <FormHeader text={"Store Details"} />
         <div className="w-full flex justify-center items-center">
-          <AddStore
+          <StoreForm
             isSubmitted={storeSubmitted}
             setIsSubmitted={setStoreSubmitted}
           />
-          <AddStoreImage />
+          <StoreImageFrom />
         </div>
         {/* SUBMIT BUTTON */}
         <div className="ml-auto my-8 mx-2 w-max flex justify-end">
