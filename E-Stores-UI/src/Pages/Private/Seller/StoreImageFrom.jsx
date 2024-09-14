@@ -3,22 +3,22 @@ import { useSellerBin } from "../../../Hooks/useSellerBin";
 import useStore from "../../../Hooks/useStore";
 import { MdAdd, MdEdit } from "react-icons/md";
 
-const StoreImageFrom = () => {
+const StoreImageFrom = ({isSubmitted, setIsSubmitted}) => {
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [displayLogoURL, setDisplayLogoURL] = useState(null);
   const [imageHovered, setImageHovered] = useState(false);
   const { uploadStoreImage } = useStore();
   const { store } = useSellerBin();
 
-  useEffect(() => {
-    if (
-      store?.storeId &&
-      store?.storeId !== "" &&
-      selectedLogo &&
-      displayLogoURL
-    )
-      uploadStoreImage(selectedLogo);
-  }, [store]);
+//   useEffect(() => {
+//     if (
+//       store?.storeId &&
+//       store?.storeId !== "" &&
+//       selectedLogo &&
+//       displayLogoURL
+//     )
+//       uploadStoreImage(selectedLogo);
+//   }, [store]);
 
   // updating Selected logo state once the image is selected
   const handleImageChange = (event) => {

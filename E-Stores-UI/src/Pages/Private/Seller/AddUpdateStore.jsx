@@ -25,7 +25,10 @@ const AddUpdateStore = () => {
             isSubmitted={storeSubmitted}
             setIsSubmitted={setStoreSubmitted}
           />
-          <StoreImageFrom />
+          <StoreImageFrom
+            isSubmitted={imageSubmitted}
+            setIsSubmitted={setImageSubmitted}
+          />
         </div>
         {/* SUBMIT BUTTON */}
         <div className="ml-auto my-8 mx-2 w-max flex justify-end">
