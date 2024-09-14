@@ -15,8 +15,6 @@ const AddUpdateStore = () => {
     setStoreSubmitted(true);
   };
 
-  useEffect(() => console.log("from add Update store: ", store), [store])
-
   return (
     <div className="flex justify-center items-start w-full h-max">
       <div className="w-10/12 flex flex-col justify-center items-start">

@@ -14,8 +14,6 @@ const SellerDashboard = () => {
   const [navs, setNavs] = useState([]);
 
   useEffect(() => {
-    console.log(store?.storeId);
-    console.log(store?.storeId ? "store" : "setup-store");
     setNavs([
       {
         name: "dashboard",

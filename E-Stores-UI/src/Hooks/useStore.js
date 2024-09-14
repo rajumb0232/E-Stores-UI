@@ -55,7 +55,6 @@ const useStore = () => {
 
   // Update address and contacts when store changes
   useEffect(() => {
-    console.log("from UseStore", store);
     if (store?.storeId && store?.storeId !== "") {
       localStorage.setItem("store-data", JSON.stringify(store));
       setAddress(store?.address);

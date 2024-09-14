@@ -20,8 +20,6 @@ const SellerBin = ({ children }) => {
   const [contacts, setContacts] = useState({})
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  useEffect(() => console.log("from starter: ", store), [store]);
-
   // const logout = () => {
   //   if (auth.authenticated) {
   //     localStorage.removeItem("user");
