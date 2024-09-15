@@ -1,49 +1,23 @@
-import React, { createContext, useContext, useState } from "react";
-import { useCategoryCatalogue } from "../Hooks/useOptions";
-import useStore from "../Hooks/useStore";
-import { useAuth } from "../Hooks/useAuth";
+/* The Hook helps in automating certain tasks that are required by the application
+   to serve properly */
 
-export const StarterDataContext = createContext({});
+import React, { createContext, useEffect } from "react";
+import useStore from "../Hooks/useStore";
+
+const StarterContext = createContext({});
 
 const Starter = ({ children }) => {
-  const { catagories, getCategories } = useCategoryCatalogue();
-  const { store, prevAddress, prevContacts, cleanStore } = useStore();
-  const { auth, setAuth } = useAuth();
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const { getStore } = useStore();
 
-  const logout = () => {
-    if (auth.authenticated) {
-      localStorage.removeItem("user");
-      cleanStore();
-      setAuth({
-        userId: "",
-        username: "",
-        roles: ["CUSTOMER"],
-        accessExpiration: null,
-        refreshExpiration: null,
-        authenticated: false,
-      });
-    }
-  };
+  // Triggers the getStore function responsible to load the store data to the context
+  useEffect(() => {
+    const loaded = getStore();
+    if (!loaded) getStore(true);
+  }, []);
 
   return (
-    <StarterDataContext.Provider
-      value={{
-        catagories,
-        getCategories,
-        store,
-        prevAddress,
-        prevContacts,
-        logout,
-        sidebarVisible,
-        setSidebarVisible
-      }}
-    >
-      {children}
-    </StarterDataContext.Provider>
+    <StarterContext.Provider value={{}}>{children}</StarterContext.Provider>
   );
 };
 
 export default Starter;
-
-export const useStarter = () => useContext(StarterDataContext);

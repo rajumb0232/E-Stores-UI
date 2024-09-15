@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
 import { SubmitBtn } from "../../../Components/Forms";
 import { useAuth } from "../../../Hooks/useAuth";
+import { useSellerBin } from "../../../Hooks/useSellerBin";
 
 const Logout = ({ doAppear }) => {
-  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { handleLogout } = useAuth();
+  const { cleanSellerData } = useSellerBin();
 
   const handleSubmit = async () => {
     const result = await handleLogout();
     if (result) {
       doAppear(false);
+      cleanSellerData();
     }
   };
 
   useEffect(() => {
-    if (isSubmited) {
+    if (isSubmitted) {
       handleSubmit();
     }
-  }, [isSubmited]);
+  }, [isSubmitted]);
 
   return (
     <div
@@ -32,12 +35,11 @@ const Logout = ({ doAppear }) => {
       </p>
       <div className="mt-4 w-full flex justify-center items-center">
         <SubmitBtn
-          isSubmited={isSubmited}
+          isSubmitted={isSubmitted}
           name={"Logout"}
           danger={true}
           onClick={() => {
-            console.log("submitted...");
-            setIsSubmited(true);
+            setIsSubmitted(true);
           }}
           btnType={"button"}
         />

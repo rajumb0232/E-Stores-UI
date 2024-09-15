@@ -13,7 +13,7 @@ const VerifyOTP = () => {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState();
-  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const inputs = Array.from({ length: 6 }, () => useRef(null));
   const [otp, setOtp] = useState(0);
   const [hiddenEmail, setHiddenEmail] = useState("");
@@ -61,7 +61,7 @@ const VerifyOTP = () => {
     inputs.map((input) => {
       inputOtp += input.current.value.toString();
     });
-    setIsSubmited(true);
+    setIsSubmitted(true);
     console.log(inputOtp);
     setOtp(parseInt(inputOtp));
   };
@@ -127,7 +127,7 @@ const VerifyOTP = () => {
               <div className="w-full">
                 <SubmitBtn
                   onClick={handleSubmit}
-                  isSubmited={isSubmited}
+                  isSubmitted={isSubmitted}
                   name={"Confirm"}
                 />
               </div>

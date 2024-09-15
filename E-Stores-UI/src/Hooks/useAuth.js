@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import AxiosPrivateInstance from "../API/AxiosPrivateInstance";
-import { useStarter } from "./useStarter";
+import { useSellerBin } from "./useSellerBin";
 import { AuthContext } from "../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const axiosInstance = AxiosPrivateInstance();
-  const { logout } = useStarter();
+  // const { logout } = useStarter();
+  const navigate = useNavigate();
 
   const handleRegister = async (url, formData) => {
     try {
@@ -18,6 +20,7 @@ export const useAuth = () => {
           username: response.data.data.email,
         });
         sessionStorage.setItem("email", response.data.data.email);
+        navigate("/verify-email")
         return true;
       } else {
         alert(
@@ -61,7 +64,7 @@ export const useAuth = () => {
     const response = await axiosInstance.post("/logout");
     try {
       if (response.status === 200) {
-        logout();
+        // logout();
         return true;
       } else {
         alert(response?.data?.message);
