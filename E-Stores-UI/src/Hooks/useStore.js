@@ -113,6 +113,7 @@ const useStore = () => {
 
   // helps loading the store data from localStorage if present, else loads through API Call
   const getStore = (force) => {
+    console.log("In get Store!");
     if (!force) {
       return loadStoreFromLocalStorage();
     }

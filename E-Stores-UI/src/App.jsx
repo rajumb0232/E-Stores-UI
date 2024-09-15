@@ -4,6 +4,7 @@ import Headers from "./Components/Headers";
 import Footer from "./Components/Footer";
 import { useAuth } from "./Hooks/useAuth";
 import SellerBin from "./Context/SellerBin";
+import Starter from "./Context/Starter";
 
 function App() {
   const { auth } = useAuth();
@@ -18,17 +19,15 @@ function App() {
       </>
     );
   };
-  
+
   return (
     <>
       {roles.includes("SELLER") ? (
         <SellerBin>
-          {body()}
+          <Starter>{body()}</Starter>
         </SellerBin>
       ) : (
-        <>
-          {body()}
-        </>
+        <>{body()}</>
       )}
     </>
   );
