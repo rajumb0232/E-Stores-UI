@@ -11,7 +11,6 @@ const Starter = ({ children }) => {
 
   // Triggers the getStore function responsible to load the store data to the context
   useEffect(() => {
-    console.log("Loading Store Info...");
     const loaded = getStore();
     if (!loaded) getStore(true);
   }, []);
