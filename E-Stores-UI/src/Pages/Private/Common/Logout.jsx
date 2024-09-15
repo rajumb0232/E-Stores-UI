@@ -39,7 +39,6 @@ const Logout = ({ doAppear }) => {
           name={"Logout"}
           danger={true}
           onClick={() => {
-            console.log("submitted...");
             setIsSubmitted(true);
           }}
           btnType={"button"}

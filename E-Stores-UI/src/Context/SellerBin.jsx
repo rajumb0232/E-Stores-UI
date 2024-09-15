@@ -20,7 +20,6 @@ const SellerBin = ({ children }) => {
   const [loggedOut, setLoggedOut] = useState(false);
 
   const cleanSellerData = () => {
-    console.log("cleaning...");
     localStorage.removeItem("user");
     setLoggedOut(true);
     setAuth({
