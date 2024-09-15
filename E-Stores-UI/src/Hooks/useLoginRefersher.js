@@ -56,7 +56,6 @@ const useLoginRefresher = () => {
     ) {
       const { accessExpiration, refreshExpiration } = user;
       if (new Date(refreshExpiration) > new Date()) {
-        console.log("refresh not expired!");
         if (new Date(accessExpiration) > new Date()) {
           setUser(user);
         } else refresh();

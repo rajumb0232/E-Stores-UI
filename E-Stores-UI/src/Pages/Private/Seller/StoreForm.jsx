@@ -45,13 +45,11 @@ const StoreForm = ({ isSubmitted, setIsSubmitted, setStoreExists }) => {
     if (!store?.storeId || store?.storeId === "") {
       updateStates(await addStore(storeInForm));
     } else {
-      const completed = await updateStore(storeInForm);
-      updateStates(await addStore(storeInForm));
+      updateStates(await updateStore(storeInForm));
     }
   };
 
   useEffect(() => {
-    console.log("is store submitted? ", isSubmitted);
     if (isSubmitted) {
       if (storeInForm.category === "") {
         alert("Category not selected!!");
@@ -65,7 +63,8 @@ const StoreForm = ({ isSubmitted, setIsSubmitted, setStoreExists }) => {
         store?.category !== storeInForm.category
       ) {
         handleSubmit();
-      } else setIsSubmitted(false);
+      } else if (store?.storeId) setStoreExists(true);
+      else setIsSubmitted(false);
     }
   }, [isSubmitted]);
 

@@ -5,7 +5,6 @@ import { useSellerBin } from "../../../Hooks/useSellerBin";
 import StoreImageFrom from "./StoreImageFrom";
 
 const AddUpdateStore = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [storeSubmitted, setStoreSubmitted] = useState(false);
   const [imageSubmitted, setImageSubmitted] = useState(false);
   const [addressSubmitted, setAddressSubmitted] = useState(false);
@@ -15,31 +14,28 @@ const AddUpdateStore = () => {
 
   /* Updates global isSubmitted state to false when all other submission states are updated to false.*/
   useEffect(() => {
-    !storeSubmitted &&
       !imageSubmitted &&
       !addressSubmitted &&
       !contactSubmitted &&
-      setIsSubmitted(false);
-  }, [storeSubmitted, imageSubmitted, addressSubmitted, contactSubmitted]);
+      setStoreSubmitted(false);
+  }, [imageSubmitted, addressSubmitted, contactSubmitted]);
 
   /* Runs if store exists and if the form is submitted and when store submitted is updated to false.*/
   useEffect(() => {
-    console.log("submitted state is: ", isSubmitted);
-    if (storeExits && isSubmitted && !storeSubmitted) {
-      setAddressSubmitted(true);
-      setContactSubmitted(true);
+    if (storeExits && storeSubmitted) {
+      // setAddressSubmitted(true);
+      // setContactSubmitted(true);
       setImageSubmitted(true);
     }
-  }, [storeExits, isSubmitted, storeSubmitted]);
+  }, [storeExits, storeSubmitted]);
 
   /* When isSubmitted and storeId is present then setsStoreExists to true 
      triggering other related submissions.*/
-  useEffect(() => {
-    isSubmitted && store?.storeId && setStoreExists(true);
-  }, [store]);
+  // useEffect(() => {
+  //   store?.storeId && setStoreExists(true);
+  // }, [store]);
 
   const submit = () => {
-    setIsSubmitted(true);
     setStoreSubmitted(true);
   };
 
@@ -51,6 +47,7 @@ const AddUpdateStore = () => {
           <StoreForm
             isSubmitted={storeSubmitted}
             setIsSubmitted={setStoreSubmitted}
+            setStoreExists={setStoreExists}
           />
           <StoreImageFrom
             isSubmitted={imageSubmitted}
@@ -61,7 +58,7 @@ const AddUpdateStore = () => {
         <div className="ml-auto my-8 mx-2 w-max flex justify-end">
           <SubmitBtn
             onClick={submit}
-            isSubmitted={isSubmitted}
+            isSubmitted={storeSubmitted}
             name={store?.storeId ? "Update" : "Confirm"}
             btnType={"button"}
           />

@@ -32,7 +32,6 @@ const StoreImageFrom = ({ isSubmitted, setIsSubmitted }) => {
 
   // triggering form submission
   useEffect(() => {
-    console.log("is image submitted? ", isSubmitted);
     if (isSubmitted)
       setTimeout(() => {
         handleSubmit();
