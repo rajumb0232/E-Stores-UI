@@ -19,12 +19,16 @@ const useLoginRefresher = () => {
       accessExpiration: null,
       refreshExpiration: null,
       authenticated: false,
-    })
+    });
   };
 
   useEffect(() => {
     if (user?.userId) localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+
+  const displayAlert = () => {
+      setTimeout(() =>  alert("You are currently not logged in!"), 500)
+  }
 
   // refresh and update the logic
   const refresh = async () => {
@@ -35,13 +39,18 @@ const useLoginRefresher = () => {
         const refreshExpiration = response.data.data.refreshExpiration;
         setUser({
           ...response.data.data,
-          accessExpiration: new Date(new Date().getTime() + accessExpiration * 1000),
-          refreshExpiration: new Date(new Date().getTime() + refreshExpiration * 1000)
+          accessExpiration: new Date(
+            new Date().getTime() + accessExpiration * 1000
+          ),
+          refreshExpiration: new Date(
+            new Date().getTime() + refreshExpiration * 1000
+          ),
         });
       }
     } catch (error) {
       clearData();
       navigate("/");
+      displayAlert()
     }
   };
 
@@ -62,10 +71,12 @@ const useLoginRefresher = () => {
       } else {
         clearData();
         navigate("/");
+        displayAlert()
       }
     } else {
       clearData();
       navigate("/");
+      displayAlert()
     }
   };
 

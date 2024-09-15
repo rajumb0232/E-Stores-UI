@@ -1,14 +1,12 @@
-import React, {
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useCategoryCatalogue } from "../Hooks/useOptions";
+import { useAuth } from "../Hooks/useAuth";
 
 export const SellerBinContext = createContext({});
 
 const SellerBin = ({ children }) => {
   const { catagories, getCategories } = useCategoryCatalogue();
+  const { setAuth } = useAuth();
   const [store, setStore] = useState({
     storeId: "",
     storeName: "",
@@ -16,37 +14,39 @@ const SellerBin = ({ children }) => {
     logoLink: "",
     about: "",
   });
-  const [address, setAddress] = useState({})
-  const [contacts, setContacts] = useState({})
+  const [address, setAddress] = useState({});
+  const [contacts, setContacts] = useState({});
   const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false);
 
-  // const logout = () => {
-  //   if (auth.authenticated) {
-  //     localStorage.removeItem("user");
-  //     cleanStore();
-  //     setAuth({
-  //       userId: "",
-  //       username: "",
-  //       roles: ["CUSTOMER"],
-  //       accessExpiration: null,
-  //       refreshExpiration: null,
-  //       authenticated: false,
-  //     });
-  //   }
-  // };
+  const cleanSellerData = () => {
+    console.log("cleaning...");
+    localStorage.removeItem("user");
+    setLoggedOut(true);
+    setAuth({
+      userId: "",
+      username: "",
+      roles: ["CUSTOMER"],
+      accessExpiration: null,
+      refreshExpiration: null,
+      authenticated: false,
+    });
+  };
 
   const contextValue = {
-      catagories,
-      getCategories,
-      store,
-      setStore,
-      address,
-      setAddress,
-      contacts,
-      setContacts,
-      sidebarVisible,
-      setSidebarVisible,
-    }
+    catagories,
+    getCategories,
+    store,
+    setStore,
+    address,
+    setAddress,
+    contacts,
+    setContacts,
+    sidebarVisible,
+    setSidebarVisible,
+    loggedOut,
+    cleanSellerData,
+  };
 
   return (
     <SellerBinContext.Provider value={contextValue}>

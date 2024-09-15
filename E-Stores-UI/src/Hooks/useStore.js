@@ -5,8 +5,15 @@ import axios from "axios";
 import { useSellerBin } from "./useSellerBin";
 
 const useStore = () => {
-  const { store, setStore, address, setAddress, contacts, setContacts } =
-    useSellerBin();
+  const {
+    store,
+    setStore,
+    address,
+    setAddress,
+    contacts,
+    setContacts,
+    loggedOut,
+  } = useSellerBin();
   const axiosInstance = AxiosPrivateInstance();
   const { auth } = useAuth();
   const [setUpInfo, setSetUpInfo] = useState({
@@ -14,6 +21,15 @@ const useStore = () => {
     address: true,
     contacts: true,
   });
+
+  // cleans seller data if seller logged out
+  useEffect(() => {
+    if (loggedOut) {
+      localStorage.removeItem("store-data");
+      localStorage.removeItem("store");
+      localStorage.removeItem("sac");
+    }
+  }, [loggedOut]);
 
   // Loads setUpInfo from the localstorage
   const loadSetUpInfoFromLocalStorage = () => {
@@ -103,13 +119,6 @@ const useStore = () => {
     fetch();
   };
 
-  // cleans up the localStorage by removing store related data.
-  const cleanStore = () => {
-    localStorage.removeItem("store-data");
-    localStorage.removeItem("store");
-    localStorage.removeItem("sac");
-  };
-
   // Adds Store to the database and localstorage and return true
   const addStore = async (data) => {
     try {
@@ -181,7 +190,6 @@ const useStore = () => {
     address,
     contacts,
     getStore,
-    cleanStore,
     addStore,
     updateStore,
     uploadStoreImage,
