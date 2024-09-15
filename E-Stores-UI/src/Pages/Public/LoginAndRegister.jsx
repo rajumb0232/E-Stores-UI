@@ -17,7 +17,7 @@ const Register = ({ role, isLogin }) => {
   const handleInput = useInputHandler();
   const [isEmailValid, setEmailValid] = useState(true);
   const [isPwdValid, setPwdValid] = useState(true);
-  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { handleLogin, handleRegister } = useAuth();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
@@ -36,24 +36,24 @@ const Register = ({ role, isLogin }) => {
     : "/customers/register";
 
   const handleSubmit = async () => {
-    setIsSubmited(
+    setIsSubmitted(
       isLogin
-        ? await handleLogin(endPoint, formData)
-        : await handleRegister(endPoint, formData)
+        ? setIsSubmitted(!(await handleLogin(endPoint, formData)))
+        : setIsSubmitted(!(await handleRegister(endPoint, formData)))
     );
   };
 
-  // when isSubmited perform login or register
+  // when isSubmitted perform login or register
   useEffect(() => {
-    if (isSubmited !== false) {
+    if (isSubmitted !== false) {
       if (isEmailValid && isPwdValid) {
         handleSubmit();
       } else {
         alert("Invalid Input");
-        setIsSubmited(false);
+        setIsSubmitted(false);
       }
     }
-  }, [isSubmited]);
+  }, [isSubmitted]);
 
   return (
     <div className="w-screen h-screen font-two flex flex-col items-center justify-start">
@@ -126,8 +126,8 @@ const Register = ({ role, isLogin }) => {
           {/* SUBMIT BUTTON */}
           <div className="w-full flex justify-end mt-4">
             <SubmitBtn
-              onClick={() => setIsSubmited(true)}
-              isSubmited={isSubmited}
+              onClick={() => setIsSubmitted(true)}
+              isSubmitted={isSubmitted}
               name={"Submit"}
               btnType={"button"}
             />
@@ -139,7 +139,7 @@ const Register = ({ role, isLogin }) => {
             className="text-sm font-semibold text-slate-700 w-full flex justify-center items-center mt-auto mb-4 hover:text-blue-500"
           >
             {isLogin
-              ? "New to Flipkart? Create an account"
+              ? "New to E-Stores? Create an account"
               : "Already have an account? Click here to login"}
           </Link>
         </div>
