@@ -24,6 +24,7 @@ const useStore = () => {
 
   // cleans seller data if seller logged out
   useEffect(() => {
+    console.log("loggedOut: ", loggedOut);
     if (loggedOut) {
       localStorage.removeItem("store-data");
       localStorage.removeItem("store");

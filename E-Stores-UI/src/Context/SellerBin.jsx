@@ -20,17 +20,22 @@ const SellerBin = ({ children }) => {
   const [loggedOut, setLoggedOut] = useState(false);
 
   const cleanSellerData = () => {
-    localStorage.removeItem("user");
     setLoggedOut(true);
-    setAuth({
-      userId: "",
-      username: "",
-      roles: ["CUSTOMER"],
-      accessExpiration: null,
-      refreshExpiration: null,
-      authenticated: false,
-    });
   };
+
+  useEffect(() => {
+    if (loggedOut) {
+      localStorage.removeItem("user");
+      setAuth({
+        userId: "",
+        username: "",
+        roles: ["CUSTOMER"],
+        accessExpiration: null,
+        refreshExpiration: null,
+        authenticated: false,
+      });
+    }
+  }, [loggedOut]);
 
   const contextValue = {
     catagories,
